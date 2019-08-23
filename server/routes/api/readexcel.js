@@ -44,7 +44,7 @@ router.get('/read', (req, res) => {
     readXlsxFile(filePath).then((rows) => {
         // `rows` is an array of rows
         // each row being an array of cells.
-        console.log(rows)
+        // console.log(rows)
         res.send('test');
     })
     

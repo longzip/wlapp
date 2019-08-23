@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server/index.js",
     "dev": "nodemon server/index.js",
-    "debug" : "node --nolazy --inspect-brk=9229 server/index.js"
+    "debug": "node --nolazy --inspect-brk=9229 server/index.js"
   },
   "keywords": [],
   "author": "",
