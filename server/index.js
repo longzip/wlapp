@@ -1,6 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const config = require( "./config" );
+const sql = require('mssql')
+const path = require('path');
 
 const app = express();
 
@@ -9,9 +12,13 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const posts = require('./routes/api/posts');
+const uoms = require('./routes/api/uoms');
+const materials = require('./routes/api/materials');
 const readexcel = require('./routes/api/readexcel');
 
 app.use('/api/posts', posts);
+app.use('/api/uoms', uoms);
+app.use('/api/materials', materials);
 app.use('/api/readexcel', readexcel);
 
 // Handle production
@@ -22,8 +29,12 @@ if (process.env.NODE_ENV === 'production') {
   // Handle SPA
   app.get('/.*/', (req, res) => res.sendFile(__dirname + '/public/index.html'));
 }
+app.use(express.static(path.join(__dirname , '../client/build/')));
+app.get('/.*/', (req, res) => res.sendFile(path.join(__dirname , '../client/build/index.html')));
 
-
+sql.on('error', err => {
+  console.log(err);
+})
 
 const port = process.env.PORT || 5000;
 
