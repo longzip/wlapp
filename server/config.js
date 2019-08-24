@@ -1,8 +1,8 @@
 const config = {
-    user: 'sa',
-    password: '111111',
-    server: 'localhost', // You can use 'localhost\\instance' to connect to named instance
-    database: 'laravel',
+    user: 'woodsland',
+    password: 'wl1408@It',
+    server: '203.162.123.56', // You can use 'localhost\\instance' to connect to named instance
+    database: '003',
  
     options: {
         encrypt: true // Use this if you're on Windows Azure
