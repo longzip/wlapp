@@ -22,7 +22,8 @@
     "mongodb": "^3.3.0",
     "mongoose": "^5.6.10",
     "mssql": "^5.1.0",
-    "read-excel-file": "^4.0.2"
+    "read-excel-file": "^4.0.2",
+    "sequelize": "^5.16.0"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",
