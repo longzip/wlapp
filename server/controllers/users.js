@@ -1,33 +1,49 @@
-const db = require('../models/index');
-const User = db.User;
+const {User} = require('../models/index');
+const Joi = require('@hapi/joi');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const environment = process.env.NODE_ENV;
 const stage = require('../config')[environment];
 
+function validateUser(user) {
+  const schema = {
+        name: Joi.string(),
+        username: Joi.string().alphanum().min(3).max(30).required(),
+        password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required(),
+        // confirmPassword: Joi.any().valid(Joi.ref('password')).required(),
+        email: Joi.string().email({ minDomainSegments: 2 })
+    };
+    return Joi.validate(user, schema);
+}
+
 module.exports = {
 
   add: (req, res) => {
-    const name = req.body.name;
-    const username = req.body.username;
-    const email = req.body.email;
-    let password = req.body.password;
-    
     let result = {};
     let status = 201;
 
-    bcrypt.hash(password, stage.saltingRounds, function(err, hash) {
+    let {error, value} = validateUser(req.body);
+
+    if (error) {
+      console.log(error);
+      status = 500;
+      result.status = status;
+      result.error = error;
+      return res.status(status).send(result);
+    }
+
+    bcrypt.hash(value.password, stage.saltingRounds, function(err, hash) {
       if (err) {
         status = 500;
         result.status = status;
         result.error = err;
         return res.status(status).send(result);
       } else {
-        password = hash;
+        value.password = hash;
         // User.destroy({ where: { } });
         // User.sync();
 
-        User.create({ name, password, username, email }).then(user => {
+        User.create(value).then(user => {
           result.status = status;
           result.result = user;
           return res.status(status).send(result);
