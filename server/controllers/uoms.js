@@ -129,8 +129,8 @@ module.exports = {
 					  [Op.like]: '%' + req.query.name + '%'
 					},
 					createdAt: {
-						[Op.lt]: moment(req.query.dateFinished),
-						[Op.gt]: moment(req.query.dateStart)
+						[Op.lte]: moment(req.query.dateFinished).endOf('day') || moment(),
+						[Op.gte]: moment(req.query.dateStart).startOf('day') || moment('2019-08-29')
 					}
 				  }
 				]
