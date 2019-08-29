@@ -1,7 +1,11 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Uom = sequelize.define('Uom', {
-    name: DataTypes.STRING,
+    name: {
+			type: DataTypes.STRING,
+			allowNull: false,
+		    unique: true
+		},
     categoryId: DataTypes.INTEGER
   }, {});
   Uom.associate = function(models) {

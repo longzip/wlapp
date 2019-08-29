@@ -3,6 +3,11 @@ const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+// const db = require('./models/index');
+
+// db.sequelize.sync({
+//   force: true
+// });
 
 const router = express.Router();
 

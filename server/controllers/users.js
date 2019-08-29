@@ -93,10 +93,9 @@ module.exports = {
     let result = {};
     let status = 200;
     const { username, password } = req.body;
-    console.log(req.body);
-
     User.findOne({ where: {username}})
     .then(user => {
+      console.log(user)
       // We could compare passwords in our model instead of below as well
       bcrypt.compare(password, user.password).then(match => {
         if (match) {

@@ -28,7 +28,7 @@ module.exports = {
         // result.result = req.file.path;
         // console.log(path.join(process.cwd(),req.file.path))
         let wb = xlsx.readFile(path.join(process.cwd(),req.file.path), {cellDates: true});
-        let ws = wb.Sheets['Chung Мат']
+        let ws = wb.Sheets['Sheet1']
         result.status = status;
         result.result = xlsx.utils.sheet_to_json(ws);
         return res.status(status).send(result);

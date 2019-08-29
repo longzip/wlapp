@@ -3,6 +3,11 @@ const validateToken = require('../utils').validateToken;
 
 module.exports = (router) => {
   router.route('/uoms')
-  	.post(validateToken, controller.add)
-    .get(validateToken, controller.getAll);
+  	.post(controller.add)
+    .get(controller.getAll);
+  router.route('/uoms/:id')
+    .get(controller.show)
+    .put(controller.update);
+  router.route('/uoms/import')
+    .post(controller.import);
 };
