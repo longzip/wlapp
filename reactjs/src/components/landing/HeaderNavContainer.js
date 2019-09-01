@@ -1,46 +1,35 @@
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import Spinner from '../common/Spinner';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
-
-export const HeaderNavContainer = ({ apiCallsInProgress }) => {
+class HeaderNavContainer extends Component {
+  render() {
     return (
-        <nav className="main-header navbar navbar-expand navbar-white navbar-light">
-            {/* SEARCH FORM */}
-            <form className="form-inline ml-3">
-                <div className="input-group input-group-sm">
-                    <input
-                        className="form-control form-control-navbar"
-                        type="search"
-                        placeholder="Search"
-                        aria-label="Search"
-                    />
-                    <div className="input-group-append">
-                        <button className="btn btn-navbar" type="submit">
-                            <i className="fas fa-search" />
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </nav>
+      <nav className="main-header navbar navbar-expand navbar-white navbar-light">
+        <ul className="navbar-nav">
+          <li className="nav-item">
+            <a className="nav-link" data-widget="pushmenu" href="#">
+              <i className="fas fa-bars"></i>
+            </a>
+          </li>
+          <li className="nav-item d-none d-sm-inline-block">
+            <Link to="/" className="nav-link">
+              Home
+            </Link>
+          </li>
+          <li className="nav-item d-none d-sm-inline-block">
+            <Link to="/courses" className="nav-link">
+              Courses
+            </Link>
+          </li>
+          <li className="nav-item d-none d-sm-inline-block">
+            <Link to="/about" className="nav-link">
+              About
+            </Link>
+          </li>
+        </ul>
+      </nav>
     );
-};
+  }
+}
 
-
-
-
-HeaderNavContainer.propTypes = {
-    apiCallsInProgress: PropTypes.number.isRequired
-};
-
-
-
-const mapStateToProps = state => ({
-    apiCallsInProgress: state.apiReducer.apiCallsInProgress
-});
-
-
-
-export default connect(mapStateToProps)(HeaderNavContainer);
-
+export default HeaderNavContainer;
