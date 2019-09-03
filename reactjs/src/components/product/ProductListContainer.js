@@ -2,46 +2,46 @@ import React, { PropTypes } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import toastr from "toastr";
-import * as courseAction from "../../action/CourseAction";
-import CourseList from "./CourseList";
+import * as productAction from "../../action/ProductAction";
+import ProductList from "./ProductList";
 
-export class CourseListContainer extends React.Component {
+export class ProductListContainer extends React.Component {
   constructor() {
     super();
 
-    this.state = { selectedCourseId: undefined };
+    this.state = { selectedProductId: undefined };
 
     this.handleAddCourse = this.handleAddCourse.bind(this);
-    this.handleEditCourse = this.handleEditCourse.bind(this);
+    this.handleEditProduct = this.handleEditProduct.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleRowSelect = this.handleRowSelect.bind(this);
   }
 
   componentDidMount() {
-    this.props.action.getCoursesAction().catch(error => {
+    this.props.action.getProductsAction().catch(error => {
       toastr.error(error);
     });
   }
 
   handleAddCourse() {
-    this.props.history.push("/course");
+    this.props.history.push("/product");
   }
 
-  handleEditCourse() {
-    const selectedCourseId = this.state.selectedCourseId;
-    console.log(selectedCourseId)
-    if (selectedCourseId) {
-      this.setState({ selectedCourseId: undefined });
-      this.props.history.push(`/course/${selectedCourseId}`);
+  handleEditProduct() {
+    const selectedProductId = this.state.selectedProductId;
+    console.log(selectedProductId);
+    if (selectedProductId) {
+      this.setState({ selectedProductId: undefined });
+      this.props.history.push(`/product/${selectedProductId}`);
     }
   }
 
   handleDelete() {
-    const selectedCourseId = this.state.selectedCourseId;
+    const selectedProductId = this.state.selectedProductId;
 
-    if (selectedCourseId) {
-      this.setState({ selectedCourseId: undefined });
-      this.props.action.deleteCourseAction(selectedCourseId).catch(error => {
+    if (selectedProductId) {
+      this.setState({ selectedProductId: undefined });
+      this.props.action.deleteProductAction(selectedProductId).catch(error => {
         toastr.error(error);
       });
     }
@@ -49,14 +49,14 @@ export class CourseListContainer extends React.Component {
 
   handleRowSelect(row, isSelected) {
     if (isSelected) {
-      this.setState({ selectedCourseId: row.id });
+      this.setState({ selectedProductId: row.id });
     }
   }
 
   render() {
-    const { courses } = this.props;
+    const { products } = this.props;
 
-    if (!courses) {
+    if (!products) {
       return <div>Loading...</div>;
     }
 
@@ -65,7 +65,7 @@ export class CourseListContainer extends React.Component {
         <div className="container-fluid">
           <div className="row mt-3">
             <div className="col">
-              <h1>Courses</h1>
+              <h1>Products</h1>
             </div>
           </div>
 
@@ -83,7 +83,7 @@ export class CourseListContainer extends React.Component {
                 <button
                   type="button"
                   className="btn btn-warning ml-2"
-                  onClick={this.handleEditCourse}
+                  onClick={this.handleEditProduct}
                 >
                   <i className="fa fa-pencil" aria-hidden="true" /> Edit
                 </button>
@@ -106,8 +106,8 @@ export class CourseListContainer extends React.Component {
 
           <div className="row">
             <div className="col">
-              <CourseList
-                courses={courses}
+              <ProductList
+                products={products}
                 handleRowSelect={this.handleRowSelect}
               />
             </div>
@@ -119,15 +119,15 @@ export class CourseListContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  courses: state.coursesReducer.courses
+  products: state.productsReducer.products
 });
 
 const mapDispatchToProps = dispatch => ({
-  action: bindActionCreators(courseAction, dispatch)
+  action: bindActionCreators(productAction, dispatch)
 });
 
-CourseListContainer.propTypes = {
-  courses: PropTypes.array,
+ProductListContainer.propTypes = {
+  products: PropTypes.array,
   action: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired
 };
@@ -135,4 +135,4 @@ CourseListContainer.propTypes = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CourseListContainer);
+)(ProductListContainer);

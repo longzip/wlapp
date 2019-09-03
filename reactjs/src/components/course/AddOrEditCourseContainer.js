@@ -66,6 +66,7 @@ export class AddOrEditCourseContainer extends React.Component {
         const heading = initialValues && initialValues.id ? 'Edit' : 'Add';
 
         return (
+            <div className="content-wrapper">
             <div className="container">
                 <CourseForm
                     heading={heading}
@@ -74,6 +75,7 @@ export class AddOrEditCourseContainer extends React.Component {
                     handleCancel={this.handleCancel}
                     initialValues={this.props.initialValues}
                 />
+            </div>
             </div>
         );
     }

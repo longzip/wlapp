@@ -17,6 +17,11 @@ class HeaderNavContainer extends Component {
             </Link>
           </li>
           <li className="nav-item d-none d-sm-inline-block">
+            <Link to="/products" className="nav-link">
+              Products
+            </Link>
+          </li>
+          <li className="nav-item d-none d-sm-inline-block">
             <Link to="/courses" className="nav-link">
               Courses
             </Link>
