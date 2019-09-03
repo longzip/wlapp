@@ -8,7 +8,7 @@ export default class MenuContainer extends Component {
         <Link to="/" className="brand-link">
           <img
             src="/dist/img/AdminLTELogo.png"
-            alt="AdminLTE Logo"
+            alt="AdminLTE"
             className="brand-image img-circle elevation-3"
             style={{ opacity: ".8" }}
           />
@@ -16,13 +16,13 @@ export default class MenuContainer extends Component {
           <span className="brand-text font-weight-light">Woodsland App</span>
         </Link>
 
-        <div class="sidebar">
+        <div className="sidebar">
           <div className="user-panel mt-3 pb-3 mb-3 d-flex">
             <div className="image">
               <img
                 src="/dist/img/user2-160x160.jpg"
                 className="img-circle elevation-2"
-                alt="User Image"
+                alt="User"
               />
             </div>
             <div className="info">
@@ -32,7 +32,7 @@ export default class MenuContainer extends Component {
             </div>
           </div>
 
-          <nav class="mt-2">
+          <nav className="mt-2">
             <ul
               className="nav nav-pills nav-sidebar flex-column"
               data-widget="treeview"

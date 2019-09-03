@@ -29,7 +29,6 @@ export class ProductListContainer extends React.Component {
 
   handleEditProduct() {
     const selectedProductId = this.state.selectedProductId;
-    console.log(selectedProductId);
     if (selectedProductId) {
       this.setState({ selectedProductId: undefined });
       this.props.history.push(`/product/${selectedProductId}`);

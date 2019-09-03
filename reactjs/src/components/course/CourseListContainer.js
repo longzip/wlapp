@@ -29,7 +29,6 @@ export class CourseListContainer extends React.Component {
 
   handleEditCourse() {
     const selectedCourseId = this.state.selectedCourseId;
-    console.log(selectedCourseId)
     if (selectedCourseId) {
       this.setState({ selectedCourseId: undefined });
       this.props.history.push(`/course/${selectedCourseId}`);

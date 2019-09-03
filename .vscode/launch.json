@@ -16,11 +16,22 @@
         "port": 9229
     },
     {
+        "type": "node",
+        "request": "launch",
+        "name": "Launch via NPM",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": [
+            "run-script",
+            "debug"
+        ],
+        "port": 9229
+    },
+    {
         "type": "chrome",
         "request": "launch",
         "name": "Launch Chrome against localhost",
         "url": "http://localhost:3000",
-        "webRoot": "${workspaceFolder}/adminlte/"
+        "webRoot": "${workspaceFolder}/reactjs/"
     }
     ]
 }

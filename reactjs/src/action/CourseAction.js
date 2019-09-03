@@ -64,6 +64,7 @@ export function getCourseAction(courseId) {
 
     return CourseApi.getCourse(courseId)
       .then(course => {
+        console.log(course)
         dispatch(getCourseResponse(course));
       })
       .catch(error => {

@@ -10,7 +10,7 @@ export default {
   },
 
   selectedProductReducer: {
-    course: undefined
+    product: undefined
   },
 
   coursesReducer: {

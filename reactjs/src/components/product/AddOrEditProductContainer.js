@@ -3,9 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import toastr from "toastr";
 import * as productAction from "../../action/ProductAction";
-import * as authorAction from "../../action/AuthorAction";
 import ProductForm from "./ProductForm"; // eslint-disable-line import/no-named-as-default
-import { authorsFormattedForDropdown } from "../../selectors/selectors"; // eslint-disable-line import/no-named-as-default
 
 export class AddOrEditProductContainer extends React.Component {
   constructor() {
@@ -48,13 +46,12 @@ export class AddOrEditProductContainer extends React.Component {
   render() {
     const { initialValues } = this.props;
     const heading = initialValues && initialValues.id ? "Edit" : "Add";
-
+    console.log(this.props.initialValues)
     return (
       <div className="content-wrapper">
         <div className="container">
           <ProductForm
             heading={heading}
-            authors={this.props.authors}
             handleSave={this.handleSave}
             handleCancel={this.handleCancel}
             initialValues={this.props.initialValues}
@@ -66,26 +63,25 @@ export class AddOrEditProductContainer extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const productId = ownProps.match.params.id; //from the path '/course/:id'
-
+  const productId = parseInt(ownProps.match.params.id); //from the path '/course/:id'
   if (
     productId &&
     state.selectedProductReducer.product &&
     productId === state.selectedProductReducer.product.id
-  ) {
+  ) 
+  {
     return {
-      initialValues: state.selectedProductReducer.product,
-      authors: authorsFormattedForDropdown(state.authorReducer.authors)
-    };
+      initialValues: state.selectedProductReducer.product
+   };
   } else {
     return {
-      authors: authorsFormattedForDropdown(state.authorReducer.authors)
+      
     };
   }
 };
 
 const mapDispatchToProps = dispatch => ({
-  action: bindActionCreators({ ...authorAction, ...productAction }, dispatch)
+  action: bindActionCreators(productAction, dispatch)
 });
 
 AddOrEditProductContainer.propTypes = {

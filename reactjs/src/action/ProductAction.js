@@ -1,6 +1,5 @@
 import * as ActionType from "./ActionType";
 import fetchClient from "../api/fetchClient";
-import CourseApi from "../api/CourseApi";
 import { ApiCallBeginAction, ApiCallErrorAction } from "./ApiAction";
 
 export const getProductsResponse = payload => ({

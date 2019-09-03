@@ -1,7 +1,6 @@
 import React, { PropTypes } from "react";
 import { Field, reduxForm } from "redux-form";
 import FieldInput from "../common/FieldInput";
-import SelectInput from "../common/SelectInput";
 
 export const ProductForm = ({
   handleSubmit,
@@ -9,7 +8,6 @@ export const ProductForm = ({
   reset,
   submitting,
   heading,
-  authors,
   handleSave,
   handleCancel
 }) => {
@@ -73,7 +71,6 @@ ProductForm.propTypes = {
   reset: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
   heading: PropTypes.string.isRequired,
-  authors: PropTypes.array.isRequired,
   handleSave: PropTypes.func.isRequired,
   handleCancel: PropTypes.func.isRequired
 };
