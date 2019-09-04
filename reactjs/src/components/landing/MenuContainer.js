@@ -39,34 +39,188 @@ export default class MenuContainer extends Component {
               role="menu"
               data-accordion="false"
             >
-              <li className="nav-item has-treeview">
-                <NavLink activeClassName="active" to="/" className="nav-link">
+              <li className="nav-item">
+                <NavLink
+                  activeClassName="active"
+                  to="/dashboard"
+                  className="nav-link"
+                >
                   <i className="nav-icon fas fa-tachometer-alt" />
+                  <p>Overview</p>
+                </NavLink>
+              </li>
+
+              <li className="nav-item has-treeview">
+                <NavLink
+                  activeClassName="active"
+                  to="/mrp"
+                  className="nav-link"
+                >
+                  <i className="nav-icon fab fa-buromobelexperte" />
                   <p>
-                    Dashboard
+                    Sản xuất
                     <i className="right fas fa-angle-left" />
                   </p>
                 </NavLink>
                 <ul className="nav nav-treeview">
                   <li className="nav-item">
-                    <NavLink activeClassName="active" to="/about" className="nav-link">
+                    <NavLink
+                      activeClassName="active"
+                      to="/mrp/productions"
+                      className="nav-link"
+                    >
                       <i className="far fa-circle nav-icon" />
-                      <p>Dashboard v1</p>
+                      <p>Đặt hàng</p>
                     </NavLink>
                   </li>
                   <li className="nav-item">
-                    <NavLink activeClassName="active" to="/courses" className="nav-link">
+                    <NavLink
+                      activeClassName="active"
+                      to="/mrp/workorders"
+                      className="nav-link"
+                    >
                       <i className="far fa-circle nav-icon" />
-                      <p>Dashboard v2</p>
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink activeClassName="active" to="../../index3.html" className="nav-link">
-                      <i className="far fa-circle nav-icon" />
-                      <p>Dashboard v3</p>
+                      <p>Lệnh sản xuất</p>
                     </NavLink>
                   </li>
                 </ul>
+              </li>
+
+              <li className="nav-item has-treeview">
+                <NavLink
+                  activeClassName="active"
+                  to="/datas"
+                  className="nav-link"
+                >
+                  <i className="nav-icon far fa-building" />
+                  <p>
+                    Dữ liệu sản xuất
+                    <i className="right fas fa-angle-left" />
+                  </p>
+                </NavLink>
+                <ul className="nav nav-treeview">
+                  <li className="nav-item">
+                    <NavLink
+                      activeClassName="active"
+                      to="/datas/routings"
+                      className="nav-link"
+                    >
+                      <i className="far fa-circle nav-icon" />
+                      <p>Routings</p>
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink
+                      activeClassName="active"
+                      to="/datas/bom"
+                      className="nav-link"
+                    >
+                      <i className="far fa-circle nav-icon" />
+                      <p>Bills of Materials</p>
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink
+                      activeClassName="active"
+                      to="/setting/products"
+                      className="nav-link"
+                    >
+                      <i className="far fa-circle nav-icon" />
+                      <p>Products</p>
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink
+                      activeClassName="active"
+                      to="/setting/workcenters"
+                      className="nav-link"
+                    >
+                      <i className="far fa-circle nav-icon" />
+                      <p>Work Centers</p>
+                    </NavLink>
+                  </li>
+                </ul>
+              </li>
+
+              <li className="nav-item has-treeview">
+                <NavLink
+                  activeClassName="active"
+                  to="/reporting"
+                  className="nav-link"
+                >
+                  <i className="nav-icon fas fa-calculator" />
+                  <p>
+                    Báo cáo
+                    <i className="right fas fa-angle-left" />
+                  </p>
+                </NavLink>
+                <ul className="nav nav-treeview">
+                  <li className="nav-item">
+                    <NavLink
+                      activeClassName="active"
+                      to="/reporting/productions"
+                      className="nav-link"
+                    >
+                      <i className="far fa-circle nav-icon" />
+                      <p>Đặt hàng sản xuất</p>
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink
+                      activeClassName="active"
+                      to="/reporting/workorders"
+                      className="nav-link"
+                    >
+                      <i className="far fa-circle nav-icon" />
+                      <p>Lệnh sản xuất</p>
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink
+                      activeClassName="active"
+                      to="/reporting/oscp"
+                      className="nav-link"
+                    >
+                      <i className="far fa-circle nav-icon" />
+                      <p>Năng lực sản xuất</p>
+                    </NavLink>
+                  </li>
+                </ul>
+              </li>
+              <li className="nav-item has-treeview">
+                <NavLink
+                  activeClassName="active"
+                  to="/settings"
+                  className="nav-link"
+                >
+                  <i className="nav-icon fa fa-cogs" />
+                  <p>
+                    Settings
+                    <i className="right fas fa-angle-left" />
+                  </p>
+                </NavLink>
+                <ul className="nav nav-treeview">
+                  <li className="nav-item">
+                    <NavLink
+                      activeClassName="active"
+                      to="/settings/users"
+                      className="nav-link"
+                    >
+                      <i className="far fa-circle nav-icon" />
+                      <p>Users</p>
+                    </NavLink>
+                  </li>
+                </ul>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  activeClassName="active"
+                  to="/logout"
+                  className="nav-link"
+                >
+                  <i className="nav-icon 	fa fa-power-off" />
+                  <p>Thoát</p>
+                </NavLink>
               </li>
             </ul>
           </nav>
