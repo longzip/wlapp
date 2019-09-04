@@ -122,7 +122,7 @@ export default class MenuContainer extends Component {
                   <li className="nav-item">
                     <NavLink
                       activeClassName="active"
-                      to="/setting/products"
+                      to="/datas/products"
                       className="nav-link"
                     >
                       <i className="far fa-circle nav-icon" />
@@ -132,7 +132,7 @@ export default class MenuContainer extends Component {
                   <li className="nav-item">
                     <NavLink
                       activeClassName="active"
-                      to="/setting/workcenters"
+                      to="/datas/workcenters"
                       className="nav-link"
                     >
                       <i className="far fa-circle nav-icon" />
@@ -206,7 +206,7 @@ export default class MenuContainer extends Component {
                       to="/settings/users"
                       className="nav-link"
                     >
-                      <i className="far fa-circle nav-icon" />
+                      <i className="fa fa-users nav-icon" />
                       <p>Users</p>
                     </NavLink>
                   </li>
