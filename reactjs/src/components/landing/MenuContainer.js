@@ -53,6 +53,42 @@ export default class MenuContainer extends Component {
               <li className="nav-item has-treeview">
                 <NavLink
                   activeClassName="active"
+                  to="/crm"
+                  className="nav-link"
+                >
+                  <i className="nav-icon fab fa-delicious" />
+                  <p>
+                    Dự án
+                    <i className="right fas fa-angle-left" />
+                  </p>
+                </NavLink>
+                <ul className="nav nav-treeview">
+                  <li className="nav-item">
+                    <NavLink
+                      activeClassName="active"
+                      to="/crm/orders"
+                      className="nav-link"
+                    >
+                      <i className="fa fa-cart-arrow-down nav-icon" />
+                      <p>Đơn hàng</p>
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink
+                      activeClassName="active"
+                      to="/crm/contacts"
+                      className="nav-link"
+                    >
+                      <i className="far fa-address-book nav-icon" />
+                      <p>Khách hàng</p>
+                    </NavLink>
+                  </li>
+                </ul>
+              </li>
+
+              <li className="nav-item has-treeview">
+                <NavLink
+                  activeClassName="active"
                   to="/mrp"
                   className="nav-link"
                 >
@@ -69,7 +105,7 @@ export default class MenuContainer extends Component {
                       to="/mrp/productions"
                       className="nav-link"
                     >
-                      <i className="far fa-circle nav-icon" />
+                      <i className="fas fa-align-left nav-icon" />
                       <p>Đặt hàng</p>
                     </NavLink>
                   </li>
@@ -79,7 +115,7 @@ export default class MenuContainer extends Component {
                       to="/mrp/workorders"
                       className="nav-link"
                     >
-                      <i className="far fa-circle nav-icon" />
+                      <i className="fas fa-align-right nav-icon" />
                       <p>Lệnh sản xuất</p>
                     </NavLink>
                   </li>
@@ -183,6 +219,41 @@ export default class MenuContainer extends Component {
                     >
                       <i className="far fa-circle nav-icon" />
                       <p>Năng lực sản xuất</p>
+                    </NavLink>
+                  </li>
+                </ul>
+              </li>
+              <li className="nav-item has-treeview">
+                <NavLink
+                  activeClassName="active"
+                  to="/stocks"
+                  className="nav-link"
+                >
+                  <i className="nav-icon fas fa-clipboard-list" />
+                  <p>
+                    Quản lý kho
+                    <i className="right fas fa-angle-left" />
+                  </p>
+                </NavLink>
+                <ul className="nav nav-treeview">
+                  <li className="nav-item">
+                    <NavLink
+                      activeClassName="active"
+                      to="/stocks/productions"
+                      className="nav-link"
+                    >
+                      <i className="far fa-circle nav-icon" />
+                      <p>Kho thành phẩm</p>
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink
+                      activeClassName="active"
+                      to="/stocks/workorders"
+                      className="nav-link"
+                    >
+                      <i className="far fa-circle nav-icon" />
+                      <p>Giao hàng</p>
                     </NavLink>
                   </li>
                 </ul>

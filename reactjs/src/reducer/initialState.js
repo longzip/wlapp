@@ -5,6 +5,14 @@ export default {
     authors: []
   },
 
+  workcentersReducer: {
+    workcenters: []
+  },
+
+  selectedWorkcenterReducer: {
+    workcenter: undefined
+  },
+
   productsReducer: {
     products: []
   },
