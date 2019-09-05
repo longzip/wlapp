@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import toastr from "toastr";
 import * as productAction from "../../action/ProductAction";
-import ProductForm from "./ProductForm"; // eslint-disable-line import/no-named-as-default
+import ProductForm from "./ProductForm";
 
 export class AddOrEditProductContainer extends React.Component {
   constructor() {
@@ -46,7 +46,7 @@ export class AddOrEditProductContainer extends React.Component {
   render() {
     const { initialValues } = this.props;
     const heading = initialValues && initialValues.id ? "Edit" : "Add";
-    console.log(this.props.initialValues)
+    console.log(this.props.initialValues);
     return (
       <div className="content-wrapper">
         <div className="container">
@@ -63,20 +63,17 @@ export class AddOrEditProductContainer extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const productId = parseInt(ownProps.match.params.id); //from the path '/course/:id'
+  const productId = parseInt(ownProps.match.params.id);
   if (
     productId &&
     state.selectedProductReducer.product &&
     productId === state.selectedProductReducer.product.id
-  ) 
-  {
+  ) {
     return {
       initialValues: state.selectedProductReducer.product
-   };
-  } else {
-    return {
-      
     };
+  } else {
+    return {};
   }
 };
 
