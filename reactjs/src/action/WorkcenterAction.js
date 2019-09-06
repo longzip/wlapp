@@ -13,7 +13,7 @@ export function getWorkcentersAction() {
     dispatch(ApiCallBeginAction());
 
     return fetchClient
-      .get("Workcenters")
+      .get("workcenters")
       .then(response => {
         dispatch(getWorkcentersResponse(response.data.result));
       })

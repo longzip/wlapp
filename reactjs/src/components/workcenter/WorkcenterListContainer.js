@@ -11,9 +11,9 @@ export class WorkcenterListContainer extends Component {
 
     this.state = { selectedWorkcenterId: undefined };
 
-    this.handleAddWorkCenter = this.handleAddWorkCenter.bind(this);
-    this.handleEditWorkcenter = this.handleEditWorkcenter.bind(this);
-    this.handleDeleteWorkcenter = this.handleDeleteWorkcenter.bind(this);
+    this.handleAd = this.handleAd.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.handleRowSelect = this.handleRowSelect.bind(this);
   }
 
@@ -23,19 +23,20 @@ export class WorkcenterListContainer extends Component {
     });
   }
 
-  handleAddWorkCenter() {
+  handleAd() {
     this.props.history.push("/datas/workcenter");
   }
 
-  handleEditWorkcenter() {
-    const selectedWorkcentertId = this.state.selectedWorkcentertId;
-    if (selectedWorkcentertId) {
-      this.setState({ selectedWorkcentertId: undefined });
-      this.props.history.push(`/datas/workcenter/${selectedWorkcentertId}`);
+  handleEdit() {
+    const selectedWorkcenterId = this.state.selectedWorkcenterId;
+    console.log(selectedWorkcenterId)
+    if (selectedWorkcenterId) {
+      this.setState({ selectedWorkcenterId: undefined });
+      this.props.history.push(`/datas/workcenter/${selectedWorkcenterId}`);
     }
   }
 
-  handleDeleteWorkcenter() {
+  handleDelete() {
     const selectedWorkcenterId = this.state.selectedWorkcenterId;
 
     if (selectedWorkcenterId) {
@@ -49,8 +50,9 @@ export class WorkcenterListContainer extends Component {
   }
 
   handleRowSelect(row, isSelected) {
+    console.log(row)
     if (isSelected) {
-      this.setState({ selectedCostcentertId: row.id });
+      this.setState({ selectedWorkcenterId: row.id });
     }
   }
 
@@ -70,7 +72,7 @@ export class WorkcenterListContainer extends Component {
                 <button
                   type="button"
                   className="btn btn-primary"
-                  onClick={this.handleAddWorkCenter}
+                  onClick={this.handleAd}
                 >
                   <i className="fa fa-plus" aria-hidden="true" /> New
                 </button>
@@ -78,7 +80,7 @@ export class WorkcenterListContainer extends Component {
                 <button
                   type="button"
                   className="btn btn-warning ml-2"
-                  onClick={this.handleEditWorkcenter}
+                  onClick={this.handleEdit}
                 >
                   <i className="fa fa-pencil" aria-hidden="true" /> Edit
                 </button>
@@ -86,12 +88,12 @@ export class WorkcenterListContainer extends Component {
                 <button
                   type="button"
                   className="btn btn-danger ml-2"
-                  onClick={this.handleDeleteWorkcenter}
+                  onClick={this.handleDelete}
                 >
                   <i
                     className="fa fa-trash-o"
                     aria-hidden="true"
-                    onClick={this.handleDeleteWorkcenter}
+                    onClick={this.handleDelete}
                   />{" "}
                   Delete
                 </button>

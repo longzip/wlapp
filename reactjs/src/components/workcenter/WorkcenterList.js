@@ -20,50 +20,53 @@ class WorkcenterList extends Component {
     };
   }
   render() {
+    console.log(this.props.workcenters);
     return (
-      <BootstrapTable
-        data={this.props.workcenters}
-        selectRow={this.selectRowProp}
-        options={this.options}
-        bordered={false}
-        striped
-        hover
-        condensed
-      >
-        <TableHeaderColumn dataField="id" isKey hidden>
-          Id
-        </TableHeaderColumn>
-
-        <TableHeaderColumn
-          dataField="name"
-          dataSort={true}
-          caretRender={getCaret}
-          filter={{ type: "TextFilter", delay: 0 }}
-          columnTitle
+      <div>
+        <BootstrapTable
+          data={this.props.workcenters}
+          selectRow={this.selectRowProp}
+          options={this.options}
+          bordered={false}
+          striped
+          hover
+          condensed
         >
-          Name
-        </TableHeaderColumn>
+          <TableHeaderColumn dataField="id" isKey hidden>
+            Id
+          </TableHeaderColumn>
 
-        <TableHeaderColumn
-          dataField="code"
-          dataSort={true}
-          caretRender={getCaret}
-          filter={{ type: "TextFilter", delay: 0 }}
-          columnTitle
-        >
-          Code
-        </TableHeaderColumn>
+          <TableHeaderColumn
+            dataField="name"
+            dataSort={true}
+            caretRender={getCaret}
+            filter={{ type: "TextFilter", delay: 0 }}
+            columnTitle
+          >
+            Name
+          </TableHeaderColumn>
 
-        <TableHeaderColumn
-          dataField="createdAt"
-          dataSort={true}
-          caretRender={getCaret}
-          filter={{ type: "TextFilter", delay: 0 }}
-          columnTitle
-        >
-          createdAt
-        </TableHeaderColumn>
-      </BootstrapTable>
+          <TableHeaderColumn
+            dataField="code"
+            dataSort={true}
+            caretRender={getCaret}
+            filter={{ type: "TextFilter", delay: 0 }}
+            columnTitle
+          >
+            Code
+          </TableHeaderColumn>
+
+          <TableHeaderColumn
+            dataField="createdAt"
+            dataSort={true}
+            caretRender={getCaret}
+            filter={{ type: "TextFilter", delay: 0 }}
+            columnTitle
+          >
+            createdAt
+          </TableHeaderColumn>
+        </BootstrapTable>
+      </div>
     );
   }
 }

@@ -40,7 +40,7 @@ export class AddOrEditWorkcenterContainer extends React.Component {
 
   handleCancel(event) {
     event.preventDefault();
-    this.props.history.replace("/products");
+    this.props.history.replace("/workcenters");
   }
 
   render() {
@@ -63,14 +63,14 @@ export class AddOrEditWorkcenterContainer extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const productId = parseInt(ownProps.match.params.id);
+  const workcenterId = parseInt(ownProps.match.params.id);
   if (
-    productId &&
-    state.selectedProductReducer.product &&
-    productId === state.selectedProductReducer.product.id
+    workcenterId &&
+    state.selectedWorkcenterReducer.workcenter &&
+    workcenterId === state.selectedWorkcenterReducer.product.id
   ) {
     return {
-      initialValues: state.selectedProductReducer.product
+      initialValues: state.selectedWorkcenterReducer.product
     };
   } else {
     return {};
