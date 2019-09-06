@@ -28,7 +28,7 @@ export const addNewProductionResponse = () => ({
 });
 
 export const updateExistingProductionResponse = () => ({
-  type: ActionType.UPDATE_EXISTING_Production_RESPONSE
+  type: ActionType.UPDATE_EXISTING_PRODUCTION_RESPONSE
 });
 
 export function saveProductionAction(ProductionBeingAddedOrEdited) {

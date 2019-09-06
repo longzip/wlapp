@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class RoutingWorkcenterList extends Component {
+export default class RoutingWorkcenterList extends React.Component {
     render() {
         return (
             <div>

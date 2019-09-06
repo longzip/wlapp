@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class InventoryListForm extends Component {
+export default class InventoryListForm extends React.Component {
     render() {
         return (
             <div>

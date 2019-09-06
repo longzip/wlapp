@@ -4,7 +4,7 @@ import fetchClient from "../api/fetchClient";
 import { ApiCallBeginAction, ApiCallErrorAction } from "./ApiAction";
 
 export const getWorkordersResponse = Workorders => ({
-  type: ActionType.GET_WorkorderS_RESPONSE,
+  type: ActionType.GET_WORKORDERS_RESPONSE,
   Workorders
 });
 
@@ -24,11 +24,11 @@ export function getWorkordersAction() {
 }
 
 export const addNewWorkorderResponse = () => ({
-  type: ActionType.ADD_NEW_Workorder_RESPONSE
+  type: ActionType.ADD_NEW_WORKORDER_RESPONSE
 });
 
 export const updateExistingWorkorderResponse = () => ({
-  type: ActionType.UPDATE_EXISTING_Workorder_RESPONSE
+  type: ActionType.UPDATE_EXISTING_WORKORDER_RESPONSE
 });
 
 export function saveWorkorderAction(WorkorderBeingAddedOrEdited) {
@@ -62,7 +62,7 @@ export function saveWorkorderAction(WorkorderBeingAddedOrEdited) {
 }
 
 export const getWorkorderResponse = WorkorderFound => ({
-  type: ActionType.GET_Workorder_RESPONSE,
+  type: ActionType.GET_WORKORDER_RESPONSE,
   Workorder: WorkorderFound
 });
 
@@ -82,7 +82,7 @@ export function getWorkorderAction(WorkorderId) {
 }
 
 export const deleteWorkorderResponse = () => ({
-  type: ActionType.DELETE_Workorder_RESPONSE
+  type: ActionType.DELETE_WORKORDER_RESPONSE
 });
 
 export function deleteWorkorderAction(WorkorderId) {

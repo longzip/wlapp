@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react';
+import React from "react";
+import PropTypes from 'prop-types'
 
 
 const FieldInput = ({input, type, name, label, placeholder, meta: {touched, error, warning}}) => {

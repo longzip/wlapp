@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { NavLink, Link } from "react-router-dom";
 
-export default class MenuContainer extends Component {
+export default class MenuContainer extends React.Component {
   render() {
     return (
       <aside className="main-sidebar sidebar-dark-primary elevation-4">

@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-class HeaderNavContainer extends Component {
+class HeaderNavContainer extends React.Component {
   render() {
     return (
       <nav className="main-header navbar navbar-expand navbar-white navbar-light">
         <ul className="navbar-nav">
           <li className="nav-item">
-            <a className="nav-link" data-widget="pushmenu" href="#">
-              <i className="fas fa-bars"></i>
-            </a>
+          <Link to="#" className="nav-link" data-widget="pushmenu">
+              Home
+            </Link>
           </li>
           <li className="nav-item d-none d-sm-inline-block">
             <Link to="/" className="nav-link">

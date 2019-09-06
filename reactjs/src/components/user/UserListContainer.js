@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class UserListContainer extends Component {
+export default class UserListContainer extends React.Component {
     render() {
         return (
             <div>

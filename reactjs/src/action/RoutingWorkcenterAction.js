@@ -28,7 +28,7 @@ export const addNewRoutingWorkcenterResponse = () => ({
 });
 
 export const updateExistingRoutingWorkcenterResponse = () => ({
-  type: ActionType.UPDATE_EXISTING_RoutingWorkcenter_RESPONSE
+  type: ActionType.UPDATE_EXISTING_ROUTINGWORKCENTER_RESPONSE
 });
 
 export function saveRoutingWorkcenterAction(RoutingWorkcenterBeingAddedOrEdited) {

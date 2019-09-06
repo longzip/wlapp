@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class ProductionListForm extends Component {
+export default class ProductionListForm extends React.Component {
     render() {
         return (
             <div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class BomList extends Component {
+export default class BomList extends React.Component {
     render() {
         return (
             <div>

@@ -1,8 +1,9 @@
-import React, { Component, PropTypes } from "react";
+import React from "react";
+import PropTypes from 'prop-types'
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import getCaret from "../common/GetCaret";
 
-class WorkcenterList extends Component {
+class WorkcenterList extends React.Component {
   constructor(props) {
     super(props);
 

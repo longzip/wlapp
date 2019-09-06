@@ -4,7 +4,7 @@ import fetchClient from "../api/fetchClient";
 import { ApiCallBeginAction, ApiCallErrorAction } from "./ApiAction";
 
 export const getWorkcenterProductivitiesResponse = WorkcenterProductivities => ({
-  type: ActionType.GET_WorkcenterProductivitieS_RESPONSE,
+  type: ActionType.GET_WORKCENTERPRODUCTIVITIES_RESPONSE,
   WorkcenterProductivities
 });
 
@@ -24,11 +24,11 @@ export function getWorkcenterProductivitiesAction() {
 }
 
 export const addNewWorkcenterProductivityResponse = () => ({
-  type: ActionType.ADD_NEW_WorkcenterProductivity_RESPONSE
+  type: ActionType.ADD_NEW_WORKCENTERPRODUCTIVITY_RESPONSE
 });
 
 export const updateExistingWorkcenterProductivityResponse = () => ({
-  type: ActionType.UPDATE_EXISTING_WorkcenterProductivity_RESPONSE
+  type: ActionType.UPDATE_EXISTING_WORKCENTERPRODUCTIVITY_RESPONSE
 });
 
 export function saveWorkcenterProductivityAction(WorkcenterProductivityBeingAddedOrEdited) {
@@ -62,7 +62,7 @@ export function saveWorkcenterProductivityAction(WorkcenterProductivityBeingAdde
 }
 
 export const getWorkcenterProductivityResponse = WorkcenterProductivityFound => ({
-  type: ActionType.GET_WorkcenterProductivity_RESPONSE,
+  type: ActionType.GET_WORKCENTERPRODUCTIVITY_RESPONSE,
   WorkcenterProductivity: WorkcenterProductivityFound
 });
 
@@ -82,7 +82,7 @@ export function getWorkcenterProductivityAction(WorkcenterProductivityId) {
 }
 
 export const deleteWorkcenterProductivityResponse = () => ({
-  type: ActionType.DELETE_WorkcenterProductivity_RESPONSE
+  type: ActionType.DELETE_WORKCENTERPRODUCTIVITY_RESPONSE
 });
 
 export function deleteWorkcenterProductivityAction(WorkcenterProductivityId) {

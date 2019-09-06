@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from "react";
+import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form';
 import FieldInput from '../common/FieldInput';
 import SelectInput from '../common/SelectInput';

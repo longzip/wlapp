@@ -4,7 +4,7 @@ import fetchClient from "../api/fetchClient";
 import { ApiCallBeginAction, ApiCallErrorAction } from "./ApiAction";
 
 export const getUomsResponse = Uoms => ({
-  type: ActionType.GET_UomS_RESPONSE,
+  type: ActionType.GET_UOMS_RESPONSE,
   Uoms
 });
 
@@ -24,11 +24,11 @@ export function getUomsAction() {
 }
 
 export const addNewUomResponse = () => ({
-  type: ActionType.ADD_NEW_Uom_RESPONSE
+  type: ActionType.ADD_NEW_UOM_RESPONSE
 });
 
 export const updateExistingUomResponse = () => ({
-  type: ActionType.UPDATE_EXISTING_Uom_RESPONSE
+  type: ActionType.UPDATE_EXISTING_UOM_RESPONSE
 });
 
 export function saveUomAction(UomBeingAddedOrEdited) {
@@ -62,7 +62,7 @@ export function saveUomAction(UomBeingAddedOrEdited) {
 }
 
 export const getUomResponse = UomFound => ({
-  type: ActionType.GET_Uom_RESPONSE,
+  type: ActionType.GET_UOM_RESPONSE,
   Uom: UomFound
 });
 
@@ -82,7 +82,7 @@ export function getUomAction(UomId) {
 }
 
 export const deleteUomResponse = () => ({
-  type: ActionType.DELETE_Uom_RESPONSE
+  type: ActionType.DELETE_UOM_RESPONSE
 });
 
 export function deleteUomAction(UomId) {

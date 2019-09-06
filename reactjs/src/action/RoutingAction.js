@@ -4,7 +4,7 @@ import fetchClient from "../api/fetchClient";
 import { ApiCallBeginAction, ApiCallErrorAction } from "./ApiAction";
 
 export const getRoutingsResponse = Routings => ({
-  type: ActionType.GET_RoutingS_RESPONSE,
+  type: ActionType.GET_ROUTINGS_RESPONSE,
   Routings
 });
 
@@ -24,11 +24,11 @@ export function getRoutingsAction() {
 }
 
 export const addNewRoutingResponse = () => ({
-  type: ActionType.ADD_NEW_Routing_RESPONSE
+  type: ActionType.ADD_NEW_ROUTING_RESPONSE
 });
 
 export const updateExistingRoutingResponse = () => ({
-  type: ActionType.UPDATE_EXISTING_Routing_RESPONSE
+  type: ActionType.UPDATE_EXISTING_ROUTING_RESPONSE
 });
 
 export function saveRoutingAction(RoutingBeingAddedOrEdited) {
@@ -62,7 +62,7 @@ export function saveRoutingAction(RoutingBeingAddedOrEdited) {
 }
 
 export const getRoutingResponse = RoutingFound => ({
-  type: ActionType.GET_Routing_RESPONSE,
+  type: ActionType.GET_ROUTING_RESPONSE,
   Routing: RoutingFound
 });
 
@@ -82,7 +82,7 @@ export function getRoutingAction(RoutingId) {
 }
 
 export const deleteRoutingResponse = () => ({
-  type: ActionType.DELETE_Routing_RESPONSE
+  type: ActionType.DELETE_ROUTING_RESPONSE
 });
 
 export function deleteRoutingAction(RoutingId) {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class DeliverListContainer extends Component {
+export default class DeliverListContainer extends React.Component {
     render() {
         return (
             <div>

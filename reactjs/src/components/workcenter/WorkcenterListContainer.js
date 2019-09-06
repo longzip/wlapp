@@ -1,11 +1,12 @@
-import React, { Component, PropTypes } from "react";
+import React from "react";
+import PropTypes from 'prop-types'
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import toastr from "toastr";
 import * as workcenterAction from "../../action/WorkcenterAction";
 import WorkcenterList from "./WorkcenterList";
 
-export class WorkcenterListContainer extends Component {
+export class WorkcenterListContainer extends React.Component {
   constructor() {
     super();
 
@@ -120,7 +121,7 @@ const mapDispatchToProps = dispatch => ({
   action: bindActionCreators(workcenterAction, dispatch)
 });
 
-WorkcenterListContainer.PropTypes = {
+WorkcenterListContainer.propTypes = {
   workcenters: PropTypes.array,
   action: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class OrderLineListForm extends Component {
+export default class OrderLineListForm extends React.Component {
     render() {
         return (
             <div>
