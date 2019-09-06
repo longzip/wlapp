@@ -4,7 +4,7 @@ import fetchClient from "../api/fetchClient";
 import { ApiCallBeginAction, ApiCallErrorAction } from "./ApiAction";
 
 export const getProductionsResponse = Productions => ({
-  type: ActionType.GET_ProductionS_RESPONSE,
+  type: ActionType.GET_PRODUCTIONS_RESPONSE,
   Productions
 });
 
@@ -24,7 +24,7 @@ export function getProductionsAction() {
 }
 
 export const addNewProductionResponse = () => ({
-  type: ActionType.ADD_NEW_Production_RESPONSE
+  type: ActionType.ADD_NEW_PRODUCTION_RESPONSE
 });
 
 export const updateExistingProductionResponse = () => ({
@@ -62,7 +62,7 @@ export function saveProductionAction(ProductionBeingAddedOrEdited) {
 }
 
 export const getProductionResponse = ProductionFound => ({
-  type: ActionType.GET_Production_RESPONSE,
+  type: ActionType.GET_PRODUCTION_RESPONSE,
   Production: ProductionFound
 });
 
@@ -82,7 +82,7 @@ export function getProductionAction(ProductionId) {
 }
 
 export const deleteProductionResponse = () => ({
-  type: ActionType.DELETE_Production_RESPONSE
+  type: ActionType.DELETE_PRODUCTION_RESPONSE
 });
 
 export function deleteProductionAction(ProductionId) {

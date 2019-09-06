@@ -1,48 +1,54 @@
 {
-  "name": "reactjs-crud-boilerplate",
-  "description": "ReactJS CRUD Boilerplate",
-  "version": "0.0.2",
-  "private": false,
+  "name": "drg1",
+  "version": "0.1.0",
+  "private": true,
   "repository": "https://github.com/ariesmcrae/reactjs-crud-boilerplate.git",
-  "author": "Aries McRae <github@ariesmcrae.com>",
-  "license": "MIT",
-  "keywords": [
-    "Boilerplate",
-    "Starter Kit",
-    "Starter Project",
-    "Seed"
-  ],
   "dependencies": {
-    "devextreme": "^19.1.5",
-    "devextreme-react": "^19.1.5",
+    "@devexpress/dx-react-core": "^2.0.4",
+    "@devexpress/dx-react-grid": "^2.0.4",
+    "@devexpress/dx-react-grid-bootstrap4": "^2.0.4",
     "axios": "^0.19.0",
-    "lodash": "^4.17.4",
-    "react": "^15.4.2",
-    "react-bootstrap-table": "^3.4.1",
-    "react-dom": "^15.4.2",
-    "react-redux": "^5.0.5",
-    "react-router-dom": "^4.1.1",
-    "redux": "^3.7.0",
-    "redux-form": "^6.8.0",
-    "redux-thunk": "^2.2.0",
-    "tether": "^1.4.0",
-    "toastr": "^2.1.2"
-  },
-  "devDependencies": {
-    "coveralls": "^2.13.1",
-    "enzyme": "^2.8.2",
-    "enzyme-to-json": "^1.5.1",
-    "nock": "^9.0.13",
-    "react-addons-test-utils": "^15.4.2",
-    "react-scripts": "0.9.5",
-    "redux-devtools-extension": "^2.13.8",
-    "redux-mock-store": "^1.2.3"
+    "lodash": "^4.17.15",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-redux": "^7.1.1",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "3.1.1",
+    "redux": "^4.0.4",
+    "redux-form": "^8.2.6",
+    "redux-thunk": "^2.3.0",
+    "tether": "^1.4.7",
+    "toastr": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "coverage": "react-scripts test --env=jsdom --coverage",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "coveralls": "^3.0.6",
+    "enzyme": "^3.10.0",
+    "enzyme-to-json": "^3.4.0",
+    "nock": "^11.3.3",
+    "react-addons-test-utils": "^15.6.2",
+    "redux-devtools": "^3.5.0",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-mock-store": "^1.5.3"
   }
 }

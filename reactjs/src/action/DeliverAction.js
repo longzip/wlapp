@@ -4,7 +4,7 @@ import fetchClient from "../api/fetchClient";
 import { ApiCallBeginAction, ApiCallErrorAction } from "./ApiAction";
 
 export const getDeliversResponse = Delivers => ({
-  type: ActionType.GET_DeliverS_RESPONSE,
+  type: ActionType.GET_DELIVERS_RESPONSE,
   Delivers
 });
 
@@ -24,11 +24,11 @@ export function getDeliversAction() {
 }
 
 export const addNewDeliverResponse = () => ({
-  type: ActionType.ADD_NEW_Deliver_RESPONSE
+  type: ActionType.ADD_NEW_DELIVER_RESPONSE
 });
 
 export const updateExistingDeliverResponse = () => ({
-  type: ActionType.UPDATE_EXISTING_Deliver_RESPONSE
+  type: ActionType.UPDATE_EXISTING_DELIVER_RESPONSE
 });
 
 export function saveDeliverAction(DeliverBeingAddedOrEdited) {
@@ -62,7 +62,7 @@ export function saveDeliverAction(DeliverBeingAddedOrEdited) {
 }
 
 export const getDeliverResponse = DeliverFound => ({
-  type: ActionType.GET_Deliver_RESPONSE,
+  type: ActionType.GET_DELIVER_RESPONSE,
   Deliver: DeliverFound
 });
 
@@ -82,7 +82,7 @@ export function getDeliverAction(DeliverId) {
 }
 
 export const deleteDeliverResponse = () => ({
-  type: ActionType.DELETE_Deliver_RESPONSE
+  type: ActionType.DELETE_DELIVER_RESPONSE
 });
 
 export function deleteDeliverAction(DeliverId) {

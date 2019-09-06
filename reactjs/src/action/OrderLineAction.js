@@ -4,7 +4,7 @@ import fetchClient from "../api/fetchClient";
 import { ApiCallBeginAction, ApiCallErrorAction } from "./ApiAction";
 
 export const getOrderLinesResponse = OrderLines => ({
-  type: ActionType.GET_OrderLineS_RESPONSE,
+  type: ActionType.GET_ORDERLINES_RESPONSE,
   OrderLines
 });
 
@@ -24,11 +24,11 @@ export function getOrderLinesAction() {
 }
 
 export const addNewOrderLineResponse = () => ({
-  type: ActionType.ADD_NEW_OrderLine_RESPONSE
+  type: ActionType.ADD_NEW_ORDERLINE_RESPONSE
 });
 
 export const updateExistingOrderLineResponse = () => ({
-  type: ActionType.UPDATE_EXISTING_OrderLine_RESPONSE
+  type: ActionType.UPDATE_EXISTING_ORDERLINE_RESPONSE
 });
 
 export function saveOrderLineAction(OrderLineBeingAddedOrEdited) {
@@ -62,7 +62,7 @@ export function saveOrderLineAction(OrderLineBeingAddedOrEdited) {
 }
 
 export const getOrderLineResponse = OrderLineFound => ({
-  type: ActionType.GET_OrderLine_RESPONSE,
+  type: ActionType.GET_ORDERLINE_RESPONSE,
   OrderLine: OrderLineFound
 });
 
@@ -82,7 +82,7 @@ export function getOrderLineAction(OrderLineId) {
 }
 
 export const deleteOrderLineResponse = () => ({
-  type: ActionType.DELETE_OrderLine_RESPONSE
+  type: ActionType.DELETE_ORDERLINE_RESPONSE
 });
 
 export function deleteOrderLineAction(OrderLineId) {

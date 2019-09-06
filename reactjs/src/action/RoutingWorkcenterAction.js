@@ -4,7 +4,7 @@ import fetchClient from "../api/fetchClient";
 import { ApiCallBeginAction, ApiCallErrorAction } from "./ApiAction";
 
 export const getRoutingWorkcentersResponse = RoutingWorkcenters => ({
-  type: ActionType.GET_RoutingWorkcenterS_RESPONSE,
+  type: ActionType.GET_ROUTINGWORKCENTERS_RESPONSE,
   RoutingWorkcenters
 });
 
@@ -24,7 +24,7 @@ export function getRoutingWorkcentersAction() {
 }
 
 export const addNewRoutingWorkcenterResponse = () => ({
-  type: ActionType.ADD_NEW_RoutingWorkcenter_RESPONSE
+  type: ActionType.ADD_NEW_ROUTINGWORKCENTER_RESPONSE
 });
 
 export const updateExistingRoutingWorkcenterResponse = () => ({
@@ -62,7 +62,7 @@ export function saveRoutingWorkcenterAction(RoutingWorkcenterBeingAddedOrEdited)
 }
 
 export const getRoutingWorkcenterResponse = RoutingWorkcenterFound => ({
-  type: ActionType.GET_RoutingWorkcenter_RESPONSE,
+  type: ActionType.GET_ROUTINGWORKCENTER_RESPONSE,
   RoutingWorkcenter: RoutingWorkcenterFound
 });
 
@@ -82,7 +82,7 @@ export function getRoutingWorkcenterAction(RoutingWorkcenterId) {
 }
 
 export const deleteRoutingWorkcenterResponse = () => ({
-  type: ActionType.DELETE_RoutingWorkcenter_RESPONSE
+  type: ActionType.DELETE_ROUTINGWORKCENTER_RESPONSE
 });
 
 export function deleteRoutingWorkcenterAction(RoutingWorkcenterId) {

@@ -4,7 +4,7 @@ import fetchClient from "../api/fetchClient";
 import { ApiCallBeginAction, ApiCallErrorAction } from "./ApiAction";
 
 export const getBomLinesResponse = bomLines => ({
-  type: ActionType.GET_BOMLineS_RESPONSE,
+  type: ActionType.GET_BOMLINES_RESPONSE,
   bomLines
 });
 
@@ -24,11 +24,11 @@ export function getBomLinesAction() {
 }
 
 export const addNewBomLineResponse = () => ({
-  type: ActionType.ADD_NEW_BOMLine_RESPONSE
+  type: ActionType.ADD_NEW_BOMLINE_RESPONSE
 });
 
 export const updateExistingBomLineResponse = () => ({
-  type: ActionType.UPDATE_EXISTING_BOMLine_RESPONSE
+  type: ActionType.UPDATE_EXISTING_BOMLINE_RESPONSE
 });
 
 export function saveBomLineAction(bomLineBeingAddedOrEdited) {
@@ -62,7 +62,7 @@ export function saveBomLineAction(bomLineBeingAddedOrEdited) {
 }
 
 export const getBomLineResponse = bomLineFound => ({
-  type: ActionType.GET_BOMLine_RESPONSE,
+  type: ActionType.GET_BOMLINE_RESPONSE,
   BomLine: bomLineFound
 });
 
@@ -82,7 +82,7 @@ export function getBomLineAction(bomLineId) {
 }
 
 export const deleteBomLineResponse = () => ({
-  type: ActionType.DELETE_BOMLine_RESPONSE
+  type: ActionType.DELETE_BOMLINE_RESPONSE
 });
 
 export function deleteBomLineAction(bomLineId) {

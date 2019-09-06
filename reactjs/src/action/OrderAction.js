@@ -4,7 +4,7 @@ import fetchClient from "../api/fetchClient";
 import { ApiCallBeginAction, ApiCallErrorAction } from "./ApiAction";
 
 export const getOrdersResponse = Orders => ({
-  type: ActionType.GET_OrderS_RESPONSE,
+  type: ActionType.GET_ORDERS_RESPONSE,
   Orders
 });
 
@@ -24,11 +24,11 @@ export function getOrdersAction() {
 }
 
 export const addNewOrderResponse = () => ({
-  type: ActionType.ADD_NEW_Order_RESPONSE
+  type: ActionType.ADD_NEW_ORDER_RESPONSE
 });
 
 export const updateExistingOrderResponse = () => ({
-  type: ActionType.UPDATE_EXISTING_Order_RESPONSE
+  type: ActionType.UPDATE_EXISTING_ORDER_RESPONSE
 });
 
 export function saveOrderAction(OrderBeingAddedOrEdited) {
@@ -62,7 +62,7 @@ export function saveOrderAction(OrderBeingAddedOrEdited) {
 }
 
 export const getOrderResponse = OrderFound => ({
-  type: ActionType.GET_Order_RESPONSE,
+  type: ActionType.GET_ORDER_RESPONSE,
   Order: OrderFound
 });
 
@@ -82,7 +82,7 @@ export function getOrderAction(OrderId) {
 }
 
 export const deleteOrderResponse = () => ({
-  type: ActionType.DELETE_Order_RESPONSE
+  type: ActionType.DELETE_ORDER_RESPONSE
 });
 
 export function deleteOrderAction(OrderId) {

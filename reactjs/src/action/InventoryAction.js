@@ -4,7 +4,7 @@ import fetchClient from "../api/fetchClient";
 import { ApiCallBeginAction, ApiCallErrorAction } from "./ApiAction";
 
 export const getInventoriesResponse = Inventories => ({
-  type: ActionType.GET_InventorieS_RESPONSE,
+  type: ActionType.GET_INVENTORIES_RESPONSE,
   Inventories
 });
 
@@ -24,11 +24,11 @@ export function getInventoriesAction() {
 }
 
 export const addNewInventoryResponse = () => ({
-  type: ActionType.ADD_NEW_Inventory_RESPONSE
+  type: ActionType.ADD_NEW_INVENTORY_RESPONSE
 });
 
 export const updateExistingInventoryResponse = () => ({
-  type: ActionType.UPDATE_EXISTING_Inventory_RESPONSE
+  type: ActionType.UPDATE_EXISTING_INVENTORY_RESPONSE
 });
 
 export function saveInventoryAction(InventoryBeingAddedOrEdited) {
@@ -62,7 +62,7 @@ export function saveInventoryAction(InventoryBeingAddedOrEdited) {
 }
 
 export const getInventoryResponse = InventoryFound => ({
-  type: ActionType.GET_Inventory_RESPONSE,
+  type: ActionType.GET_INVENTORY_RESPONSE,
   Inventory: InventoryFound
 });
 
@@ -82,7 +82,7 @@ export function getInventoryAction(InventoryId) {
 }
 
 export const deleteInventoryResponse = () => ({
-  type: ActionType.DELETE_Inventory_RESPONSE
+  type: ActionType.DELETE_INVENTORY_RESPONSE
 });
 
 export function deleteInventoryAction(InventoryId) {

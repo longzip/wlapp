@@ -4,7 +4,7 @@ import fetchClient from "../api/fetchClient";
 import { ApiCallBeginAction, ApiCallErrorAction } from "./ApiAction";
 
 export const getProductCategoriesResponse = ProductCategories => ({
-  type: ActionType.GET_ProductCategorieS_RESPONSE,
+  type: ActionType.GET_PRODUCTCATEGORIES_RESPONSE,
   ProductCategories
 });
 
@@ -24,11 +24,11 @@ export function getProductCategoriesAction() {
 }
 
 export const addNewProductCategoryResponse = () => ({
-  type: ActionType.ADD_NEW_ProductCategory_RESPONSE
+  type: ActionType.ADD_NEW_PRODUCTCATEGORY_RESPONSE
 });
 
 export const updateExistingProductCategoryResponse = () => ({
-  type: ActionType.UPDATE_EXISTING_ProductCategory_RESPONSE
+  type: ActionType.UPDATE_EXISTING_PRODUCTCATEGORY_RESPONSE
 });
 
 export function saveProductCategoryAction(ProductCategoryBeingAddedOrEdited) {
@@ -62,7 +62,7 @@ export function saveProductCategoryAction(ProductCategoryBeingAddedOrEdited) {
 }
 
 export const getProductCategoryResponse = ProductCategoryFound => ({
-  type: ActionType.GET_ProductCategory_RESPONSE,
+  type: ActionType.GET_PRODUCTCATEGORY_RESPONSE,
   ProductCategory: ProductCategoryFound
 });
 
@@ -82,7 +82,7 @@ export function getProductCategoryAction(ProductCategoryId) {
 }
 
 export const deleteProductCategoryResponse = () => ({
-  type: ActionType.DELETE_ProductCategory_RESPONSE
+  type: ActionType.DELETE_PRODUCTCATEGORY_RESPONSE
 });
 
 export function deleteProductCategoryAction(ProductCategoryId) {
