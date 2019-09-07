@@ -1,11 +1,17 @@
-const controller = require('../controllers/users');
-const validateToken = require('../utils').validateToken;
+const controller = require("../controllers/users");
+const validateToken = require("../utils").validateToken;
 
-module.exports = (router) => {
-  router.route('/users')
-  	.post(controller.add)
+module.exports = router => {
+  router
+    .route("/users")
+    .post(controller.add)
     .get(validateToken, controller.getAll);
 
-  router.route('/login')
-    .post(controller.login);
+  router
+    .route("/users/:id")
+    .get(controller.show)
+    .delete(controller.delete)
+    .put(controller.update);
+
+  router.route("/login").post(controller.login);
 };

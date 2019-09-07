@@ -16,6 +16,24 @@ function validate(data) {
 }
 
 module.exports = {
+  delete: (req, res) => {
+    let result = {};
+    let status = 200;
+
+    Order.findByPk(req.params.id)
+      .then(item => {
+        result.status = status;
+        result.result = item.destroy();
+        return res.status(status).send(result);
+      })
+      .catch(err => {
+        status = 500;
+        result.status = status;
+        result.error = err;
+        return res.status(status).send(result);
+      });
+  },
+
   add: (req, res) => {
     let result = {};
     let status = 201;

@@ -7,6 +7,7 @@ module.exports = (router) => {
     .get(controller.getAll);
   router.route('/routings/:id')
     .get(controller.show)
+    .delete(controller.delete)
     .put(controller.update);
   router.route('/routings/import')
     .post(controller.import);

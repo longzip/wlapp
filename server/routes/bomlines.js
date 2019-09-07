@@ -7,6 +7,7 @@ module.exports = (router) => {
     .get(controller.getAll);
   router.route('/bomlines/:id')
     .get(controller.show)
+    .delete(controller.delete)
     .put(controller.update);
   router.route('/bomlines/import')
     .post(controller.import);

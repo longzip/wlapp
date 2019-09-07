@@ -7,6 +7,7 @@ module.exports = (router) => {
     .get(controller.getAll);
   router.route('/orderlines/:id')
     .get(controller.show)
+    .delete(controller.delete)
     .put(controller.update);
   router.route('/orderlines/import')
     .post(controller.import);

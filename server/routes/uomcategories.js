@@ -7,6 +7,7 @@ module.exports = (router) => {
     .get(controller.getAll);
   router.route('/uomcategories/:id')
     .get(controller.show)
+    .delete(controller.delete)
     .put(controller.update);
   router.route('/uomcategories/import')
     .post(controller.import);

@@ -7,6 +7,7 @@ module.exports = (router) => {
     .get(controller.getAll);
   router.route('/uoms/:id')
     .get(controller.show)
+    .delete(controller.delete)
     .put(controller.update);
   router.route('/uoms/import')
     .post(controller.import);

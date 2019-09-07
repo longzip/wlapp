@@ -7,6 +7,7 @@ module.exports = (router) => {
     .get(controller.getAll);
   router.route('/workcenter-productivities/:id')
     .get(controller.show)
+    .delete(controller.delete)
     .put(controller.update);
   router.route('/workcenter-productivities/import')
     .post(controller.import);
