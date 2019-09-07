@@ -1,32 +1,7 @@
 import React, { PropTypes } from "react";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
+import getCaret from "../common/GetCaret";
 
-const getCaret = direction => {
-  if (direction === "asc") {
-    return (
-      <span>
-        {" "}
-        <i className="fa fa-sort-asc" aria-hidden="true" />
-      </span>
-    );
-  }
-
-  if (direction === "desc") {
-    return (
-      <span>
-        {" "}
-        <i className="fa fa-sort-desc" aria-hidden="true" />
-      </span>
-    );
-  }
-
-  return (
-    <span>
-      {" "}
-      <i className="fa fa-sort" aria-hidden="true" />
-    </span>
-  );
-};
 
 class ProductList extends React.Component {
   constructor(props) {

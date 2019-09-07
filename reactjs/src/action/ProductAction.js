@@ -1,4 +1,5 @@
 import * as ActionType from "./ActionType";
+
 import fetchClient from "../api/fetchClient";
 import { ApiCallBeginAction, ApiCallErrorAction } from "./ApiAction";
 
@@ -33,8 +34,6 @@ export const updateExistingProductResponse = () => ({
 export function saveProductAction(productBeingAddedOrEdited) {
   return function(dispatch) {
     dispatch(ApiCallBeginAction());
-    //if authorId exists, it means that the course is being edited, therefore update it.
-    //if authorId doesn't exist, it must therefore be new course that is being added, therefore add it
     if (productBeingAddedOrEdited.id) {
       return fetchClient
         .put(

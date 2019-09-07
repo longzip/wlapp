@@ -1,4 +1,5 @@
 import React from "react";
+
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import PageNotFound from "./common/PageNotFound";
 import Home from "./landing/Home";
@@ -144,14 +145,17 @@ const App = () => {
           <Route exact path="/uom" component={AddOrEditUomContainer} />
           <Route path="/uom/:id" component={AddOrEditUomContainer} />
 
-          <Route path="/workcenters" component={WorkcenterListContainer} />
+          <Route
+            path="/datas/workcenters"
+            component={WorkcenterListContainer}
+          />
           <Route
             exact
-            path="/workcenter"
+            path="/datas/workcenter"
             component={AddOrEditWorkcenterContainer}
           />
           <Route
-            path="/workcenter/:id"
+            path="/datas/workcenter/:id"
             component={AddOrEditWorkcenterContainer}
           />
 
