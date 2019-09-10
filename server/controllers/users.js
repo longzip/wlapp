@@ -104,41 +104,43 @@ module.exports = {
     let result = {};
     let status = 201;
 
-    let { error, value } = validate(req.body);
-
-    User.update(value, {
-      where: {
-        id: req.params.id
-      }
-    })
-      .then(affectedRows => {
-        result.status = status;
-        result.result = affectedRows;
-        return res.status(status).send(result);
-      })
-      .catch(err => {
-        status = 500;
-        result.status = status;
-        result.error = err;
-        return res.status(status).send(result);
-      });
-  },
-
-  getAll: (req, res) => {
-    let result = {};
-    let status = 200;
-
-    const payload = req.decoded;
-    // TODO: Log the payload here to verify that it's the same payload
-    //  we used when we created the token
-    // console.log('PAYLOAD', payload);
-    if (payload && payload.user !== "admin") {
-      // find multiple entries
-      User.findAll()
-        .then(users => {
-          // users will be an array of all User instances
+    let { error, value } = validateUser(req.body);
+    if (value.password) {
+      bcrypt.hash(value.password, stage.saltingRounds, function(err, hash) {
+        if (err) {
+          status = 500;
           result.status = status;
-          result.result = users;
+          result.error = err;
+          return res.status(status).send(result);
+        } else {
+          value.password = hash;
+          User.update(value, {
+            where: {
+              id: req.params.id
+            }
+          })
+            .then(affectedRows => {
+              result.status = status;
+              result.result = affectedRows;
+              return res.status(status).send(result);
+            })
+            .catch(err => {
+              status = 500;
+              result.status = status;
+              result.error = err;
+              return res.status(status).send(result);
+            });
+        }
+      });
+    } else {
+      User.update(value, {
+        where: {
+          id: req.params.id
+        }
+      })
+        .then(affectedRows => {
+          result.status = status;
+          result.result = affectedRows;
           return res.status(status).send(result);
         })
         .catch(err => {
@@ -147,12 +149,39 @@ module.exports = {
           result.error = err;
           return res.status(status).send(result);
         });
-    } else {
-      status = 401;
-      result.status = status;
-      result.error = `Authentication error`;
-      res.status(status).send(result);
     }
+  },
+
+  getAll: (req, res) => {
+    let result = {};
+    let status = 200;
+
+    User.findAll()
+      .then(users => {
+        // users will be an array of all User instances
+        result.status = status;
+        result.result = users;
+        return res.status(status).send(result);
+      })
+      .catch(err => {
+        status = 500;
+        result.status = status;
+        result.error = err;
+        return res.status(status).send(result);
+      });
+
+    // const payload = req.decoded;
+    // TODO: Log the payload here to verify that it's the same payload
+    //  we used when we created the token
+    // console.log('PAYLOAD', payload);
+    // if (payload && payload.user !== "admin") {
+    //   // find multiple entries
+    // } else {
+    //   status = 401;
+    //   result.status = status;
+    //   result.error = `Authentication error`;
+    //   res.status(status).send(result);
+    // }
   },
 
   login: (req, res) => {

@@ -5,7 +5,7 @@ module.exports = router => {
   router
     .route("/users")
     .post(controller.add)
-    .get(validateToken, controller.getAll);
+    .get(controller.getAll);
 
   router
     .route("/users/:id")
