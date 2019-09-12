@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/index.js",
-    "dev": "cross-env NODE_ENV=development nodemon server/index.js",
-    "debug": "node --nolazy --inspect-brk=9229 server/index.js"
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "debug": "node --nolazy --inspect-brk=9229 index.js"
   },
   "keywords": [],
   "author": "",
