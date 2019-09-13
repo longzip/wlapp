@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     note: DataTypes.TEXT('tiny')
   }, {});
   Contact.associate = function(models) {
-    Contact.belongsTo(models.User);
+    Contact.hasOne(models.User);
     Contact.hasMany(models.Order)
   };
   return Contact;

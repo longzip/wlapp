@@ -13,15 +13,6 @@ const stage = require("./config")[environment];
 
 const app = express();
 
-// db.Order.sync({
-//   force: true
-// });
-// db.Contact.sync({
-//   force: true
-// });
-
-// console.log(db.contact)
-
 // Middleware
 app.use(bodyParser.json());
 app.use(
