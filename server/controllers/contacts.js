@@ -8,7 +8,10 @@ function validate(data) {
     name: Joi.string().required(),
     addressLine: Joi.string(),
     city: Joi.string(),
-    phone: Joi.string()
+    phone: Joi.string(),
+    email: Joi.string().email({ minDomainSegments: 2 }),
+    description: Joi.string(),
+    note: Joi.string()
   };
   return Joi.validate(data, schema);
 }
@@ -39,7 +42,6 @@ module.exports = {
     let { error, value } = validate(req.body);
 
     if (error) {
-      console.log(error);
       status = 500;
       result.status = status;
       result.error = error;

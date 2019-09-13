@@ -1,16 +1,19 @@
-'use strict';
+"use strict";
 module.exports = (sequelize, DataTypes) => {
-  const BomLine = sequelize.define('BomLine', {
-    productId: DataTypes.INTEGER,
-    productQty: DataTypes.INTEGER,
-    productUomId: DataTypes.INTEGER,
-    sequence: DataTypes.INTEGER,
-    routingId: DataTypes.INTEGER,
-    bomId: DataTypes.INTEGER,
-    operationId: DataTypes.INTEGER
-  }, {});
+  const BomLine = sequelize.define(
+    "BomLine",
+    {
+      productQty: DataTypes.INTEGER,
+      productUomId: DataTypes.INTEGER,
+      operationId: DataTypes.INTEGER
+    },
+    {}
+  );
   BomLine.associate = function(models) {
-    // associations can be defined here
+    BomLine.hasOne(models.Bom);
+    BomLine.hasOne(models.Routing);
+    BomLine.hasOne(models.Product);
+    BomLine.hasOne(models.Uom);
   };
   return BomLine;
 };

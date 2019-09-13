@@ -4,6 +4,7 @@ const logger = require("morgan");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
+const db = require("./models/index");
 
 const router = express.Router();
 
@@ -11,6 +12,15 @@ const environment = process.env.NODE_ENV; // development
 const stage = require("./config")[environment];
 
 const app = express();
+
+// db.Order.sync({
+//   force: true
+// });
+// db.Contact.sync({
+//   force: true
+// });
+
+// console.log(db.contact)
 
 // Middleware
 app.use(bodyParser.json());
