@@ -142,7 +142,7 @@ module.exports = {
     // find multiple entries
     RoutingWorkcenter.findAll({
       offset: req.query.offset || 0,
-      limit: req.query.limit || 10,
+      limit: req.query.limit || 0,
       where: req.query.name
         ? {
             [Op.and]: [

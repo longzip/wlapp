@@ -2,12 +2,16 @@
 module.exports = (sequelize, DataTypes) => {
   const Contact = sequelize.define('Contact', {
     name: DataTypes.STRING,
+    description: DataTypes.STRING,
     addressLine: DataTypes.STRING,
     city: DataTypes.STRING,
-    phone: DataTypes.STRING
+    email: DataTypes.STRING,
+    phone: DataTypes.STRING,
+    note: DataTypes.TEXT('tiny')
   }, {});
   Contact.associate = function(models) {
-    // associations can be defined here
+    Contact.belongsTo(models.User);
+    Contact.hasMany(models.Order)
   };
   return Contact;
 };
