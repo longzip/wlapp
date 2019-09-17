@@ -1,4 +1,4 @@
-const { Order } = require("../models/index");
+const { Order, OrderLine } = require("../models/index");
 const Joi = require("@hapi/joi");
 const { Op } = require("sequelize");
 const moment = require("moment");

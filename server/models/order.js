@@ -13,6 +13,8 @@ module.exports = (sequelize, DataTypes) => {
   );
   Order.associate = function(models) {
     Order.belongsTo(models.Contact);
+    Order.hasMany(models.Inventory);
+    Order.hasMany(models.Deliver);
   };
   return Order;
 };

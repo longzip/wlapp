@@ -1,15 +1,17 @@
-'use strict';
+"use strict";
 module.exports = (sequelize, DataTypes) => {
-  const Inventory = sequelize.define('Inventory', {
-    name: DataTypes.STRING,
-    orderId: DataTypes.INTEGER,
-    productionId: DataTypes.INTEGER,
-    workorderId: DataTypes.INTEGER,
-    productId: DataTypes.INTEGER,
-    productQty: DataTypes.INTEGER
-  }, {});
+  const Inventory = sequelize.define(
+    "Inventory",
+    {
+      name: DataTypes.STRING,
+      productQty: DataTypes.INTEGER
+    },
+    {}
+  );
   Inventory.associate = function(models) {
-    // associations can be defined here
+    Inventory.belongsTo(models.Order);
+    Inventory.belongsTo(models.Production);
+    Inventory.belongsTo(models.Product);
   };
   return Inventory;
 };

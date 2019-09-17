@@ -1,16 +1,19 @@
-'use strict';
+"use strict";
 module.exports = (sequelize, DataTypes) => {
-  const RoutingWorkcenter = sequelize.define('RoutingWorkcenter', {
-    name: DataTypes.STRING,
-    workcenterId: DataTypes.INTEGER,
-    sequence: DataTypes.INTEGER,
-    routingId: DataTypes.INTEGER,
-    note: DataTypes.STRING,
-    worksheet: DataTypes.STRING,
-    active: DataTypes.BOOLEAN
-  }, {});
+  const RoutingWorkcenter = sequelize.define(
+    "RoutingWorkcenter",
+    {
+      name: DataTypes.STRING,
+      sequence: DataTypes.INTEGER,
+      note: DataTypes.STRING,
+      worksheet: DataTypes.STRING,
+      active: DataTypes.BOOLEAN
+    },
+    {}
+  );
   RoutingWorkcenter.associate = function(models) {
-    // associations can be defined here
+    RoutingWorkcenter.belongsTo(models.Routing);
+    RoutingWorkcenter.belongsTo(models.Workcenter);
   };
   return RoutingWorkcenter;
 };

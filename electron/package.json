@@ -1,7 +1,7 @@
 {
-  "name": "electron-quick-start",
+  "name": "woodsland-managerment-system",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "Woodsland Managerment System",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
