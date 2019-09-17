@@ -33,9 +33,10 @@ Object.keys(db).forEach(modelName => {
 
 db.Contact.hasMany(db.Order);
 
-sequelize.sync({
-    force: true
-});
+// sequelize.sync({
+//     force: true
+// });
+sequelize.sync();
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
