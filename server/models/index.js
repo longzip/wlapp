@@ -37,15 +37,6 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
-// db.Contact.hasMany(db.Order);
-
-// sequelize.sync({
-<<<<<<< HEAD
-//     force: true
-=======
-//   force: true
->>>>>>> b8f90c3785f251dc0652b3c24d4df10f9e09202f
-// });
 sequelize.sync();
 
 db.sequelize = sequelize;

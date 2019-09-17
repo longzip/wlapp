@@ -15,13 +15,8 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   Contact.associate = function(models) {
-<<<<<<< HEAD
-    Contact.hasOne(models.User);
-    Contact.hasMany(models.Order)
-=======
     Contact.belongsTo(models.User);
     Contact.hasMany(models.Order);
->>>>>>> b8f90c3785f251dc0652b3c24d4df10f9e09202f
   };
   return Contact;
 };
