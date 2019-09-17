@@ -1,14 +1,21 @@
-'use strict';
+"use strict";
 module.exports = (sequelize, DataTypes) => {
-  const OrderLine = sequelize.define('OrderLine', {
-    name: DataTypes.STRING,
-    productUomQty: DataTypes.INTEGER,
-    state: DataTypes.STRING
-  }, {});
+  const OrderLine = sequelize.define(
+    "OrderLine",
+    {
+      name: DataTypes.STRING,
+      productDimension: DataTypes.STRING,
+      productSpec: DataTypes.STRING,
+      productUom: DataTypes.STRING,
+      productUomQty: DataTypes.INTEGER,
+      state: DataTypes.STRING,
+      note: DataTypes.TEXT
+    },
+    {}
+  );
   OrderLine.associate = function(models) {
     OrderLine.belongsTo(models.Order);
     OrderLine.belongsTo(models.Product);
-    OrderLine.belongsTo(models.Uom);
   };
   return OrderLine;
 };

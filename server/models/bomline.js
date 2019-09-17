@@ -4,16 +4,15 @@ module.exports = (sequelize, DataTypes) => {
     "BomLine",
     {
       productQty: DataTypes.INTEGER,
-      productUomId: DataTypes.INTEGER,
+      productUom: DataTypes.STRING,
       operationId: DataTypes.INTEGER
     },
     {}
   );
   BomLine.associate = function(models) {
-    BomLine.hasOne(models.Bom);
-    BomLine.hasOne(models.Routing);
-    BomLine.hasOne(models.Product);
-    BomLine.hasOne(models.Uom);
+    BomLine.belongsTo(models.Bom);
+    BomLine.belongsTo(models.Routing);
+    BomLine.belongsTo(models.Product);
   };
   return BomLine;
 };

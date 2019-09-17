@@ -80,22 +80,11 @@ module.exports = {
     let result = {};
     let status = 200;
     // console.log(req.body);
-    Uom.sync({
-      force: true
-    })
-      .then(() => {
-        Uom.bulkCreate(req.body)
-          .then(affectedRows => {
-            result.status = status;
-            result.result = affectedRows;
-            return res.status(status).send(result);
-          })
-          .catch(err => {
-            status = 500;
-            result.status = status;
-            result.error = err;
-            return res.status(status).send(result);
-          });
+    Uom.bulkCreate(req.body)
+      .then(affectedRows => {
+        result.status = status;
+        result.result = affectedRows;
+        return res.status(status).send(result);
       })
       .catch(err => {
         status = 500;
@@ -103,6 +92,16 @@ module.exports = {
         result.error = err;
         return res.status(status).send(result);
       });
+    // Uom.sync()
+    //   .then(() => {
+
+    //   })
+    //   .catch(err => {
+    //     status = 500;
+    //     result.status = status;
+    //     result.error = err;
+    //     return res.status(status).send(result);
+    //   });
   },
 
   update: (req, res) => {

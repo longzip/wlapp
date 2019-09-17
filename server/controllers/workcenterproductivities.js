@@ -88,22 +88,11 @@ module.exports = {
     let result = {};
     let status = 200;
     // console.log(req.body);
-    WorkcenterProductivity.sync({
-      force: true
-    })
-      .then(() => {
-        WorkcenterProductivity.bulkCreate(req.body)
-          .then(affectedRows => {
-            result.status = status;
-            result.result = affectedRows;
-            return res.status(status).send(result);
-          })
-          .catch(err => {
-            status = 500;
-            result.status = status;
-            result.error = err;
-            return res.status(status).send(result);
-          });
+    WorkcenterProductivity.bulkCreate(req.body)
+      .then(affectedRows => {
+        result.status = status;
+        result.result = affectedRows;
+        return res.status(status).send(result);
       })
       .catch(err => {
         status = 500;
@@ -111,6 +100,18 @@ module.exports = {
         result.error = err;
         return res.status(status).send(result);
       });
+    // WorkcenterProductivity.sync({
+    //   force: true
+    // })
+    //   .then(() => {
+
+    //   })
+    //   .catch(err => {
+    //     status = 500;
+    //     result.status = status;
+    //     result.error = err;
+    //     return res.status(status).send(result);
+    //   });
   },
 
   update: (req, res) => {

@@ -64,22 +64,11 @@ module.exports = {
     let result = {};
     let status = 200;
     // console.log(req.body);
-    Workcenter.sync({
-      force: true
-    })
-      .then(() => {
-        Workcenter.bulkCreate(req.body)
-          .then(affectedRows => {
-            result.status = status;
-            result.result = affectedRows;
-            return res.status(status).send(result);
-          })
-          .catch(err => {
-            status = 500;
-            result.status = status;
-            result.error = err;
-            return res.status(status).send(result);
-          });
+    Workcenter.bulkCreate(req.body)
+      .then(affectedRows => {
+        result.status = status;
+        result.result = affectedRows;
+        return res.status(status).send(result);
       })
       .catch(err => {
         status = 500;
@@ -87,6 +76,18 @@ module.exports = {
         result.error = err;
         return res.status(status).send(result);
       });
+    // Workcenter.sync({
+    //   force: true
+    // })
+    //   .then(() => {
+
+    //   })
+    //   .catch(err => {
+    //     status = 500;
+    //     result.status = status;
+    //     result.error = err;
+    //     return res.status(status).send(result);
+    //   });
   },
 
   delete: (req, res) => {
