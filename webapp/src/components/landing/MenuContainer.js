@@ -164,7 +164,7 @@ export class MenuContainer extends React.Component {
                       className="nav-link"
                     >
                       <i className="far fa-circle nav-icon" />
-                      <p>Routings</p>
+                      <p>Quy trình sản xuất</p>
                     </NavLink>
                   </li>
                   <li className="nav-item">
@@ -174,7 +174,7 @@ export class MenuContainer extends React.Component {
                       className="nav-link"
                     >
                       <i className="far fa-circle nav-icon" />
-                      <p>Bills of Materials</p>
+                      <p>Định mức nguyên liệu</p>
                     </NavLink>
                   </li>
                   <li className="nav-item">
@@ -184,7 +184,7 @@ export class MenuContainer extends React.Component {
                       className="nav-link"
                     >
                       <i className="far fa-circle nav-icon" />
-                      <p>Products</p>
+                      <p>Sản phẩm</p>
                     </NavLink>
                   </li>
                   <li className="nav-item">
@@ -194,7 +194,7 @@ export class MenuContainer extends React.Component {
                       className="nav-link"
                     >
                       <i className="far fa-circle nav-icon" />
-                      <p>Work Centers</p>
+                      <p>Công đoạn sản xuất</p>
                     </NavLink>
                   </li>
                 </ul>

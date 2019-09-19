@@ -12,12 +12,13 @@ module.exports = (sequelize, DataTypes) => {
       name: DataTypes.STRING,
       sequence: DataTypes.INTEGER,
       description: DataTypes.TEXT(),
-      description_purchase: DataTypes.TEXT(),
-      description_sale: DataTypes.TEXT(),
+      descriptionPurchase: DataTypes.TEXT(),
+      descriptionSale: DataTypes.TEXT(),
       type: DataTypes.STRING,
       listPrice: DataTypes.FLOAT,
       active: DataTypes.BOOLEAN,
       saleOk: DataTypes.BOOLEAN,
+      imageUrl: DataTypes.STRING,
       purchaseOk: DataTypes.BOOLEAN
     },
     {}

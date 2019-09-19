@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Field, reduxForm } from "redux-form";
 import FieldInput from "../common/FieldInput";
 import TextareaInput from "../common/TextareaInput";
+import FormSubmitButton from "../common/FormSubmitButton";
 
 export const ContactForm = ({
   handleSubmit,
@@ -14,85 +15,75 @@ export const ContactForm = ({
   handleCancel
 }) => {
   return (
-    <form onSubmit={handleSubmit(handleSave)}>
-      <h1>{heading}</h1>
-
-      <Field
-        type="text"
-        name="name"
-        label="Mã dự án"
-        placeholder="DA.."
-        component={FieldInput}
-      />
-      <Field
-        type="text"
-        name="description"
-        label="Tên chủ đầu tư"
-        placeholder="Nhập tên chủ đầu tư"
-        component={FieldInput}
-      />
-      <Field
-        type="text"
-        name="addressLine"
-        label="Địa chỉ"
-        placeholder="Nhập địa chỉ dự án"
-        component={FieldInput}
-      />
-      <Field
-        type="text"
-        name="city"
-        label="Tỉnh thành"
-        placeholder="Chọn tỉnh thành phố"
-        component={FieldInput}
-      />
-      <Field
-        type="text"
-        name="phone"
-        label="Phone"
-        placeholder="Nhập số điện thoại"
-        component={FieldInput}
-      />
-      <Field
-        type="text"
-        name="email"
-        label="Email"
-        placeholder="Nhập email"
-        component={FieldInput}
-      />
-      <Field
-        type="textarea"
-        rows="5"
-        name="note"
-        label="Ghi chú"
-        placeholder="Ghi chú dự án"
-        component={TextareaInput}
-      />
-
-      <div>
-        <button type="submit" disabled={submitting} className="btn btn-primary">
-          <i className="fa fa-paper-plane-o" aria-hidden="true" /> Submit
-        </button>
-
-        {heading === "Add" && (
-          <button
-            type="button"
-            disabled={pristine || submitting}
-            onClick={reset}
-            className="btn btn-default btn-space"
-          >
-            Clear Values
-          </button>
-        )}
-
-        <button
-          type="button"
-          className="btn btn-default btn-space"
-          onClick={handleCancel}
-        >
-          Cancel
-        </button>
+    <div className="card card-primary">
+      <div className="card-header">
+        <h3 className="card-title">Thêm khách hàng</h3>
       </div>
-    </form>
+      <form role="form" onSubmit={handleSubmit(handleSave)}>
+        <div className="card-body">
+          <Field
+            type="text"
+            name="name"
+            label="Mã dự án"
+            placeholder="DA.."
+            component={FieldInput}
+          />
+          <Field
+            type="text"
+            name="description"
+            label="Tên chủ đầu tư"
+            placeholder="Nhập tên chủ đầu tư"
+            component={FieldInput}
+          />
+          <Field
+            type="text"
+            name="addressLine"
+            label="Địa chỉ"
+            placeholder="Nhập địa chỉ dự án"
+            component={FieldInput}
+          />
+          <Field
+            type="text"
+            name="city"
+            label="Tỉnh thành"
+            placeholder="Chọn tỉnh thành phố"
+            component={FieldInput}
+          />
+          <Field
+            type="text"
+            name="phone"
+            label="Phone"
+            placeholder="Nhập số điện thoại"
+            component={FieldInput}
+          />
+          <Field
+            type="text"
+            name="email"
+            label="Email"
+            placeholder="Nhập email"
+            component={FieldInput}
+          />
+          <Field
+            type="textarea"
+            rows="5"
+            name="note"
+            label="Ghi chú"
+            placeholder="Ghi chú dự án"
+            component={TextareaInput}
+          />
+        </div>
+
+        <div className="card-footer">
+          <FormSubmitButton
+            pristine={pristine}
+            heading={heading}
+            submitting={submitting}
+            reset={reset}
+            handleCancel={handleCancel}
+          />
+        </div>
+      </form>
+    </div>
   );
 };
 

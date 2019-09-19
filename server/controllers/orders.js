@@ -1,16 +1,17 @@
-const { Order, OrderLine } = require("../models/index");
+const { Order, OrderLine, Contact, User } = require("../models/index");
 const Joi = require("@hapi/joi");
 const { Op } = require("sequelize");
 const moment = require("moment");
 
 function validate(data) {
   const schema = {
-    name: Joi.string().required(),
     description: Joi.string(),
     note: Joi.string(),
     active: Joi.boolean(),
     dateFinished: Joi.date(),
-    contactId: Joi.number()
+    version: Joi.string(),
+    UserId: Joi.number(),
+    ContactId: Joi.number()
   };
   return Joi.validate(data, schema);
 }
@@ -140,6 +141,16 @@ module.exports = {
     console.log(req.query.name);
     // find multiple entries
     Order.findAll({
+      include: [
+        {
+          // Notice `include` takes an ARRAY
+          model: Contact
+        },
+        {
+          // Notice `include` takes an ARRAY
+          model: User
+        }
+      ],
       offset: req.query.offset || 0,
       limit: req.query.limit || 0,
       where: req.query.name

@@ -14,11 +14,12 @@ export class AddOrEditProductContainer extends React.Component {
   }
 
   componentDidMount() {
-    this.props.action
-      .getProductAction(this.props.match.params.id)
-      .catch(error => {
-        toastr.error(error);
-      });
+    if (this.props.match.params.id)
+      this.props.action
+        .getProductAction(this.props.match.params.id)
+        .catch(error => {
+          toastr.error(error);
+        });
   }
 
   handleSave(values) {
@@ -47,7 +48,6 @@ export class AddOrEditProductContainer extends React.Component {
   render() {
     const { initialValues } = this.props;
     const heading = initialValues && initialValues.id ? "Edit" : "Add";
-    console.log(this.props.initialValues);
     return (
       <div className="content-wrapper">
         <div className="container">

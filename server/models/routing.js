@@ -3,9 +3,9 @@ module.exports = (sequelize, DataTypes) => {
   const Routing = sequelize.define(
     "Routing",
     {
+      code: DataTypes.STRING,
       name: DataTypes.STRING,
       active: DataTypes.BOOLEAN,
-      code: DataTypes.STRING,
       note: DataTypes.TEXT
     },
     {}

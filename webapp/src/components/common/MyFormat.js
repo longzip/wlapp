@@ -1,7 +1,11 @@
-import React from "react"
+import React from "react";
 import Moment from "react-moment";
+import moment from "moment/min/moment-with-locales";
+
+Moment.globalMoment = moment;
+Moment.globalLocale = "vi";
 const dateFormat = (cell, row) => {
-  return <Moment format="L">{cell}</Moment>;
+  return <Moment fromNow>{cell}</Moment>;
 };
 
 export default dateFormat;

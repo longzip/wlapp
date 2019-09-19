@@ -4,30 +4,65 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import toastr from "toastr";
 import * as quoterAction from "../../action/QuoteAction";
-import QuoteForm from "./QuoteForm";
+import * as productAction from "../../action/ProductAction";
+import * as uomAction from "../../action/UomAction";
+import * as orderLineAction from "../../action/OrderLineAction";
+import * as contactAction from "../../action/ContactAction";
 import OrderLineList from "../orderLine/OrderLineList";
+import OrderLineForm from "../orderLine/OrderLineForm";
+import QuoteForm from "./QuoteForm";
+import {
+  productsFormattedForDropdown,
+  uomsFormattedForDropdown,
+  contactsFormattedForDropdown
+} from "../../selectors/selectors";
 
 export class AddOrEditQuoteContainer extends React.Component {
   constructor() {
     super();
+    this.state = { selectedOrderLineId: undefined, allowAdd: false };
     this.handleSave = this.handleSave.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleRowSelect = this.handleRowSelect.bind(this);
+    this.handleAllowAdd = this.handleAllowAdd.bind(this);
+    this.handleSaveQuote = this.handleSaveQuote.bind(this);
   }
 
   componentDidMount() {
-    if (this.props.match.params.id)
+    if (this.props.match.params.id) {
       this.props.action
         .getQuoteAction(this.props.match.params.id)
         .catch(error => {
           toastr.error(error);
         });
+
+      this.props.action.getOrderLinesAction().catch(error => {
+        toastr.error(error);
+      });
+    }
+
+    this.props.action.getProductsAction().catch(error => {
+      toastr.error(error);
+    });
+
+    this.props.action.getContactsAction().catch(error => {
+      toastr.error(error);
+    });
+
+    this.props.action.getUomsAction().catch(error => {
+      toastr.error(error);
+    });
   }
 
-  handleSave(values) {
+  handleSaveQuote(values) {
     const order = {
       id: values.id,
-      code: values.code,
-      name: values.name
+      description: values.description,
+      version: values.version,
+      dateFinished: values.dateFinished,
+      ContactId: values.contact.value,
+      UserId: this.props.currentUser.id
     };
 
     this.props.action
@@ -41,24 +76,263 @@ export class AddOrEditQuoteContainer extends React.Component {
       });
   }
 
+  handleSave(values) {
+    const orderLine = {
+      id: values.id,
+      name: values.name,
+      productDimension: values.productDimension,
+      productSpec: values.productSpec,
+      productUom: values.productUom.label,
+      productUomQty: values.productUomQty,
+      productPrice: values.productPrice,
+      note: values.note,
+      state: values.state,
+      OrderId: this.props.initialValues.id,
+      ProductId: values.product.value
+    };
+
+    this.props.action
+      .saveOrderLineAction(orderLine)
+      .then(() => {
+        toastr.success("Đã thêm vào báo giá báo giá");
+        this.props.action.resetForm("OrderLineForm");
+        // this.props.history.push("/sales/quotes");
+        this.props.action.getOrderLinesAction().catch(error => {
+          toastr.error(error);
+        });
+      })
+      .catch(error => {
+        toastr.error(error);
+      });
+  }
+
   handleCancel(event) {
     event.preventDefault();
     this.props.history.replace("/sales/quotes");
   }
 
+  handleDelete() {
+    const selectedOrderLineId = this.state.selectedOrderLineId;
+
+    if (selectedOrderLineId) {
+      this.setState({ selectedOrderLineId: undefined });
+      this.props.action
+        .deleteOrderLineAction(selectedOrderLineId)
+        .then(() => {
+          toastr.success("Đã bỏ sản phẩm trong báo giá");
+          // this.props.history.push("/sales/quotes");
+          this.props.action.getOrderLinesAction().catch(error => {
+            toastr.error(error);
+          });
+        })
+        .catch(error => {
+          toastr.error(error);
+        });
+    }
+  }
+
+  handleRowSelect(row, isSelected) {
+    if (isSelected) {
+      this.setState({ selectedOrderLineId: row.id });
+    }
+  }
+
+  handleAllowAdd() {
+    this.setState({ allowAdd: !this.state.allowAdd });
+  }
+
   render() {
-    const { initialValues } = this.props;
+    const { initialValues, orderLines, products, uoms, contacts } = this.props;
     const heading = initialValues && initialValues.id ? "Edit" : "Add";
+    if (!this.props.initialValues)
+      return (
+        <div className="content-wrapper">
+          <section className="content">
+            <div className="container-fluid">
+              <QuoteForm
+                heading={heading}
+                contacts={contacts}
+                handleSave={this.handleSaveQuote}
+                handleCancel={this.handleCancel}
+                initialValues={this.props.initialValues}
+              />
+            </div>
+          </section>
+        </div>
+      );
+    const dt = new Date(Date.now());
+    const { allowAdd } = this.state;
     return (
       <div className="content-wrapper">
-        <div className="container">
-          <QuoteForm
-            heading={heading}
-            handleSave={this.handleSave}
-            handleCancel={this.handleCancel}
-            initialValues={this.props.initialValues}
-          />
-        </div>
+        <section className="content-header">
+          <div className="container-fluid">
+            <div className="row mb-2">
+              <div className="col-sm-6">
+                <h1>Báo giá</h1>
+              </div>
+              <div className="col-sm-6">
+                <ol className="breadcrumb float-sm-right">
+                  <li className="breadcrumb-item">
+                    <a href="#">Home</a>
+                  </li>
+                  <li className="breadcrumb-item active">Báo giá</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className="content">
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-12">
+                <div className="callout callout-info">
+                  <h5>
+                    <i className="fas fa-info"></i> Note:
+                  </h5>
+                  This page has been enhanced for printing. Click the print
+                  button at the bottom of the invoice to test.
+                </div>
+                <div className="invoice p-3 mb-3">
+                  <div className="row">
+                    <div className="col-12">
+                      <h4>
+                        <i className="fas fa-globe"></i> Woodland furniture.
+                        <small className="float-right">
+                          Date: {dt.toLocaleDateString("vi-VN")}
+                        </small>
+                      </h4>
+                    </div>
+                  </div>
+                  <div className="row invoice-info">
+                    <div className="col-sm-4 invoice-col">
+                      Từ
+                      <address>
+                        <strong>CÔNG TY CỔ PHẦN WOODSLAND</strong>
+                        <br />
+                        Lô số 11, KCN Quang Minh, Thị trấn Quang Minh
+                        <br />
+                        Huyện Mê Linh, Thành phố Hà Nội
+                        <br />
+                        Phone: 02435840112
+                        <br />
+                        Email: info@woodsland.com.vn
+                      </address>
+                    </div>
+                    <div className="col-sm-4 invoice-col">
+                      Đến
+                      <address>
+                        <strong>John Doe</strong>
+                        <br />
+                        795 Folsom Ave, Suite 600
+                        <br />
+                        San Francisco, CA 94107
+                        <br />
+                        Phone: (555) 539-1037
+                        <br />
+                        Email: john.doe@example.com
+                      </address>
+                    </div>
+                    <div className="col-sm-4 invoice-col">
+                      <b>Invoice #007612</b>
+                      <br />
+                      <br />
+                      <b>Order ID:</b> 4F3S8J
+                      <br />
+                      <b>Payment Due:</b> 2/22/2014
+                      <br />
+                      <b>Account:</b> 968-34567
+                    </div>
+                  </div>
+
+                  {/* <QuoteForm
+                    heading={heading}
+                    handleSave={this.handleSave}
+                    handleCancel={this.handleCancel}
+                    initialValues={this.props.initialValues}
+                  /> */}
+                  {allowAdd && (
+                    <OrderLineForm
+                      heading="Add"
+                      products={products}
+                      uoms={uoms}
+                      handleSave={this.handleSave}
+                      handleCancel={this.handleAllowAdd}
+                      initialValues={null}
+                    />
+                  )}
+                  <div className="card">
+                    <div className="card-header">
+                      <h3 className="card-title">Dòng sản phẩm</h3>
+                      <div className="card-tools no-print">
+                        <div class="input-group-append">
+                          <button
+                            type="submit"
+                            className="btn btn-primary"
+                            onClick={this.handleAllowAdd}
+                          >
+                            Thêm <i class="far fa-plus-square"></i>
+                          </button>
+                          <button
+                            type="submit"
+                            className="btn btn-danger"
+                            onClick={this.handleDelete}
+                          >
+                            Xóa <i class="fas fa-trash-alt"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="card-body p-0">
+                      <OrderLineList
+                        orderLines={orderLines}
+                        handleRowSelect={this.handleRowSelect}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="row">
+                    <div className="col-6">
+                      <p className="lead">Payment Methods:</p>
+                      <p
+                        className="text-muted well well-sm shadow-none"
+                        style={{ marginTop: "10px" }}
+                      >
+                        Etsy doostang zoodles disqus groupon greplin oooj voxy
+                        zoodles, weebly ning heekya handango imeem plugg dopplr
+                        jibjab, movity jajah plickers sifteo edmodo ifttt
+                        zimbra.
+                      </p>
+                    </div>
+
+                    <div className="col-6">
+                      <p className="lead">Amount Due 2/22/2014</p>
+                      <div className="table-responsive">
+                        <table className="table">
+                          <tr>
+                            <th style={{ width: "50%" }}>Subtotal:</th>
+                            <td>$250.30</td>
+                          </tr>
+                          <tr>
+                            <th>Tax (9.3%)</th>
+                            <td>$10.34</td>
+                          </tr>
+                          <tr>
+                            <th>Shipping:</th>
+                            <td>$5.80</td>
+                          </tr>
+                          <tr>
+                            <th>Total:</th>
+                            <td>$265.24</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     );
   }
@@ -72,15 +346,35 @@ const mapStateToProps = (state, ownProps) => {
     quoteId === state.selectedQuoteReducer.quote.id
   ) {
     return {
-      initialValues: state.selectedQuoteReducer.quote
+      initialValues: state.selectedQuoteReducer.quote,
+      products: productsFormattedForDropdown(state.productsReducer.products),
+      uoms: uomsFormattedForDropdown(state.uomsReducer.uoms),
+      contacts: contactsFormattedForDropdown(state.contactsReducer.contacts),
+      orderLines: state.orderLinesReducer.orderLines,
+      currentUser: state.loginedUserReducer.userAuth
     };
   } else {
-    return {};
+    return {
+      products: productsFormattedForDropdown(state.productsReducer.products),
+      uoms: uomsFormattedForDropdown(state.uomsReducer.uoms),
+      contacts: contactsFormattedForDropdown(state.contactsReducer.contacts),
+      orderLines: state.orderLinesReducer.orderLines,
+      currentUser: state.loginedUserReducer.userAuth
+    };
   }
 };
 
 const mapDispatchToProps = dispatch => ({
-  action: bindActionCreators(quoterAction, dispatch)
+  action: bindActionCreators(
+    {
+      ...productAction,
+      ...quoterAction,
+      ...orderLineAction,
+      ...contactAction,
+      ...uomAction
+    },
+    dispatch
+  )
 });
 
 AddOrEditQuoteContainer.propTypes = {

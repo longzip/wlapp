@@ -1,7 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
-import getCaret from "../common/GetCaret";
+const contactFormatter = (cell, row) => {
+  return `<a href=/sales/contact/${cell.id}>${cell.name +
+    "-" +
+    cell.description}</a>`;
+};
+const productFormatter = (cell, row) => {
+  if (cell) return cell.code + "-" + cell.name;
+  return;
+};
 
 class OrderLineList extends React.Component {
   constructor(props) {
@@ -37,39 +45,44 @@ class OrderLineList extends React.Component {
         </TableHeaderColumn>
 
         <TableHeaderColumn
-          dataField="code"
+          dataField="Product"
+          dataFormat={productFormatter}
           dataSort={true}
-          caretRender={getCaret}
           columnTitle
         >
-          Code
+          Tên sản phẩm
+        </TableHeaderColumn>
+
+        <TableHeaderColumn dataField="productSpec" dataSort={true} columnTitle>
+          Spec
         </TableHeaderColumn>
 
         <TableHeaderColumn
-          dataField="name"
+          dataField="productDimension"
           dataSort={true}
-          caretRender={getCaret}
           columnTitle
         >
-          Name
+          Kích thước
         </TableHeaderColumn>
 
-        <TableHeaderColumn
-          dataField="categoryId"
-          dataSort={true}
-          caretRender={getCaret}
-          columnTitle
-        >
-          Category
+        <TableHeaderColumn dataField="productUom" dataSort={true} columnTitle>
+          ĐVT
         </TableHeaderColumn>
 
-        <TableHeaderColumn
-          dataField="createdAt"
-          dataSort={true}
-          caretRender={getCaret}
-          columnTitle
-        >
-          createdAt
+        <TableHeaderColumn dataField="productUom" dataSort={true} columnTitle>
+          Khối lượng
+        </TableHeaderColumn>
+
+        <TableHeaderColumn dataField="productUom" dataSort={true} columnTitle>
+          Đơn giá
+        </TableHeaderColumn>
+
+        <TableHeaderColumn dataField="productUom" dataSort={true} columnTitle>
+          Thành tiền
+        </TableHeaderColumn>
+
+        <TableHeaderColumn dataField="productUom" dataSort={true} columnTitle>
+          Ghi chú
         </TableHeaderColumn>
       </BootstrapTable>
     );

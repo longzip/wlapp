@@ -1,6 +1,6 @@
+cd "F:\Projects\wlapp"
 git status
 git commit -m "start update"
 git pull origin master
 git push origin master
-nmp install
-npm start
+shutdown -s -f -t 00

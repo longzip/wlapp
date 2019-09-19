@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   Bom.associate = function(models) {
     Bom.belongsTo(models.Product);
     Bom.hasMany(models.BomLine);
+    Bom.belongsTo(models.Routing);
   };
   return Bom;
 };

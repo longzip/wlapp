@@ -23,3 +23,41 @@ export const productCategoriesFormattedForDropdown = productCategories => {
     };
   });
 };
+
+export const productsFormattedForDropdown = products => {
+  if (!products) {
+    return;
+  }
+
+  return products.map(product => {
+    return {
+      value: product.id,
+      label: `${product.name}`
+    };
+  });
+};
+
+export const uomsFormattedForDropdown = uoms => {
+  if (!uoms) {
+    return;
+  }
+
+  return uoms.map(uom => {
+    return {
+      value: uom.id,
+      label: `${uom.name}`
+    };
+  });
+};
+
+export const contactsFormattedForDropdown = contacts => {
+  if (!contacts) {
+    return;
+  }
+  return contacts.map(contact => {
+    return {
+      value: contact.id,
+      label: `${contact.name}-${contact.description}`
+    };
+  });
+};

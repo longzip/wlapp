@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import toastr from "toastr";
 import * as uomAction from "../../action/UomAction";
 import UomList from "./UomList";
+import ListButton from "../common/ListButton";
 
 export class UomListContainer extends React.Component {
   constructor() {
@@ -12,7 +13,7 @@ export class UomListContainer extends React.Component {
 
     this.state = { selectedUomId: undefined };
 
-    this.handleAd = this.handleAd.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleRowSelect = this.handleRowSelect.bind(this);
@@ -24,7 +25,7 @@ export class UomListContainer extends React.Component {
     });
   }
 
-  handleAd() {
+  handleAdd() {
     this.props.history.push("/settings/uom");
   }
 
@@ -41,11 +42,9 @@ export class UomListContainer extends React.Component {
 
     if (selectedUomId) {
       this.setState({ selectedUomId: undefined });
-      this.props.action
-        .deleteUomAction(selectedUomId)
-        .catch(error => {
-          toastr.error(error);
-        });
+      this.props.action.deleteUomAction(selectedUomId).catch(error => {
+        toastr.error(error);
+      });
     }
   }
 
@@ -67,42 +66,14 @@ export class UomListContainer extends React.Component {
               <h3 className="card-title">Unit of Mesure</h3>
             </div>
             <div className="card-footer clearfix">
-              <div className="btn-group" role="group">
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={this.handleAd}
-                >
-                  <i className="fa fa-plus" aria-hidden="true" /> New
-                </button>
-
-                <button
-                  type="button"
-                  className="btn btn-warning ml-2"
-                  onClick={this.handleEdit}
-                >
-                  <i className="fa fa-pencil" aria-hidden="true" /> Edit
-                </button>
-
-                <button
-                  type="button"
-                  className="btn btn-danger ml-2"
-                  onClick={this.handleDelete}
-                >
-                  <i
-                    className="fa fa-trash-o"
-                    aria-hidden="true"
-                    onClick={this.handleDelete}
-                  />{" "}
-                  Delete
-                </button>
-              </div>{" "}
+              <ListButton
+                handleAdd={this.handleAdd}
+                handleEdit={this.handleEdit}
+                handleDelete={this.handleDelete}
+              />
             </div>
             <div className="card-body p-0">
-              <UomList
-                uoms={uoms}
-                handleRowSelect={this.handleRowSelect}
-              />
+              <UomList uoms={uoms} handleRowSelect={this.handleRowSelect} />
             </div>
           </div>
         </div>

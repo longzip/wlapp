@@ -27,56 +27,23 @@ export class UserList extends React.Component {
         <div className="card">
           <BootstrapTable
             data={this.props.users}
-            pagination={true}
+            pagination
             selectRow={this.selectRowProp}
-            options={this.options}
-            bordered={false}
             striped
             hover
-            condensed
+            version="4"
           >
             <TableHeaderColumn dataField="id" isKey hidden>
               #
             </TableHeaderColumn>
 
-            <TableHeaderColumn
-              dataField="name"
-              dataSort={true}
-              caretRender={getCaret}
-              filter={{ type: "TextFilter", delay: 0 }}
-              columnTitle
-            >
-              Tên
-            </TableHeaderColumn>
+            <TableHeaderColumn dataField="name">Tên</TableHeaderColumn>
 
-            <TableHeaderColumn
-              dataField="username"
-              dataSort={true}
-              caretRender={getCaret}
-              filter={{ type: "TextFilter", delay: 0 }}
-              columnTitle
-            >
-              Username
-            </TableHeaderColumn>
+            <TableHeaderColumn dataField="username">Username</TableHeaderColumn>
 
-            <TableHeaderColumn
-              dataField="email"
-              dataSort={true}
-              caretRender={getCaret}
-              filter={{ type: "TextFilter", delay: 0 }}
-              columnTitle
-            >
-              Email
-            </TableHeaderColumn>
+            <TableHeaderColumn dataField="email">Email</TableHeaderColumn>
 
-            <TableHeaderColumn
-              dataField="createdAt"
-              dataFormat={dateFormat}
-              dataSort={true}
-              caretRender={getCaret}
-              filter={{ type: "TextFilter", delay: 0 }}
-              columnTitle
-            >
+            <TableHeaderColumn dataField="createdAt" dataFormat={dateFormat}>
               Ngày tạo
             </TableHeaderColumn>
           </BootstrapTable>

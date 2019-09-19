@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import toastr from "toastr";
 import * as orderAction from "../../action/OrderAction";
-import OrderForm from "./OrderForm";
 import OrderLineList from "../orderLine/OrderLineList";
 
 export class AddOrEditOrderContainer extends React.Component {
@@ -50,7 +49,7 @@ export class AddOrEditOrderContainer extends React.Component {
     const { orderLines } = this.props;
 
     const { initialValues } = this.props;
-    const heading = initialValues && initialValues.id ? "Edit" : "Add";
+    // const heading = initialValues && initialValues.id ? "Edit" : "Add";
     console.log(initialValues);
     return (
       <div className="content-wrapper">

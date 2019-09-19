@@ -1,16 +1,20 @@
-const { OrderLine } = require("../models/index");
+const { OrderLine, Product } = require("../models/index");
 const Joi = require("@hapi/joi");
 const { Op } = require("sequelize");
 const moment = require("moment");
 
 function validate(data) {
   const schema = {
-    order_id: Joi.number(),
     name: Joi.string(),
-    productId: Joi.number(),
+    productDimension: Joi.string(),
+    productSpec: Joi.string(),
     productUomQty: Joi.number(),
-    productUom: Joi.number(),
-    state: Joi.string()
+    productUom: Joi.string(),
+    productPrice: Joi.number(),
+    note: Joi.string(),
+    state: Joi.string(),
+    OrderId: Joi.number(),
+    ProductId: Joi.number()
   };
   return Joi.validate(data, schema);
 }
@@ -134,30 +138,19 @@ module.exports = {
   },
 
   getAll: (req, res) => {
-    // Uom.sync();
     let result = {};
     let status = 200;
-    console.log(req.query.name);
-    // find multiple entries
     OrderLine.findAll({
-      offset: req.query.offset || 0,
-      limit: req.query.limit || 0,
-      where: req.query.name
+      include: [
+        {
+          model: Product
+        }
+      ],
+      where: req.query.orderId
         ? {
-            [Op.and]: [
-              {
-                name: {
-                  [Op.like]: "%" + req.query.name + "%"
-                },
-                createdAt: {
-                  [Op.lte]:
-                    moment(req.query.dateFinished).endOf("day") || moment(),
-                  [Op.gte]:
-                    moment(req.query.dateStart).startOf("day") ||
-                    moment("2019-08-29")
-                }
-              }
-            ]
+            OrderId: {
+              [Op.like]: req.query.orderId
+            }
           }
         : {},
       order: req.query.sort ? req.query.sort : [["createdAt", "DESC"]]

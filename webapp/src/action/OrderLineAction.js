@@ -2,6 +2,7 @@ import * as ActionType from "./ActionType";
 
 import fetchClient from "../api/fetchClient";
 import { ApiCallBeginAction, ApiCallErrorAction } from "./ApiAction";
+import { reset } from "redux-form";
 
 export const getOrderLinesResponse = orderLines => ({
   type: ActionType.GET_ORDERLINES_RESPONSE,
@@ -101,4 +102,8 @@ export function deleteOrderLineAction(OrderLineId) {
         throw error;
       });
   };
+}
+
+export function resetForm(myForm) {
+  return dispatch => dispatch(reset(myForm));
 }

@@ -2,6 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Field, reduxForm } from "redux-form";
 import FieldInput from "../common/FieldInput";
+import SelectInput from "../common/SelectInput";
+import DatePicker, {
+  FieldDatePicker,
+  formatDates,
+  normalizeDates
+} from "../common/Datepicker";
+import FormSubmitButton from "../common/FormSubmitButton";
 
 export const QuoteForm = ({
   handleSubmit,
@@ -9,46 +16,61 @@ export const QuoteForm = ({
   reset,
   submitting,
   heading,
+  contacts,
   handleSave,
   handleCancel
 }) => {
   return (
-    <form onSubmit={handleSubmit(handleSave)}>
-      <h1>{heading}</h1>
-
-      <Field
-        type="text"
-        name="name"
-        label="Name"
-        placeholder="Name of the course"
-        component={FieldInput}
-      />
-
-      <div>
-        <button type="submit" disabled={submitting} className="btn btn-primary">
-          <i className="fa fa-paper-plane-o" aria-hidden="true" /> Submit
-        </button>
-
-        {heading === "Add" && (
-          <button
-            type="button"
-            disabled={pristine || submitting}
-            onClick={reset}
-            className="btn btn-default btn-space"
-          >
-            Clear Values
-          </button>
-        )}
-
-        <button
-          type="button"
-          className="btn btn-default btn-space"
-          onClick={handleCancel}
-        >
-          Cancel
-        </button>
+    <div className="card card-primary">
+      <div className="card-header">
+        <h3 className="card-title">Tạo báo giá</h3>
       </div>
-    </form>
+      <form role="form" onSubmit={handleSubmit(handleSave)}>
+        <div className="card-body">
+          <Field
+            type="text"
+            name="contact"
+            options={contacts}
+            label="Chọn dự án"
+            component={SelectInput}
+          />
+
+          <Field
+            type="text"
+            name="description"
+            label="Gói thầu"
+            placeholder="Nhập gói thầu"
+            component={FieldInput}
+          />
+
+          <Field
+            type="text"
+            name="version"
+            label="Phiên bản"
+            placeholder="Nhập phiên bản"
+            component={FieldInput}
+          />
+
+          <Field
+            name={"dateFinished"}
+            component={DatePicker}
+            placeholder="Chọn ngày"
+            parse={normalizeDates}
+            format={formatDates}
+          />
+        </div>
+
+        <div className="card-footer">
+          <FormSubmitButton
+            pristine={pristine}
+            heading={heading}
+            submitting={submitting}
+            reset={reset}
+            handleCancel={handleCancel}
+          />
+        </div>
+      </form>
+    </div>
   );
 };
 

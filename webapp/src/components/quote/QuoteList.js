@@ -2,9 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import getCaret from "../common/GetCaret";
+import dateFormat from "../common/MyFormat";
 
 const titleFormatter = (cell, row) => {
-  return `<a href=/sales/order-lines>${cell}</a>`;
+  return `<a href=/sales/quote/${row.id}>${cell}</a>`;
+};
+const contactFormatter = (cell, row) => {
+  return `<a href=/sales/contact/${cell.id}>${cell.name +
+    "-" +
+    cell.description}</a>`;
+};
+const userFormatter = (cell, row) => {
+  return cell.name;
 };
 
 class QuoteList extends React.Component {
@@ -32,6 +41,8 @@ class QuoteList extends React.Component {
         selectRow={this.selectRowProp}
         options={this.options}
         bordered={false}
+        pagination={true}
+        show-search-button={true}
         striped
         hover
         condensed
@@ -41,40 +52,61 @@ class QuoteList extends React.Component {
         </TableHeaderColumn>
 
         <TableHeaderColumn
-          dataField="code"
-          dataSort={true}
-          caretRender={getCaret}
-          columnTitle
-        >
-          Code
-        </TableHeaderColumn>
-
-        <TableHeaderColumn
-          dataField="name"
+          dataField="description"
           dataFormat={titleFormatter}
           dataSort={true}
           caretRender={getCaret}
           columnTitle
         >
-          Name
+          Gói thầu
         </TableHeaderColumn>
 
         <TableHeaderColumn
-          dataField="categoryId"
+          dataField="Contact"
+          dataFormat={contactFormatter}
           dataSort={true}
           caretRender={getCaret}
           columnTitle
         >
-          Category
+          Dự án
         </TableHeaderColumn>
 
         <TableHeaderColumn
+          dataField="version"
+          dataSort={true}
+          caretRender={getCaret}
+          columnTitle
+        >
+          Lần
+        </TableHeaderColumn>
+
+        <TableHeaderColumn
+          dataField="stage"
+          dataSort={true}
+          caretRender={getCaret}
+          columnTitle
+        >
+          Tình trạng
+        </TableHeaderColumn>
+
+        <TableHeaderColumn
+          dataFormat={userFormatter}
+          dataField="User"
+          dataSort={true}
+          caretRender={getCaret}
+          columnTitle
+        >
+          Tạo bởi
+        </TableHeaderColumn>
+
+        <TableHeaderColumn
+          dataFormat={dateFormat}
           dataField="createdAt"
           dataSort={true}
           caretRender={getCaret}
           columnTitle
         >
-          createdAt
+          Ngày
         </TableHeaderColumn>
       </BootstrapTable>
     );

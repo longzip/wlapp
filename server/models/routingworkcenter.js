@@ -4,7 +4,6 @@ module.exports = (sequelize, DataTypes) => {
     "RoutingWorkcenter",
     {
       name: DataTypes.STRING,
-      sequence: DataTypes.INTEGER,
       note: DataTypes.STRING,
       worksheet: DataTypes.STRING,
       active: DataTypes.BOOLEAN
