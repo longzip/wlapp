@@ -61,7 +61,6 @@ export const UserForm = ({
             handleCancel={handleCancel}
           />
         </div>
-        >
       </form>
     </div>
   );
