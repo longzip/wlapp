@@ -14,13 +14,13 @@ const SelectInput = ({
     <div className="form-group">
       <div htmlFor={name}>{label}</div>
       <div className="field">
-        {/* <Select
+        <Select
           {...input}
           onChange={value => input.onChange(value)}
           onBlur={() => input.onBlur(input.value)}
           options={options}
-        /> */}
-        <select {...input} name={name} className="form-control">
+        />
+        {/* <select {...input} name={name} className="form-control">
           <option>{defaultOption}</option>
           {options.map(option => {
             return (
@@ -29,7 +29,7 @@ const SelectInput = ({
               </option>
             );
           })}
-        </select>
+        </select> */}
 
         {touched &&
           ((error && <p className="text-danger">{error}</p>) ||

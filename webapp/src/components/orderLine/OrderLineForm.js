@@ -4,6 +4,7 @@ import { Field, reduxForm } from "redux-form";
 import FieldInput from "../common/FieldInput";
 import SelectInput from "../common/SelectInput";
 import TextareaInput from "../common/TextareaInput";
+import FormSubmitButton from "../common/FormSubmitButton";
 
 export const OrderLineForm = ({
   handleSubmit,
@@ -17,12 +18,12 @@ export const OrderLineForm = ({
   handleCancel
 }) => {
   return (
-    <div className="card card-warning">
+    <div className="card card-primary">
       <div className="card-header">
         <h3 className="card-title">Thêm sản phẩm</h3>
       </div>
-      <div className="card-body">
-        <form onSubmit={handleSubmit(handleSave)}>
+      <form role="form" onSubmit={handleSubmit(handleSave)}>
+        <div className="card-body">
           <Field
             name="product"
             label="Chọn sản phẩm"
@@ -47,7 +48,7 @@ export const OrderLineForm = ({
           />
 
           <Field
-            type="text"
+            type="number"
             name="productUomQty"
             label="Số lượng"
             placeholder="Name of the course"
@@ -63,7 +64,7 @@ export const OrderLineForm = ({
           />
 
           <Field
-            type="text"
+            type="number"
             name="productPrice"
             label="Giá"
             placeholder=""
@@ -77,38 +78,18 @@ export const OrderLineForm = ({
             placeholder=""
             component={TextareaInput}
           />
+        </div>
 
-          <div>
-            <button
-              type="submit"
-              disabled={submitting}
-              className="btn btn-primary"
-            >
-              <i className="fa fa-paper-plane-o" aria-hidden="true" /> Thêm vào
-              dòng sản phẩm
-            </button>
-
-            {heading === "Add" && (
-              <button
-                type="button"
-                disabled={pristine || submitting}
-                onClick={reset}
-                className="btn btn-default btn-space"
-              >
-                Làm lại
-              </button>
-            )}
-
-            <button
-              type="button"
-              className="btn btn-default btn-space"
-              onClick={handleCancel}
-            >
-              Đóng
-            </button>
-          </div>
-        </form>
-      </div>
+        <div className="card-footer">
+          <FormSubmitButton
+            pristine={pristine}
+            heading={heading}
+            submitting={submitting}
+            reset={reset}
+            handleCancel={handleCancel}
+          />
+        </div>
+      </form>
     </div>
   );
 };

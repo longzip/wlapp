@@ -22,7 +22,7 @@ export class UserLoginContainer extends Component {
       .loginUserAction(user)
       .then(() => {
         toastr.success("Login Success");
-        this.props.history.replace("/");
+        this.props.history.push("/");
       })
       .catch(error => {
         toastr.error(error);
@@ -41,7 +41,10 @@ export class UserLoginContainer extends Component {
             <p className="login-box-msg">Sign in to start your session</p>
 
             <div className="social-auth-links text-center mb-3">
-              <LoginForm handleLogin={this.handleLogin} />
+              <LoginForm
+                handleLogin={this.handleLogin}
+                initialValues={{ username: "admin", password: "123456" }}
+              />
               <p>- OR -</p>
               <Link to="#" className="btn btn-block btn-primary">
                 <i className="fab fa-facebook mr-2"></i> Sign in using Facebook
