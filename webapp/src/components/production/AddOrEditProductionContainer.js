@@ -14,11 +14,12 @@ export class AddOrEditProductionContainer extends React.Component {
   }
 
   componentDidMount() {
-    this.props.action
-      .getProductionAction(this.props.match.params.id)
-      .catch(error => {
-        toastr.error(error);
-      });
+    if (this.props.match.params.id)
+      this.props.action
+        .getProductionAction(this.props.match.params.id)
+        .catch(error => {
+          toastr.error(error);
+        });
   }
 
   handleSave(values) {
@@ -31,8 +32,8 @@ export class AddOrEditProductionContainer extends React.Component {
     this.props.action
       .saveProductionAction(product)
       .then(() => {
-        toastr.success("Product saved");
-        this.props.history.push("/productions");
+        toastr.success("Đã lưu thành công");
+        this.props.history.push("/mrp/productions");
       })
       .catch(error => {
         toastr.error(error);
@@ -41,7 +42,7 @@ export class AddOrEditProductionContainer extends React.Component {
 
   handleCancel(event) {
     event.preventDefault();
-    this.props.history.replace("/productions");
+    this.props.history.replace("/mrp/productions");
   }
 
   render() {
@@ -64,14 +65,14 @@ export class AddOrEditProductionContainer extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const productId = parseInt(ownProps.match.params.id);
+  const productionId = parseInt(ownProps.match.params.id);
   if (
-    productId &&
-    state.selectedProductReducer.product &&
-    productId === state.selectedProductReducer.product.id
+    productionId &&
+    state.selectedProductionReducer.production &&
+    productionId === state.selectedProductionReducer.production.id
   ) {
     return {
-      initialValues: state.selectedProductReducer.product
+      initialValues: state.selectedProductionReducer.production
     };
   } else {
     return {};

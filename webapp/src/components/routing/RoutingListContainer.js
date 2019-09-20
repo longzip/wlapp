@@ -1,12 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import toastr from "toastr";
 import * as routingAction from "../../action/RoutingAction";
 import RoutingList from "./RoutingList";
+import ListButton from "../common/ListButton";
 
-export class RoutingListContainer extends Component {
+export class RoutingListContainer extends React.Component {
   constructor() {
     super();
 
@@ -25,23 +26,67 @@ export class RoutingListContainer extends Component {
   }
 
   handleAdd() {
-    this.props.history.push("/mpr/");
+    this.props.history.push("/datas/routing");
   }
 
-  handleEdit() {}
+  handleEdit() {
+    const selectedRoutingId = this.state.selectedRoutingId;
+    if (selectedRoutingId) {
+      this.setState({ selectedRoutingId: undefined });
+      this.props.history.push(`/datas/routing/${selectedRoutingId}`);
+    }
+  }
 
-  handleDelete() {}
+  handleDelete() {
+    const selectedRoutingId = this.state.selectedRoutingId;
 
-  handleRowSelect() {}
+    if (selectedRoutingId) {
+      this.setState({ selectedRoutingId: undefined });
+      this.props.action.deleteRoutingAction(selectedRoutingId).catch(error => {
+        toastr.error(error);
+      });
+    }
+  }
+
+  handleRowSelect(row, isSelected) {
+    if (isSelected) {
+      this.setState({ selectedRoutingId: row.id });
+    }
+  }
+
   render() {
     const { routings } = this.props;
+
     if (!routings) return <div>Loading...</div>;
-    return <div></div>;
+    return (
+      <div className="content-wrapper">
+        <div className="container-fluid">
+          <div className="card mt-3">
+            <div className="card-header">
+              <h3 className="card-title">Quy trình sản xuất</h3>
+            </div>
+            <div className="card-footer clearfix">
+              <ListButton
+                handleAdd={this.handleAdd}
+                handleEdit={this.handleEdit}
+                handleDelete={this.handleDelete}
+              />
+            </div>
+            <div className="card-body p-0">
+              <RoutingList
+                routings={routings}
+                handleRowSelect={this.handleRowSelect}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 
 const mapStateToProps = state => ({
-  uoms: state.uomsReducer.uoms
+  routings: state.routingsReducer.routings
 });
 
 const mapDispatchToProps = dispatch => ({

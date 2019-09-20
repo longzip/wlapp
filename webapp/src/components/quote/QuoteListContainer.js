@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import toastr from "toastr";
 import * as quoteAction from "../../action/QuoteAction";
 import QuoteList from "./QuoteList";
+import ListButton from "../common/ListButton";
 
 export class QuoteListContainer extends React.Component {
   constructor() {
@@ -65,54 +66,14 @@ export class QuoteListContainer extends React.Component {
         <div className="container-fluid">
           <div className="card">
             <div className="card-header">
-              <h3 className="card-title">Dòng sản phẩm</h3>
-              <div className="card-tools no-print">
-                <div class="input-group-append">
-                  <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={this.handleAdd}
-                  >
-                    <i className="fa fa-plus" aria-hidden="true" /> New
-                  </button>
-
-                  <button
-                    type="button"
-                    className="btn btn-warning ml-2"
-                    onClick={this.handleEdit}
-                  >
-                    <i className="fa fa-pencil" aria-hidden="true" /> Edit
-                  </button>
-
-                  <button
-                    type="button"
-                    className="btn btn-danger ml-2"
-                    onClick={this.handleDelete}
-                  >
-                    <i
-                      className="fa fa-trash-o"
-                      aria-hidden="true"
-                      onClick={this.handleDelete}
-                    />{" "}
-                    Delete
-                  </button>
-
-                  <button
-                    type="submit"
-                    className="btn btn-primary"
-                    onClick={this.handleAllowAdd}
-                  >
-                    Thêm <i class="far fa-plus-square"></i>
-                  </button>
-                  <button
-                    type="submit"
-                    className="btn btn-danger"
-                    onClick={this.handleDelete}
-                  >
-                    Xóa <i class="fas fa-trash-alt"></i>
-                  </button>
-                </div>
-              </div>
+              <h3 className="card-title">Báo giá</h3>
+            </div>
+            <div className="card-footer clearfix">
+              <ListButton
+                handleAdd={this.handleAdd}
+                handleEdit={this.handleEdit}
+                handleDelete={this.handleDelete}
+              />
             </div>
             <div className="card-body p-0">
               <QuoteList

@@ -32,7 +32,7 @@ export class AddOrEditProductContainer extends React.Component {
     this.props.action
       .saveProductAction(product)
       .then(() => {
-        toastr.success("Product saved");
+        toastr.success("Đã lưu thành công");
         this.props.history.push("/datas/products");
       })
       .catch(error => {

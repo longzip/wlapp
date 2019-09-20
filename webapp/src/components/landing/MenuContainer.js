@@ -127,8 +127,8 @@ export class MenuContainer extends React.Component {
                       to="/mrp/productions"
                       className="nav-link"
                     >
-                      <i className="fas fa-align-left nav-icon" />
-                      <p>Đặt hàng</p>
+                      <i className="far fa-calendar-plus nav-icon"></i>
+                      <p>Lệnh sản xuất</p>
                     </NavLink>
                   </li>
                   <li className="nav-item">
@@ -137,8 +137,8 @@ export class MenuContainer extends React.Component {
                       to="/mrp/workorders"
                       className="nav-link"
                     >
-                      <i className="fas fa-align-right nav-icon" />
-                      <p>Lệnh sản xuất</p>
+                      <i className="far fa-calendar-plus nav-icon"></i>
+                      <p>Lệnh làm việc</p>
                     </NavLink>
                   </li>
                 </ul>

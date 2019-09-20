@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Field, reduxForm } from "redux-form";
 import FieldInput from "../common/FieldInput";
+import FormSubmitButton from "../common/FormSubmitButton";
+import TextareaInput from "../common/TextareaInput";
 
 export const RoutingForm = ({
   handleSubmit,
@@ -13,42 +15,46 @@ export const RoutingForm = ({
   handleCancel
 }) => {
   return (
-    <form onSubmit={handleSubmit(handleSave)}>
-      <h1>{heading}</h1>
-
-      <Field
-        type="text"
-        name="name"
-        label="Name"
-        placeholder="Name of the course"
-        component={FieldInput}
-      />
-
-      <div>
-        <button type="submit" disabled={submitting} className="btn btn-primary">
-          <i className="fa fa-paper-plane-o" aria-hidden="true" /> Submit
-        </button>
-
-        {heading === "Add" && (
-          <button
-            type="button"
-            disabled={pristine || submitting}
-            onClick={reset}
-            className="btn btn-default btn-space"
-          >
-            Clear Values
-          </button>
-        )}
-
-        <button
-          type="button"
-          className="btn btn-default btn-space"
-          onClick={handleCancel}
-        >
-          Cancel
-        </button>
+    <div className="card card-primary">
+      <div className="card-header">
+        <h3 className="card-title">Thêm quy trình sản xuất</h3>
       </div>
-    </form>
+      <form role="form" onSubmit={handleSubmit(handleSave)}>
+        <div className="card-body">
+          <Field
+            type="text"
+            name="code"
+            label="Mã"
+            placeholder="Đặt mã cho quy trình"
+            component={FieldInput}
+          />
+          <Field
+            type="text"
+            name="name"
+            label="Name"
+            placeholder="Tên quy trình"
+            component={FieldInput}
+          />
+
+          <Field
+            type="text"
+            name="note"
+            label="Mô tả"
+            placeholder="Mô tả quy trình"
+            component={TextareaInput}
+          />
+        </div>
+        <div className="card-footer">
+          <FormSubmitButton
+            pristine={pristine}
+            heading={heading}
+            submitting={submitting}
+            reset={reset}
+            handleCancel={handleCancel}
+          />
+        </div>
+      </form>
+    </div>
   );
 };
 

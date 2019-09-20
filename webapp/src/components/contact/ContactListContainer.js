@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import toastr from "toastr";
 import * as contactAction from "../../action/ContactAction";
 import ContactList from "./ContactList";
+import ListButton from "../common/ListButton";
 
 export class ContactListContainer extends Component {
   constructor() {
@@ -60,51 +61,24 @@ export class ContactListContainer extends Component {
     return (
       <div className="content-wrapper">
         <div className="container-fluid">
-          <div className="row mt-3">
-            <div>
-              <h1>Bảng thông tin khách hàng</h1>
+          <div className="card mt-3">
+            <div className="card-header">
+              <h3 className="card-title">Khách hàng</h3>
+            </div>
+            <div className="card-footer clearfix">
+              <ListButton
+                handleAdd={this.handleAdd}
+                handleEdit={this.handleEdit}
+                handleDelete={this.handleDelete}
+              />
+            </div>
+            <div className="card-body p-0">
+              <ContactList
+                contacts={contacts}
+                handleRowSelect={this.handleRowSelect}
+              />
             </div>
           </div>
-
-          <div className="row mt-3">
-            <div className="col">
-              <div className="btn-group" role="group">
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={this.handleAdd}
-                >
-                  <i className="fa fa-plus" aria-hidden="true" /> New
-                </button>
-
-                <button
-                  type="button"
-                  className="btn btn-warning ml-2"
-                  onClick={this.handleEdit}
-                >
-                  <i className="fa fa-pencil" aria-hidden="true" /> Edit
-                </button>
-
-                <button
-                  type="button"
-                  className="btn btn-danger ml-2"
-                  onClick={this.handleDelete}
-                >
-                  <i
-                    className="fa fa-trash-o"
-                    aria-hidden="true"
-                    onClick={this.handleDelete}
-                  />{" "}
-                  Delete
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <ContactList
-            contacts={contacts}
-            handleRowSelect={this.handleRowSelect}
-          />
         </div>
       </div>
     );

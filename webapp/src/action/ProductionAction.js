@@ -63,7 +63,7 @@ export function saveProductionAction(ProductionBeingAddedOrEdited) {
 
 export const getProductionResponse = ProductionFound => ({
   type: ActionType.GET_PRODUCTION_RESPONSE,
-  Production: ProductionFound
+  production: ProductionFound
 });
 
 export function getProductionAction(ProductionId) {

@@ -61,7 +61,7 @@ export class UomListContainer extends React.Component {
     return (
       <div className="content-wrapper">
         <div className="container-fluid">
-          <div className="card">
+          <div className="card mt-3">
             <div className="card-header">
               <h3 className="card-title">Unit of Mesure</h3>
             </div>

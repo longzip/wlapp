@@ -5,7 +5,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       name: DataTypes.STRING,
       active: DataTypes.BOOLEAN,
-      productQty: DataTypes.INTEGER
+      productQty: DataTypes.INTEGER,
+      productUom: DataTypes.STRING
     },
     {}
   );

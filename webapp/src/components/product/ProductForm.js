@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Field, reduxForm } from "redux-form";
 import FieldInput from "../common/FieldInput";
+import FormSubmitButton from "../common/FormSubmitButton";
 
 export const ProductForm = ({
   handleSubmit,
@@ -13,50 +14,47 @@ export const ProductForm = ({
   handleCancel
 }) => {
   return (
-    <form onSubmit={handleSubmit(handleSave)}>
-      <h1>{heading}</h1>
-
-      <Field
-        type="text"
-        name="code"
-        label="Code"
-        placeholder="Mã"
-        component={FieldInput}
-      />
-
-      <Field
-        type="text"
-        name="name"
-        label="Tên"
-        placeholder="Tên sản phẩm"
-        component={FieldInput}
-      />
-
-      <div>
-        <button type="submit" disabled={submitting} className="btn btn-primary">
-          <i className="fa fa-paper-plane-o" aria-hidden="true" /> Submit
-        </button>
-
-        {heading === "Add" && (
-          <button
-            type="button"
-            disabled={pristine || submitting}
-            onClick={reset}
-            className="btn btn-default btn-space"
-          >
-            Clear Values
-          </button>
-        )}
-
-        <button
-          type="button"
-          className="btn btn-default btn-space"
-          onClick={handleCancel}
-        >
-          Cancel
-        </button>
+    <div className="card card-primary">
+      <div className="card-header">
+        <h3 className="card-title">Thêm sản phẩm</h3>
       </div>
-    </form>
+      <form role="form" onSubmit={handleSubmit(handleSave)}>
+        <div className="card-body">
+          <Field
+            type="text"
+            name="code"
+            label="Mã sản phẩm"
+            placeholder="Nhập mã sản phẩm"
+            component={FieldInput}
+          />
+
+          <Field
+            type="text"
+            name="name"
+            label="Tên"
+            placeholder="Tên sản phẩm"
+            component={FieldInput}
+          />
+          <Field
+            type="text"
+            name="listPrice"
+            label="Giá"
+            placeholder="0"
+            component={FieldInput}
+          />
+        </div>
+
+        <div className="card-footer">
+          <FormSubmitButton
+            pristine={pristine}
+            heading={heading}
+            submitting={submitting}
+            reset={reset}
+            handleCancel={handleCancel}
+          />
+        </div>
+      </form>
+    </div>
   );
 };
 

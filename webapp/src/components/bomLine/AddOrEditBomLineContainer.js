@@ -31,7 +31,7 @@ export class AddOrEditBomLineContainer extends React.Component {
     this.props.action
       .saveBomLineAction(product)
       .then(() => {
-        toastr.success("Product saved");
+        toastr.success("Đã lưu thành công");
         this.props.history.push("/products");
       })
       .catch(error => {

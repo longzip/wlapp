@@ -63,7 +63,7 @@ export function saveWorkorderAction(WorkorderBeingAddedOrEdited) {
 
 export const getWorkorderResponse = WorkorderFound => ({
   type: ActionType.GET_WORKORDER_RESPONSE,
-  Workorder: WorkorderFound
+  workorder: WorkorderFound
 });
 
 export function getWorkorderAction(WorkorderId) {

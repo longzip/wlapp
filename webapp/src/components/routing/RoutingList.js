@@ -20,7 +20,7 @@ class RoutingList extends React.Component {
   render() {
     return (
       <BootstrapTable
-        data={this.props.uoms}
+        data={this.props.routings}
         pagination={true}
         selectRow={this.selectRowProp}
         options={this.options}
@@ -32,6 +32,11 @@ class RoutingList extends React.Component {
         <TableHeaderColumn dataField="id" isKey hidden>
           #
         </TableHeaderColumn>
+
+        <TableHeaderColumn dataField="code">Mã</TableHeaderColumn>
+
+        <TableHeaderColumn dataField="name">Tên</TableHeaderColumn>
+        <TableHeaderColumn dataField="note">Ghi chú</TableHeaderColumn>
       </BootstrapTable>
     );
   }

@@ -14,25 +14,26 @@ export class AddOrEditWorkorderContainer extends React.Component {
   }
 
   componentDidMount() {
-    this.props.action
-      .getWorkorderAction(this.props.match.params.id)
-      .catch(error => {
-        toastr.error(error);
-      });
+    if (this.props.match.params.id)
+      this.props.action
+        .getWorkorderAction(this.props.match.params.id)
+        .catch(error => {
+          toastr.error(error);
+        });
   }
 
   handleSave(values) {
-    const product = {
+    const workorder = {
       id: values.id,
       code: values.code,
       name: values.name
     };
 
     this.props.action
-      .saveWorkorderAction(product)
+      .saveWorkorderAction(workorder)
       .then(() => {
-        toastr.success("Product saved");
-        this.props.history.push("/products");
+        toastr.success("Đã lưu");
+        this.props.history.push("/mrp/workorders");
       })
       .catch(error => {
         toastr.error(error);
@@ -41,13 +42,12 @@ export class AddOrEditWorkorderContainer extends React.Component {
 
   handleCancel(event) {
     event.preventDefault();
-    this.props.history.replace("/products");
+    this.props.history.replace("/mrp/workorders");
   }
 
   render() {
     const { initialValues } = this.props;
     const heading = initialValues && initialValues.id ? "Edit" : "Add";
-    console.log(this.props.initialValues);
     return (
       <div className="content-wrapper">
         <div className="container">
@@ -64,14 +64,14 @@ export class AddOrEditWorkorderContainer extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const productId = parseInt(ownProps.match.params.id);
+  const id = parseInt(ownProps.match.params.id);
   if (
-    productId &&
-    state.selectedProductReducer.product &&
-    productId === state.selectedProductReducer.product.id
+    id &&
+    state.selectedWorkorderReducer.workorder &&
+    id === state.selectedWorkorderReducer.workorder.id
   ) {
     return {
-      initialValues: state.selectedProductReducer.product
+      initialValues: state.selectedWorkorderReducer.workorder
     };
   } else {
     return {};

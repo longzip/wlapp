@@ -31,7 +31,7 @@ export class AddOrEditRoutingWorkcenterContainer extends React.Component {
     this.props.action
       .saveRoutingWorkcenterAction(product)
       .then(() => {
-        toastr.success("Product saved");
+        toastr.success("Đã lưu thành công");
         this.props.history.push("/products");
       })
       .catch(error => {

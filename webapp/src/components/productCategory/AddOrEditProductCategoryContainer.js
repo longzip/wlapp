@@ -31,7 +31,7 @@ export class AddOrEditProductCategoryContainer extends React.Component {
     this.props.action
       .saveProductCategoryAction(product)
       .then(() => {
-        toastr.success("Product saved");
+        toastr.success("Đã lưu thành công");
         this.props.history.push("/productCategories");
       })
       .catch(error => {

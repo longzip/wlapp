@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import toastr from "toastr";
 import * as workcenterAction from "../../action/WorkcenterAction";
 import WorkcenterList from "./WorkcenterList";
+import ListButton from "../common/ListButton";
 
 export class WorkcenterListContainer extends React.Component {
   constructor() {
@@ -12,7 +13,7 @@ export class WorkcenterListContainer extends React.Component {
 
     this.state = { selectedWorkcenterId: undefined };
 
-    this.handleAd = this.handleAd.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleRowSelect = this.handleRowSelect.bind(this);
@@ -24,7 +25,7 @@ export class WorkcenterListContainer extends React.Component {
     });
   }
 
-  handleAd() {
+  handleAdd() {
     this.props.history.push("/datas/workcenter");
   }
 
@@ -64,41 +65,16 @@ export class WorkcenterListContainer extends React.Component {
     return (
       <div className="content-wrapper">
         <div className="container-fluid">
-          <div className="card">
+          <div className="card mt-3">
             <div className="card-header">
-              <h3 className="card-title">Workcenters</h3>
+              <h3 className="card-title">Công đoạn sản xuất</h3>
             </div>
             <div className="card-footer clearfix">
-              <div className="btn-group" role="group">
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={this.handleAd}
-                >
-                  <i className="fa fa-plus" aria-hidden="true" /> New
-                </button>
-
-                <button
-                  type="button"
-                  className="btn btn-warning ml-2"
-                  onClick={this.handleEdit}
-                >
-                  <i className="fa fa-pencil" aria-hidden="true" /> Edit
-                </button>
-
-                <button
-                  type="button"
-                  className="btn btn-danger ml-2"
-                  onClick={this.handleDelete}
-                >
-                  <i
-                    className="fa fa-trash-o"
-                    aria-hidden="true"
-                    onClick={this.handleDelete}
-                  />{" "}
-                  Delete
-                </button>
-              </div>{" "}
+              <ListButton
+                handleAdd={this.handleAdd}
+                handleEdit={this.handleEdit}
+                handleDelete={this.handleDelete}
+              />
             </div>
             <div className="card-body p-0">
               <WorkcenterList

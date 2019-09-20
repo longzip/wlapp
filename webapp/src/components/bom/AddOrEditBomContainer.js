@@ -14,23 +14,26 @@ export class AddOrEditBomContainer extends React.Component {
   }
 
   componentDidMount() {
-    this.props.action.getBomAction(this.props.match.params.id).catch(error => {
-      toastr.error(error);
-    });
+    if (this.props.match.params.id)
+      this.props.action
+        .getBomAction(this.props.match.params.id)
+        .catch(error => {
+          toastr.error(error);
+        });
   }
 
   handleSave(values) {
-    const product = {
+    const bom = {
       id: values.id,
       code: values.code,
       name: values.name
     };
 
     this.props.action
-      .saveBomAction(product)
+      .saveBomAction(bom)
       .then(() => {
-        toastr.success("Product saved");
-        this.props.history.push("/products");
+        toastr.success("Đã lưu thành công");
+        this.props.history.push("/datas/boms");
       })
       .catch(error => {
         toastr.error(error);
@@ -39,13 +42,12 @@ export class AddOrEditBomContainer extends React.Component {
 
   handleCancel(event) {
     event.preventDefault();
-    this.props.history.replace("/products");
+    this.props.history.replace("/datas/boms");
   }
 
   render() {
     const { initialValues } = this.props;
     const heading = initialValues && initialValues.id ? "Edit" : "Add";
-    console.log(this.props.initialValues);
     return (
       <div className="content-wrapper">
         <div className="container">
