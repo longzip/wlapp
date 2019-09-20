@@ -22,6 +22,7 @@ import OrderListContainer from "./order/OrderListContainer";
 import AddOrEditOrderContainer from "./order/AddOrEditOrderContainer";
 import QuoteListContainer from "./quote/QuoteListContainer";
 import AddOrEditQuoteContainer from "./quote/AddOrEditQuoteContainer";
+import ShowQuoteContainer from "./quote/ShowQuoteContainer";
 import OrderLineListContainer from "./orderLine/OrderLineListContainer";
 import AddOrEditOrderLineContainer from "./orderLine/AddOrEditOrderLineContainer";
 import ProductCategoryListContainer from "./productCategory/ProductCategoryListContainer";
@@ -172,6 +173,12 @@ export class App extends React.Component {
               exact
               path="/sales/quote"
               component={AddOrEditQuoteContainer}
+            />
+            <PrivateRoute
+              authed={userAuth}
+              exact
+              path="/sales/quote/:id/detail"
+              component={ShowQuoteContainer}
             />
             <PrivateRoute
               authed={userAuth}

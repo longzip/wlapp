@@ -29,7 +29,7 @@ export const QuoteForm = ({
         <div className="card-body">
           <Field
             type="text"
-            name="contact"
+            name="ContactId"
             options={contacts}
             label="Chọn dự án"
             component={SelectInput}
@@ -44,7 +44,7 @@ export const QuoteForm = ({
           />
 
           <Field
-            type="text"
+            type="number"
             name="version"
             label="Phiên bản"
             placeholder="Nhập phiên bản"

@@ -36,7 +36,7 @@ export const ProductForm = ({
             component={FieldInput}
           />
           <Field
-            type="text"
+            type="number"
             name="listPrice"
             label="Giá"
             placeholder="0"

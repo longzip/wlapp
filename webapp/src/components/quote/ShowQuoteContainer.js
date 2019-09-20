@@ -10,17 +10,20 @@ import * as orderLineAction from "../../action/OrderLineAction";
 import * as contactAction from "../../action/ContactAction";
 import OrderLineList from "../orderLine/OrderLineList";
 import OrderLineForm from "../orderLine/OrderLineForm";
-import QuoteForm from "./QuoteForm";
 import {
   productsFormattedForDropdown,
   uomsFormattedForDropdown,
   contactsFormattedForDropdown
 } from "../../selectors/selectors";
 
-export class AddOrEditQuoteContainer extends React.Component {
+export class ShowQuoteContainer extends React.Component {
   constructor() {
     super();
-    this.state = { selectedOrderLineId: undefined, allowAdd: false };
+    this.state = {
+      selectedOrderLineId: undefined,
+      allowAdd: false,
+      selectedOrderLineRow: undefined
+    };
     this.handleSave = this.handleSave.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -82,7 +85,7 @@ export class AddOrEditQuoteContainer extends React.Component {
       name: values.name,
       productDimension: values.productDimension,
       productSpec: values.productSpec,
-      productUom: values.productUom.label,
+      productUom: values.productUom,
       productUomQty: values.productUomQty,
       productPrice: values.productPrice,
       note: values.note,
@@ -134,6 +137,10 @@ export class AddOrEditQuoteContainer extends React.Component {
   handleRowSelect(row, isSelected) {
     if (isSelected) {
       this.setState({ selectedOrderLineId: row.id });
+      this.setState({ selectedOrderLineRow: row });
+      this.props.action.getOrderLineAction(row.id).catch(error => {
+        toastr.error(error);
+      });
     }
   }
 
@@ -142,24 +149,15 @@ export class AddOrEditQuoteContainer extends React.Component {
   }
 
   render() {
-    const { initialValues, orderLines, products, uoms, contacts } = this.props;
+    const {
+      initialValues,
+      orderLines,
+      products,
+      uoms,
+      contacts,
+      selectedOrderLineRow
+    } = this.props;
     const heading = initialValues && initialValues.id ? "Edit" : "Add";
-    // if (!this.props.initialValues)
-    return (
-      <div className="content-wrapper">
-        <section className="content">
-          <div className="container-fluid">
-            <QuoteForm
-              heading={heading}
-              contacts={contacts}
-              handleSave={this.handleSaveQuote}
-              handleCancel={this.handleCancel}
-              initialValues={this.props.initialValues}
-            />
-          </div>
-        </section>
-      </div>
-    );
     const dt = new Date(Date.now());
     const { allowAdd } = this.state;
     return (
@@ -272,6 +270,15 @@ export class AddOrEditQuoteContainer extends React.Component {
                           >
                             Thêm <i class="far fa-plus-square"></i>
                           </button>
+                          {selectedOrderLineRow && (
+                            <button
+                              type="submit"
+                              className="btn btn-primary"
+                              onClick={this.handleAllowAdd}
+                            >
+                              Sửa <i class="far fa-plus-square"></i>
+                            </button>
+                          )}
                           <button
                             type="submit"
                             className="btn btn-danger"
@@ -377,7 +384,7 @@ const mapDispatchToProps = dispatch => ({
   )
 });
 
-AddOrEditQuoteContainer.propTypes = {
+ShowQuoteContainer.propTypes = {
   action: PropTypes.object.isRequired,
   history: PropTypes.object,
   initialValues: PropTypes.object,
@@ -387,4 +394,4 @@ AddOrEditQuoteContainer.propTypes = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AddOrEditQuoteContainer);
+)(ShowQuoteContainer);

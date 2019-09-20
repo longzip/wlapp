@@ -5,10 +5,10 @@ import getCaret from "../common/GetCaret";
 import dateFormat from "../common/MyFormat";
 
 const titleFormatter = (cell, row) => {
-  return `<a href=/sales/quote/${row.id}>${cell}</a>`;
+  return `<a href=/sales/quote/${row.id}/detail>${cell}</a>`;
 };
 const contactFormatter = (cell, row) => {
-  return `<a href=/sales/contact/${cell.id}>${cell.name +
+  return `<a href=/sales/contact/${cell.id}/detail>${cell.name +
     "-" +
     cell.description}</a>`;
 };

@@ -44,7 +44,7 @@ export const uomsFormattedForDropdown = uoms => {
 
   return uoms.map(uom => {
     return {
-      value: uom.id,
+      value: uom.name,
       label: `${uom.name}`
     };
   });

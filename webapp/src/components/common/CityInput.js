@@ -1,25 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Select from "react-select";
 
-const SelectInput = ({
+const CityInput = ({
   input,
   name,
+  options,
   label,
   defaultOption,
-  options,
   meta: { touched, error, warning }
 }) => {
   return (
     <div className="form-group">
       <div htmlFor={name}>{label}</div>
       <div className="field">
-        {/* <Select
-          {...input}
-          onChange={value => input.onChange(value)}
-          onBlur={() => input.onBlur(input.value)}
-          options={options}
-        /> */}
         <select {...input} name={name} className="form-control">
           <option>{defaultOption}</option>
           {options.map(option => {
@@ -39,7 +32,7 @@ const SelectInput = ({
   );
 };
 
-SelectInput.propTypes = {
+CityInput.propTypes = {
   input: PropTypes.object.isRequired,
   name: PropTypes.string,
   label: PropTypes.string.isRequired,
@@ -48,4 +41,4 @@ SelectInput.propTypes = {
   meta: PropTypes.object.isRequired
 };
 
-export default SelectInput;
+export default CityInput;

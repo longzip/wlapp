@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Field, reduxForm } from "redux-form";
 import FieldInput from "../common/FieldInput";
+import SelectInput from "../common/SelectInput";
 import FormSubmitButton from "../common/FormSubmitButton";
 
 export const ProductionForm = ({
@@ -23,10 +24,45 @@ export const ProductionForm = ({
           <Field
             type="text"
             name="name"
-            label="Name"
-            placeholder="Name of the course"
+            label="Số"
+            placeholder="Lệnh sản xuất số"
             component={FieldInput}
           />
+          {/* <Field
+            type="text"
+            name="contact"
+            options={products}
+            label="Sản phẩm"
+            component={SelectInput}
+          />
+          <Field
+            type="text"
+            name="name"
+            label="Số"
+            placeholder="Số lượng cần sản xuất"
+            component={FieldInput}
+          />
+          <Field
+            type="text"
+            name="boms"
+            options={products}
+            label="Định mức nguyên vật liệu"
+            component={SelectInput}
+          />
+          <Field
+            type="text"
+            name="boms"
+            options={products}
+            label="Quy trình sản xuất"
+            component={SelectInput}
+          />
+          <Field
+            type="text"
+            name="boms"
+            options={products}
+            label="Hạn chót để bắt đầu"
+            component={SelectInput}
+          /> */}
         </div>
         <div className="card-footer">
           <FormSubmitButton

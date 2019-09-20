@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 import { Field, reduxForm } from "redux-form";
 import FieldInput from "../common/FieldInput";
 import TextareaInput from "../common/TextareaInput";
+import CityInput from "../common/CityInput";
 import FormSubmitButton from "../common/FormSubmitButton";
+import cities from "../../api/City";
 
 export const ContactForm = ({
   handleSubmit,
@@ -44,13 +46,14 @@ export const ContactForm = ({
           />
           <Field
             type="text"
+            options={cities}
             name="city"
             label="Tỉnh thành"
             placeholder="Chọn tỉnh thành phố"
-            component={FieldInput}
+            component={CityInput}
           />
           <Field
-            type="text"
+            type="number"
             name="phone"
             label="Phone"
             placeholder="Nhập số điện thoại"
