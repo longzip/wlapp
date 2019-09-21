@@ -1,4 +1,4 @@
-const { Bom } = require("../models/index");
+const { Bom, Product, Routing } = require("../models/index");
 const Joi = require("@hapi/joi");
 const { Op } = require("sequelize");
 const moment = require("moment");
@@ -140,6 +140,16 @@ module.exports = {
     console.log(req.query.name);
     // find multiple entries
     Bom.findAll({
+      include: [
+        {
+          // Notice `include` takes an ARRAY
+          model: Product
+        },
+        {
+          // Notice `include` takes an ARRAY
+          model: Routing
+        }
+      ],
       offset: req.query.offset || 0,
       limit: req.query.limit || 0,
       where: req.query.name

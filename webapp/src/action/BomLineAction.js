@@ -8,12 +8,19 @@ export const getBomLinesResponse = bomLines => ({
   bomLines
 });
 
-export function getBomLinesAction() {
+export function setBomLinesAction(bomLines) {
+  return dispatch => {
+    dispatch(ApiCallBeginAction());
+    dispatch(getBomLinesResponse(bomLines));
+  };
+}
+
+export function getBomLinesAction(bomId) {
   return dispatch => {
     dispatch(ApiCallBeginAction());
 
     return fetchClient
-      .get("bomLines")
+      .get("bomLines?bom=" + bomId)
       .then(response => {
         dispatch(getBomLinesResponse(response.data.result));
       })
@@ -63,8 +70,15 @@ export function saveBomLineAction(bomLineBeingAddedOrEdited) {
 
 export const getBomLineResponse = bomLineFound => ({
   type: ActionType.GET_BOMLINE_RESPONSE,
-  BomLine: bomLineFound
+  bomLine: bomLineFound
 });
+
+export function setBomLineAction(bomLine) {
+  return dispatch => {
+    dispatch(ApiCallBeginAction());
+    dispatch(getBomLineResponse(bomLine));
+  };
+}
 
 export function getBomLineAction(bomLineId) {
   return dispatch => {

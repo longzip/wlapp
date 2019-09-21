@@ -36,10 +36,7 @@ export function saveBomAction(bomBeingAddedOrEdited) {
     dispatch(ApiCallBeginAction());
     if (bomBeingAddedOrEdited.id) {
       return fetchClient
-        .put(
-          "Boms/" + bomBeingAddedOrEdited.id,
-          bomBeingAddedOrEdited
-        )
+        .put("Boms/" + bomBeingAddedOrEdited.id, bomBeingAddedOrEdited)
         .then(() => {
           dispatch(updateExistingBomResponse());
         })
@@ -63,7 +60,7 @@ export function saveBomAction(bomBeingAddedOrEdited) {
 
 export const getBomResponse = bomFound => ({
   type: ActionType.GET_BOM_RESPONSE,
-  Bom: bomFound
+  bom: bomFound
 });
 
 export function getBomAction(bomId) {

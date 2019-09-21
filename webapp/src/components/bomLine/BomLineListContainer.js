@@ -3,8 +3,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import toastr from "toastr";
+// import * as uomAction from "../../action/UomAction";
 import * as bomLineAction from "../../action/BomLineAction";
 import BomLineList from "./BomLineList";
+import ListButton from "../common/ListButton";
 
 export class BomLineListContainer extends React.Component {
   constructor() {
@@ -12,8 +14,8 @@ export class BomLineListContainer extends React.Component {
 
     this.state = { selectedBomLineId: undefined };
 
-    this.handleAddCourse = this.handleAddCourse.bind(this);
-    this.handleEditBomLine = this.handleEditBomLine.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleRowSelect = this.handleRowSelect.bind(this);
   }
@@ -24,24 +26,24 @@ export class BomLineListContainer extends React.Component {
     });
   }
 
-  handleAddCourse() {
-    this.props.history.push("/product");
+  handleAdd() {
+    this.props.history.push("/settings/bom-line");
   }
 
-  handleEditBomLine() {
-    const selectedProductId = this.state.selectedProductId;
-    if (selectedProductId) {
-      this.setState({ selectedProductId: undefined });
-      this.props.history.push(`/product/${selectedProductId}`);
+  handleEdit() {
+    const selectedBomLineId = this.state.selectedBomLineId;
+    if (selectedBomLineId) {
+      this.setState({ selectedBomLineId: undefined });
+      this.props.history.push(`/settings/bom-line/${selectedBomLineId}`);
     }
   }
 
   handleDelete() {
-    const selectedProductId = this.state.selectedProductId;
+    const selectedBomLineId = this.state.selectedBomLineId;
 
-    if (selectedProductId) {
-      this.setState({ selectedProductId: undefined });
-      this.props.action.deleteBomLineAction(selectedProductId).catch(error => {
+    if (selectedBomLineId) {
+      this.setState({ selectedBomLineId: undefined });
+      this.props.action.deleteBomLineAction(selectedBomLineId).catch(error => {
         toastr.error(error);
       });
     }
@@ -49,65 +51,32 @@ export class BomLineListContainer extends React.Component {
 
   handleRowSelect(row, isSelected) {
     if (isSelected) {
-      this.setState({ selectedProductId: row.id });
+      this.setState({ selectedBomLineId: row.id });
+      this.props.action.setBomLineAction(row);
     }
   }
 
   render() {
-    const { products } = this.props;
+    const { bomLines } = this.props;
 
-    if (!products) {
-      return <div>Loading...</div>;
-    }
-
+    if (!bomLines) return <div>Loading...</div>;
     return (
       <div className="content-wrapper">
         <div className="container-fluid">
-          <div className="row mt-3">
-            <div className="col">
-              <h1>Products</h1>
+          <div className="card mt-3">
+            <div className="card-header">
+              <h3 className="card-title">Dòng định mức vật tư</h3>
             </div>
-          </div>
-
-          <div className="row mt-3">
-            <div className="col">
-              <div className="btn-group" role="group">
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={this.handleAddCourse}
-                >
-                  <i className="fa fa-plus" aria-hidden="true" /> New
-                </button>
-
-                <button
-                  type="button"
-                  className="btn btn-warning ml-2"
-                  onClick={this.handleEditBomLine}
-                >
-                  <i className="fa fa-pencil" aria-hidden="true" /> Edit
-                </button>
-
-                <button
-                  type="button"
-                  className="btn btn-danger ml-2"
-                  onClick={this.handleDelete}
-                >
-                  <i
-                    className="fa fa-trash-o"
-                    aria-hidden="true"
-                    onClick={this.handleDelete}
-                  />{" "}
-                  Delete
-                </button>
-              </div>
+            <div className="card-footer clearfix">
+              <ListButton
+                handleAdd={this.handleAdd}
+                handleEdit={this.handleEdit}
+                handleDelete={this.handleDelete}
+              />
             </div>
-          </div>
-
-          <div className="row">
-            <div className="col">
+            <div className="card-body p-0">
               <BomLineList
-                products={products}
+                bomLines={bomLines}
                 handleRowSelect={this.handleRowSelect}
               />
             </div>
@@ -119,7 +88,7 @@ export class BomLineListContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  products: state.productsReducer.products
+  bomLines: state.bomLinesReducer.bomLines
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -127,7 +96,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 BomLineListContainer.propTypes = {
-  products: PropTypes.array,
+  bomLines: PropTypes.array,
   action: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired
 };

@@ -32,7 +32,21 @@ export const productsFormattedForDropdown = products => {
   return products.map(product => {
     return {
       value: product.id,
-      label: `${product.name}`
+      label: `${product.name}`,
+      uom: product.uom
+    };
+  });
+};
+
+export const routingsFormattedForDropdown = routings => {
+  if (!routings) {
+    return;
+  }
+
+  return routings.map(routing => {
+    return {
+      value: routing.id,
+      label: `${routing.name}`
     };
   });
 };

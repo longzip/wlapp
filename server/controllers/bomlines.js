@@ -5,12 +5,11 @@ const moment = require("moment");
 
 function validate(data) {
   const schema = {
-    productId: Joi.number(),
+    ProductId: Joi.number(),
     productQty: Joi.number(),
-    productUomId: Joi.number(),
-    sequence: Joi.number(),
-    routingId: Joi.number(),
-    bomId: Joi.number(),
+    productUom: Joi.number(),
+    RoutingId: Joi.number(),
+    BomId: Joi.number(),
     operationId: Joi.number()
   };
   return Joi.validate(data, schema);

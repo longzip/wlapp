@@ -7,6 +7,11 @@ import toastr from "toastr";
 import * as userAction from "../../action/UserAction";
 import LoginForm from "./LoginForm";
 
+const refresh = () => {
+  window.location.replace("/");
+  // window.location.reload(false);
+};
+
 export class UserLoginContainer extends Component {
   constructor() {
     super();
@@ -22,7 +27,8 @@ export class UserLoginContainer extends Component {
       .loginUserAction(user)
       .then(() => {
         toastr.success("Login Success");
-        this.props.history.push("/");
+        refresh();
+        // this.props.history.replace("/");
       })
       .catch(error => {
         toastr.error(error);

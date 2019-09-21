@@ -42,7 +42,7 @@ export class BomListContainer extends React.Component {
 
     if (selectedBomId) {
       this.setState({ selectedBomId: undefined });
-      this.props.action.deleteAction(selectedBomId).catch(error => {
+      this.props.action.deleteBomAction(selectedBomId).catch(error => {
         toastr.error(error);
       });
     }

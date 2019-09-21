@@ -1,6 +1,7 @@
-import React from 'react'
-const Home = () => {
-  return <div className="content-wrapper"></div>;
-};
+import React, { Component } from "react";
 
-export default Home;
+export default class Home extends Component {
+  render() {
+    return <div className="content-wrapper"></div>;
+  }
+}

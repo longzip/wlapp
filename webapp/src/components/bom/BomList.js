@@ -3,6 +3,14 @@ import * as PropTypes from "prop-types";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import getCaret from "../common/GetCaret";
 import dateFormat from "../common/MyFormat";
+import {
+  productFormatter,
+  routingFormatter
+} from "../common/TableColumnFormat";
+
+const titleFormatter = (cell, row) => {
+  return `<a href=/datas/bom/${row.id}/detail>${cell}</a>`;
+};
 
 class BomList extends React.Component {
   constructor(props) {
@@ -40,23 +48,28 @@ class BomList extends React.Component {
             </TableHeaderColumn>
 
             <TableHeaderColumn
-              dataField="name"
-              dataSort={true}
-              caretRender={getCaret}
-              filter={{ type: "TextFilter", delay: 0 }}
-              columnTitle
+              dataField="Product"
+              dataFormat={productFormatter}
             >
-              Tên
+              Sản phẩm
+            </TableHeaderColumn>
+
+            <TableHeaderColumn dataField="name" dataFormat={titleFormatter}>
+              Biến thể sản phẩm
+            </TableHeaderColumn>
+
+            <TableHeaderColumn dataField="productQty">
+              Số lượng
             </TableHeaderColumn>
 
             <TableHeaderColumn
-              dataField="createdAt"
-              dataFormat={dateFormat}
-              dataSort={true}
-              caretRender={getCaret}
-              filter={{ type: "TextFilter", delay: 0 }}
-              columnTitle
+              dataField="Routing"
+              dataFormat={routingFormatter}
             >
+              Quy trình sản xuất
+            </TableHeaderColumn>
+
+            <TableHeaderColumn dataField="createdAt" dataFormat={dateFormat}>
               Ngày tạo
             </TableHeaderColumn>
           </BootstrapTable>

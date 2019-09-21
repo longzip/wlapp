@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Field, reduxForm } from "redux-form";
 import FieldInput from "../common/FieldInput";
 import FormSubmitButton from "../common/FormSubmitButton";
+import SelectInput from "../common/SelectInput";
 
 export const BomForm = ({
   handleSubmit,
@@ -10,6 +11,8 @@ export const BomForm = ({
   reset,
   submitting,
   heading,
+  products,
+  routings,
   handleSave,
   handleCancel
 }) => {
@@ -22,10 +25,30 @@ export const BomForm = ({
         <div className="card-body">
           <Field
             type="text"
+            name="Product"
+            label="Sản phẩm"
+            options={products}
+            component={SelectInput}
+          />
+          <Field
+            type="text"
             name="name"
-            label="Name"
-            placeholder="Name of the course"
+            label="Biến thể sản phẩm"
+            placeholder="Nhập tên biến thể sản phẩm"
             component={FieldInput}
+          />
+          <Field
+            type="number"
+            name="productQty"
+            label="Số lượng"
+            component={FieldInput}
+          />
+          <Field
+            type="text"
+            name="Routing"
+            label="Quy trình sản xuất"
+            options={routings}
+            component={SelectInput}
           />
         </div>
         <div className="card-footer">

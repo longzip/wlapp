@@ -4,6 +4,12 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import toastr from "toastr";
 import * as bomAction from "../../action/BomAction";
+import * as productAction from "../../action/ProductAction";
+import * as routingAction from "../../action/RoutingAction";
+import {
+  productsFormattedForDropdown,
+  routingsFormattedForDropdown
+} from "../../selectors/selectors";
 import BomForm from "./BomForm";
 
 export class AddOrEditBomContainer extends React.Component {
@@ -20,13 +26,25 @@ export class AddOrEditBomContainer extends React.Component {
         .catch(error => {
           toastr.error(error);
         });
+    this.props.action.getProductsAction().catch(error => {
+      toastr.error(error);
+    });
+    this.props.action.getRoutingsAction().catch(error => {
+      toastr.error(error);
+    });
   }
 
   handleSave(values) {
+    console.log("log values");
+    console.log(values);
+
     const bom = {
       id: values.id,
-      code: values.code,
-      name: values.name
+      name: values.name,
+      productQty: values.productQty,
+      productUom: values.Product.oum,
+      ProductId: values.Product.value,
+      RoutingId: values.Routing.value
     };
 
     this.props.action
@@ -46,16 +64,18 @@ export class AddOrEditBomContainer extends React.Component {
   }
 
   render() {
-    const { initialValues } = this.props;
+    const { initialValues, products, routings } = this.props;
     const heading = initialValues && initialValues.id ? "Edit" : "Add";
     return (
       <div className="content-wrapper">
         <div className="container">
           <BomForm
             heading={heading}
+            products={products}
+            routings={routings}
             handleSave={this.handleSave}
             handleCancel={this.handleCancel}
-            initialValues={this.props.initialValues}
+            initialValues={initialValues}
           />
         </div>
       </div>
@@ -64,22 +84,30 @@ export class AddOrEditBomContainer extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const productId = parseInt(ownProps.match.params.id);
+  const bomId = parseInt(ownProps.match.params.id);
   if (
-    productId &&
-    state.selectedProductReducer.product &&
-    productId === state.selectedProductReducer.product.id
+    bomId &&
+    state.selectedBomReducer.bom &&
+    bomId === state.selectedBomReducer.bom.id
   ) {
     return {
-      initialValues: state.selectedProductReducer.product
+      initialValues: state.selectedBomReducer.bom,
+      routings: routingsFormattedForDropdown(state.routingsReducer.routings),
+      products: productsFormattedForDropdown(state.productsReducer.products)
     };
   } else {
-    return {};
+    return {
+      routings: routingsFormattedForDropdown(state.routingsReducer.routings),
+      products: productsFormattedForDropdown(state.productsReducer.products)
+    };
   }
 };
 
 const mapDispatchToProps = dispatch => ({
-  action: bindActionCreators(bomAction, dispatch)
+  action: bindActionCreators(
+    { ...bomAction, ...productAction, ...routingAction },
+    dispatch
+  )
 });
 
 AddOrEditBomContainer.propTypes = {

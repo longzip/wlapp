@@ -10,6 +10,7 @@ import CourseListContainer from "./course/CourseListContainer";
 import AddOrEditCourseContainer from "./course/AddOrEditCourseContainer"; // eslint-disable-line import/no-named-as-default
 import BomListContainer from "./bom/BomListContainer";
 import AddOrEditBomContainer from "./bom/AddOrEditBomContainer";
+import ShowBomContainer from "./bom/ShowBomContainer";
 import BomLineListContainer from "./bomLine/BomLineListContainer";
 import AddOrEditBomLineContainer from "./bomLine/AddOrEditBomLineContainer";
 import ContactListContainer from "./contact/ContactListContainer";
@@ -100,18 +101,23 @@ export class App extends React.Component {
             />
             <PrivateRoute
               authed={userAuth}
-              path="/bom-lines"
+              path="/datas/bom/:id/detail"
+              component={ShowBomContainer}
+            />
+            <PrivateRoute
+              authed={userAuth}
+              path="/settings/bom-lines"
               component={BomLineListContainer}
             />
             <PrivateRoute
               authed={userAuth}
               exact
-              path="/bomline"
+              path="/settings/bom-line"
               component={AddOrEditBomLineContainer}
             />
             <PrivateRoute
               authed={userAuth}
-              path="/bom-line/:id"
+              path="/settings/bom-line/:id"
               component={AddOrEditBomLineContainer}
             />
             <PrivateRoute
