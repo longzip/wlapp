@@ -34,7 +34,6 @@ class BomLineList extends React.Component {
         <div className="card">
           <BootstrapTable
             data={this.props.bomLines}
-            pagination={true}
             selectRow={this.selectRowProp}
             options={this.options}
             bordered={false}

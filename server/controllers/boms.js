@@ -137,7 +137,6 @@ module.exports = {
     // Uom.sync();
     let result = {};
     let status = 200;
-    console.log(req.query.name);
     // find multiple entries
     Bom.findAll({
       include: [

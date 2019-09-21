@@ -4,7 +4,31 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import toastr from "toastr";
 import * as bomLineAction from "../../action/BomLineAction";
-import BomLineForm from "../bomLine/BomLineForm";
+import * as bomAction from "../../action/BomAction";
+import BomLineList from "../bomLine/BomLineList";
+
+const cardTools = (
+  <div className="card-tools">
+    <button
+      type="button"
+      className="btn btn-tool"
+      data-card-widget="collapse"
+      data-toggle="tooltip"
+      title="Collapse"
+    >
+      <i className="fas fa-minus"></i>
+    </button>
+    <button
+      type="button"
+      className="btn btn-tool"
+      data-card-widget="remove"
+      data-toggle="tooltip"
+      title="Remove"
+    >
+      <i className="fas fa-times"></i>
+    </button>
+  </div>
+);
 
 export class ShowBomContainer extends React.Component {
   constructor() {
@@ -14,8 +38,14 @@ export class ShowBomContainer extends React.Component {
   }
 
   componentDidMount() {
+    if (this.props.match.params.id)
+      this.props.action
+        .getBomAction(this.props.match.params.id)
+        .catch(error => {
+          toastr.error(error);
+        });
     this.props.action
-      .getBomLineAction(this.props.match.params.id)
+      .getBomLinesAction(this.props.match.params.id)
       .catch(error => {
         toastr.error(error);
       });
@@ -45,18 +75,36 @@ export class ShowBomContainer extends React.Component {
   }
 
   render() {
-    const { initialValues } = this.props;
+    const { initialValues, bomLines } = this.props;
     const heading = initialValues && initialValues.id ? "Edit" : "Add";
-    console.log(this.props.initialValues);
     return (
       <div className="content-wrapper">
         <div className="container">
-          <BomLineForm
-            heading={heading}
-            handleSave={this.handleSave}
-            handleCancel={this.handleCancel}
-            initialValues={this.props.initialValues}
-          />
+          <div className="card">
+            <div className="card-header">
+              <h3 className="card-title">Chi tiết định mức NVL</h3>
+              {cardTools}
+            </div>
+            <div className="cart-body">
+              <div className="row">
+                <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+                  <div className="col-12">
+                    <h4>Dòng sản phẩm</h4>
+                    <BomLineList
+                      bomLines={bomLines}
+                      handleRowSelect={this.handleRowSelect}
+                    />
+                  </div>
+                </div>
+                <div className="col-12 col-md-12 col-lg-4 order-1 order-md-2">
+                  <h3 className="text-primary">
+                    <i class="fas fa-paint-brush"></i>
+                    {initialValues && initialValues.name}
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -64,22 +112,23 @@ export class ShowBomContainer extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const productId = parseInt(ownProps.match.params.id);
+  const bomId = parseInt(ownProps.match.params.id);
   if (
-    productId &&
-    state.selectedProductReducer.product &&
-    productId === state.selectedProductReducer.product.id
+    bomId &&
+    state.selectedBomReducer.bom &&
+    bomId === state.selectedBomReducer.bom.id
   ) {
     return {
-      initialValues: state.selectedProductReducer.product
+      initialValues: state.selectedBomReducer.bom,
+      bomLines: state.bomLinesReducer.bomLines
     };
   } else {
-    return {};
+    return { bomLines: state.bomLinesReducer.bomLines };
   }
 };
 
 const mapDispatchToProps = dispatch => ({
-  action: bindActionCreators(bomLineAction, dispatch)
+  action: bindActionCreators({ ...bomAction, ...bomLineAction }, dispatch)
 });
 
 ShowBomContainer.propTypes = {

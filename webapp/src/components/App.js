@@ -96,13 +96,13 @@ export class App extends React.Component {
             />
             <PrivateRoute
               authed={userAuth}
-              path="/datas/bom/:id"
-              component={AddOrEditBomContainer}
+              path="/datas/bom/:id/detail"
+              component={ShowBomContainer}
             />
             <PrivateRoute
               authed={userAuth}
-              path="/datas/bom/:id/detail"
-              component={ShowBomContainer}
+              path="/datas/bom/:id"
+              component={AddOrEditBomContainer}
             />
             <PrivateRoute
               authed={userAuth}
