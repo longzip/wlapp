@@ -13,7 +13,7 @@ export function getWorkordersAction() {
     dispatch(ApiCallBeginAction());
 
     return fetchClient
-      .get("Workorders")
+      .get("workorders")
       .then(response => {
         dispatch(getWorkordersResponse(response.data.result));
       })
@@ -37,7 +37,7 @@ export function saveWorkorderAction(WorkorderBeingAddedOrEdited) {
     if (WorkorderBeingAddedOrEdited.id) {
       return fetchClient
         .put(
-          "Workorders/" + WorkorderBeingAddedOrEdited.id,
+          "workorders/" + WorkorderBeingAddedOrEdited.id,
           WorkorderBeingAddedOrEdited
         )
         .then(() => {
@@ -49,7 +49,7 @@ export function saveWorkorderAction(WorkorderBeingAddedOrEdited) {
         });
     } else {
       return fetchClient
-        .post("Workorders", WorkorderBeingAddedOrEdited)
+        .post("workorders", WorkorderBeingAddedOrEdited)
         .then(() => {
           dispatch(addNewWorkorderResponse());
         })
@@ -66,12 +66,12 @@ export const getWorkorderResponse = WorkorderFound => ({
   workorder: WorkorderFound
 });
 
-export function getWorkorderAction(WorkorderId) {
+export function getWorkorderAction(workorderId) {
   return dispatch => {
     dispatch(ApiCallBeginAction());
 
     return fetchClient
-      .get("Workorders/" + WorkorderId)
+      .get("workorders/" + workorderId)
       .then(response => {
         dispatch(getWorkorderResponse(response.data.result));
       })
@@ -85,12 +85,12 @@ export const deleteWorkorderResponse = () => ({
   type: ActionType.DELETE_WORKORDER_RESPONSE
 });
 
-export function deleteWorkorderAction(WorkorderId) {
+export function deleteWorkorderAction(workorderId) {
   return dispatch => {
     dispatch(ApiCallBeginAction());
 
     return fetchClient
-      .delete("Workorders/" + WorkorderId)
+      .delete("workorders/" + workorderId)
       .then(() => {
         dispatch(deleteWorkorderResponse());
       })

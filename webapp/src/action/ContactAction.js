@@ -1,5 +1,4 @@
 import * as ActionType from "./ActionType";
-
 import fetchClient from "../api/fetchClient";
 import { ApiCallBeginAction, ApiCallErrorAction } from "./ApiAction";
 
@@ -49,7 +48,7 @@ export function saveContactAction(contactBeingAddedOrEdited) {
         });
     } else {
       return fetchClient
-        .post("Contacts", contactBeingAddedOrEdited)
+        .post("contacts", contactBeingAddedOrEdited)
         .then(() => {
           dispatch(addNewContactResponse());
         })
@@ -69,9 +68,8 @@ export const getContactResponse = contactFound => ({
 export function getContactAction(contactId) {
   return dispatch => {
     dispatch(ApiCallBeginAction());
-
     return fetchClient
-      .get("Contacts/" + contactId)
+      .get("contacts/" + contactId)
       .then(response => {
         dispatch(getContactResponse(response.data.result));
       })
@@ -88,7 +86,6 @@ export const deleteContactResponse = () => ({
 export function deleteContactAction(contactId) {
   return dispatch => {
     dispatch(ApiCallBeginAction());
-
     return fetchClient
       .delete("contacts/" + contactId)
       .then(() => {

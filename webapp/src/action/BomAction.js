@@ -36,7 +36,7 @@ export function saveBomAction(bomBeingAddedOrEdited) {
     dispatch(ApiCallBeginAction());
     if (bomBeingAddedOrEdited.id) {
       return fetchClient
-        .put("Boms/" + bomBeingAddedOrEdited.id, bomBeingAddedOrEdited)
+        .put("boms/" + bomBeingAddedOrEdited.id, bomBeingAddedOrEdited)
         .then(() => {
           dispatch(updateExistingBomResponse());
         })
@@ -46,7 +46,7 @@ export function saveBomAction(bomBeingAddedOrEdited) {
         });
     } else {
       return fetchClient
-        .post("Boms", bomBeingAddedOrEdited)
+        .post("boms", bomBeingAddedOrEdited)
         .then(() => {
           dispatch(addNewBomResponse());
         })

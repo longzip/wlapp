@@ -13,7 +13,7 @@ export class UserListContainer extends Component {
 
     this.state = { selectedUserId: undefined };
 
-    this.handleAd = this.handleAd.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleRowSelect = this.handleRowSelect.bind(this);
@@ -25,7 +25,7 @@ export class UserListContainer extends Component {
     });
   }
 
-  handleAd() {
+  handleAdd() {
     this.props.history.push("/settings/user");
   }
 
@@ -48,9 +48,9 @@ export class UserListContainer extends Component {
     }
   }
 
-  handleRowSelect(row, isSelected) {
+  handleRowSelect({ id }, isSelected) {
     if (isSelected) {
-      this.setState({ selectedUserId: row.id });
+      this.setState({ selectedUserId: id });
     }
   }
 
@@ -65,16 +65,15 @@ export class UserListContainer extends Component {
             <div className="card-header">
               <h3 className="card-title">Users</h3>
             </div>
-
-            <div className="card-body p-0">
-              <UserList users={users} handleRowSelect={this.handleRowSelect} />
-            </div>
-            <div className="card-footer clearfix">
+            <div className="card-header">
               <ListButton
                 handleAdd={this.handleAdd}
                 handleEdit={this.handleEdit}
                 handleDelete={this.handleDelete}
               />
+            </div>
+            <div className="card-body p-0">
+              <UserList users={users} handleRowSelect={this.handleRowSelect} />
             </div>
           </div>
         </div>

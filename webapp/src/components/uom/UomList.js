@@ -8,11 +8,6 @@ class UomList extends React.Component {
   constructor(props) {
     super(props);
 
-    this.options = {
-      sortIndicator: true,
-      noDataText: "No data",
-    };
-
     this.selectRowProp = {
       mode: "radio",
       bgColor: "#c1f291",
@@ -29,11 +24,11 @@ class UomList extends React.Component {
             data={this.props.uoms}
             pagination={true}
             selectRow={this.selectRowProp}
-            options={this.options}
             bordered={false}
             striped
             hover
             condensed
+            version="4"
           >
             <TableHeaderColumn dataField="id" isKey hidden>
               #
@@ -42,22 +37,10 @@ class UomList extends React.Component {
             <TableHeaderColumn
               dataField="name"
               dataSort={true}
-              caretRender={getCaret}
               filter={{ type: "TextFilter", delay: 0 }}
               columnTitle
             >
               Tên
-            </TableHeaderColumn>
-
-            <TableHeaderColumn
-              dataField="createdAt"
-              dataFormat={dateFormat}
-              dataSort={true}
-              caretRender={getCaret}
-              filter={{ type: "TextFilter", delay: 0 }}
-              columnTitle
-            >
-              Ngày tạo
             </TableHeaderColumn>
           </BootstrapTable>
         </div>

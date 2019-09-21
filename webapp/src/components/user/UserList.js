@@ -8,11 +8,6 @@ export class UserList extends React.Component {
   constructor(props) {
     super(props);
 
-    this.options = {
-      sortIndicator: true,
-      noDataText: "No data"
-    };
-
     this.selectRowProp = {
       mode: "radio",
       bgColor: "#c1f291",
@@ -24,14 +19,18 @@ export class UserList extends React.Component {
   render() {
     return (
       <div>
-        <div className="card">
+        <div className="card mt-2">
           <BootstrapTable
             data={this.props.users}
-            pagination
             selectRow={this.selectRowProp}
+            version="4"
+            exportCSV
+            bordered={false}
             striped
             hover
-            version="4"
+            condensed
+            pagination
+            search
           >
             <TableHeaderColumn dataField="id" isKey hidden>
               #
@@ -39,7 +38,9 @@ export class UserList extends React.Component {
 
             <TableHeaderColumn dataField="name">Tên</TableHeaderColumn>
 
-            <TableHeaderColumn dataField="username">Username</TableHeaderColumn>
+            <TableHeaderColumn dataField="username" dataAlign="center">
+              Username
+            </TableHeaderColumn>
 
             <TableHeaderColumn dataField="email">Email</TableHeaderColumn>
 

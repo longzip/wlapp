@@ -44,7 +44,7 @@ export function saveBomLineAction(bomLineBeingAddedOrEdited) {
     if (bomLineBeingAddedOrEdited.id) {
       return fetchClient
         .put(
-          "BomLines/" + bomLineBeingAddedOrEdited.id,
+          "bomLines/" + bomLineBeingAddedOrEdited.id,
           bomLineBeingAddedOrEdited
         )
         .then(() => {
@@ -56,7 +56,7 @@ export function saveBomLineAction(bomLineBeingAddedOrEdited) {
         });
     } else {
       return fetchClient
-        .post("BomLines", bomLineBeingAddedOrEdited)
+        .post("bomLines", bomLineBeingAddedOrEdited)
         .then(() => {
           dispatch(addNewBomLineResponse());
         })
