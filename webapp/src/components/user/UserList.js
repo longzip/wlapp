@@ -24,7 +24,6 @@ export class UserList extends React.Component {
             data={this.props.users}
             selectRow={this.selectRowProp}
             version="4"
-            exportCSV
             bordered={false}
             striped
             hover

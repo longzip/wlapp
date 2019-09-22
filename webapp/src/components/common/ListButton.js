@@ -4,7 +4,7 @@ export const ListButton = ({ handleAdd, handleEdit, handleDelete }) => {
   return (
     <div className="btn-group" role="group">
       <button type="button" className="btn btn-primary" onClick={handleAdd}>
-        <i class="fas fa-plus"></i> Tạo
+        <i className="fas fa-plus"></i> Tạo
       </button>
 
       <button
@@ -12,7 +12,7 @@ export const ListButton = ({ handleAdd, handleEdit, handleDelete }) => {
         className="btn btn-warning ml-2"
         onClick={handleEdit}
       >
-        <i class="fas fa-edit"></i> Sửa
+        <i className="fas fa-edit"></i> Sửa
       </button>
 
       <button
@@ -20,7 +20,7 @@ export const ListButton = ({ handleAdd, handleEdit, handleDelete }) => {
         className="btn btn-danger ml-2"
         onClick={handleDelete}
       >
-        <i class="fas fa-trash"></i> Xóa
+        <i className="fas fa-trash"></i> Xóa
       </button>
     </div>
   );

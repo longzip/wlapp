@@ -2,14 +2,14 @@ import React, { PureComponent } from "react";
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import { SingleDatePicker } from "react-dates";
-import esLocale from "moment/locale/es";
+import "moment/locale/vi";
 import moment from "moment";
 import { Field } from "redux-form";
 
 class DatePicker extends PureComponent {
   constructor(props) {
     super(props);
-    moment.locale("es", esLocale);
+    // moment.locale("vi");
   }
 
   state = {
@@ -29,15 +29,14 @@ class DatePicker extends PureComponent {
       placeholder,
       disabled,
       name,
-      label,
-      required
+      label
     } = this.props;
     const { focused } = this.state;
     const invalid = error !== undefined && error !== null;
 
     return (
       <div className="form-group">
-        <div htmlFor={name}>{label}</div>
+        <label htmlFor={name}>{label}</label>
         <div className="field">
           <SingleDatePicker
             showClearDate={true}
@@ -52,7 +51,9 @@ class DatePicker extends PureComponent {
             onFocusChange={this.onFocusChange}
             id={input.name}
           />
-          {error && touched && <span>{error}</span>}
+          {touched &&
+            ((error && <p className="text-danger">{error}</p>) ||
+              (warning && <p className="text-danger">{warning}</p>))}
         </div>
       </div>
     );

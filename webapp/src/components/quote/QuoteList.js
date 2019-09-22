@@ -7,23 +7,16 @@ import dateFormat from "../common/MyFormat";
 const titleFormatter = (cell, row) => {
   return `<a href=/sales/quote/${row.id}/detail>${cell}</a>`;
 };
-const contactFormatter = (cell, row) => {
-  return `<a href=/sales/contact/${cell.id}/detail>${cell.name +
-    "-" +
-    cell.description}</a>`;
+const contactFormatter = cell => {
+  return cell.name + "-" + cell.description;
 };
-const userFormatter = (cell, row) => {
+const userFormatter = cell => {
   return cell.name;
 };
 
 class QuoteList extends React.Component {
   constructor(props) {
     super(props);
-
-    this.options = {
-      sortIndicator: true,
-      noDataText: "Không có dữ liệu"
-    };
 
     this.selectRowProp = {
       mode: "radio",
@@ -39,13 +32,13 @@ class QuoteList extends React.Component {
       <BootstrapTable
         data={this.props.quotes}
         selectRow={this.selectRowProp}
-        options={this.options}
+        version="4"
         bordered={false}
-        pagination={true}
-        show-search-button={true}
         striped
         hover
         condensed
+        pagination
+        search
       >
         <TableHeaderColumn dataField="id" isKey hidden>
           Id
@@ -55,8 +48,6 @@ class QuoteList extends React.Component {
           dataField="description"
           dataFormat={titleFormatter}
           dataSort={true}
-          caretRender={getCaret}
-          columnTitle
         >
           Gói thầu
         </TableHeaderColumn>
@@ -65,27 +56,15 @@ class QuoteList extends React.Component {
           dataField="Contact"
           dataFormat={contactFormatter}
           dataSort={true}
-          caretRender={getCaret}
-          columnTitle
         >
           Dự án
         </TableHeaderColumn>
 
-        <TableHeaderColumn
-          dataField="version"
-          dataSort={true}
-          caretRender={getCaret}
-          columnTitle
-        >
+        <TableHeaderColumn dataField="version" dataSort={true}>
           Lần
         </TableHeaderColumn>
 
-        <TableHeaderColumn
-          dataField="stage"
-          dataSort={true}
-          caretRender={getCaret}
-          columnTitle
-        >
+        <TableHeaderColumn dataField="stage" dataSort={true}>
           Tình trạng
         </TableHeaderColumn>
 
@@ -93,8 +72,6 @@ class QuoteList extends React.Component {
           dataFormat={userFormatter}
           dataField="User"
           dataSort={true}
-          caretRender={getCaret}
-          columnTitle
         >
           Tạo bởi
         </TableHeaderColumn>
@@ -103,8 +80,6 @@ class QuoteList extends React.Component {
           dataFormat={dateFormat}
           dataField="createdAt"
           dataSort={true}
-          caretRender={getCaret}
-          columnTitle
         >
           Ngày
         </TableHeaderColumn>

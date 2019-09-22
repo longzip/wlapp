@@ -67,7 +67,10 @@ module.exports = {
     let result = {};
     let status = 200;
 
-    Order.findByPk(req.params.id)
+    Order.findOne({
+      include: [{ model: Contact }],
+      where: { id: req.params.id }
+    })
       .then(item => {
         result.status = status;
         result.result = item;
