@@ -23,14 +23,15 @@ export class AddOrEditRoutingContainer extends React.Component {
   }
 
   handleSave(values) {
-    const product = {
+    const routing = {
       id: values.id,
       code: values.code,
-      name: values.name
+      name: values.name,
+      note: values.note
     };
 
     this.props.action
-      .saveRoutingAction(product)
+      .saveRoutingAction(routing)
       .then(() => {
         toastr.success("Đã lưu thành công");
         this.props.history.push("/datas/routings");

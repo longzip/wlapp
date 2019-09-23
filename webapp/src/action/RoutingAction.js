@@ -63,7 +63,7 @@ export function saveRoutingAction(RoutingBeingAddedOrEdited) {
 
 export const getRoutingResponse = RoutingFound => ({
   type: ActionType.GET_ROUTING_RESPONSE,
-  Routing: RoutingFound
+  routing: RoutingFound
 });
 
 export function getRoutingAction(RoutingId) {

@@ -4,6 +4,7 @@ import { Field, reduxForm } from "redux-form";
 import FieldInput from "../common/FieldInput";
 import FormSubmitButton from "../common/FormSubmitButton";
 import SelectInput from "../common/SelectInput";
+import CityInput from "../common/CityInput";
 
 export const BomForm = ({
   handleSubmit,
@@ -23,13 +24,24 @@ export const BomForm = ({
       </div>
       <form role="form" onSubmit={handleSubmit(handleSave)}>
         <div className="card-body">
-          <Field
-            type="text"
-            name="Product"
-            label="Sản phẩm"
-            options={products}
-            component={SelectInput}
-          />
+          {heading === "Add" && (
+            <Field
+              type="text"
+              name="Product"
+              label="Sản phẩm"
+              options={products}
+              component={SelectInput}
+            />
+          )}
+          {heading === "Edit" && (
+            <Field
+              type="text"
+              name="ProductId"
+              label="Sản phẩm"
+              options={products}
+              component={CityInput}
+            />
+          )}
           <Field
             type="text"
             name="name"
@@ -45,10 +57,10 @@ export const BomForm = ({
           />
           <Field
             type="text"
-            name="Routing"
+            name="RoutingId"
             label="Quy trình sản xuất"
             options={routings}
-            component={SelectInput}
+            component={CityInput}
           />
         </div>
         <div className="card-footer">

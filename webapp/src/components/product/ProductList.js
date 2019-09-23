@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import getCaret from "../common/GetCaret";
+import dateFormat from "../common/MyFormat";
 
 class ProductList extends React.Component {
   constructor(props) {
@@ -27,52 +28,31 @@ class ProductList extends React.Component {
         data={this.props.products}
         selectRow={this.selectRowProp}
         options={this.options}
+        version="4"
         bordered={false}
         striped
         hover
         condensed
+        search
       >
         <TableHeaderColumn dataField="id" isKey hidden>
           Id
         </TableHeaderColumn>
 
-        <TableHeaderColumn
-          dataField="code"
-          dataSort={true}
-          caretRender={getCaret}
-          filter={{ type: "TextFilter", delay: 0 }}
-          columnTitle
-        >
-          Code
+        <TableHeaderColumn dataField="code">Mã SP</TableHeaderColumn>
+
+        <TableHeaderColumn dataField="name">Tên sản phẩm</TableHeaderColumn>
+        <TableHeaderColumn dataField="type">Loại</TableHeaderColumn>
+        <TableHeaderColumn dataField="ProductCategory">
+          Danh mục
         </TableHeaderColumn>
 
-        <TableHeaderColumn
-          dataField="name"
-          dataSort={true}
-          caretRender={getCaret}
-          columnTitle
-        >
-          Name
-        </TableHeaderColumn>
+        <TableHeaderColumn dataField="listPrice">Giá</TableHeaderColumn>
 
-        <TableHeaderColumn
-          dataField="categoryId"
-          dataSort={true}
-          caretRender={getCaret}
-          filter={{ type: "TextFilter", delay: 0 }}
-          columnTitle
-        >
-          Category
-        </TableHeaderColumn>
+        <TableHeaderColumn dataField="uom">ĐVT</TableHeaderColumn>
 
-        <TableHeaderColumn
-          dataField="createdAt"
-          dataSort={true}
-          caretRender={getCaret}
-          filter={{ type: "TextFilter", delay: 0 }}
-          columnTitle
-        >
-          createdAt
+        <TableHeaderColumn dataField="createdAt" dataFormat={dateFormat}>
+          Ngày tạo
         </TableHeaderColumn>
       </BootstrapTable>
     );

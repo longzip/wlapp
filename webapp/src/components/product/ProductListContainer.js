@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import toastr from "toastr";
 import * as productAction from "../../action/ProductAction";
 import ProductList from "./ProductList";
+import ListButton from "../common/ListButton";
 
 export class ProductListContainer extends React.Component {
   constructor() {
@@ -56,56 +57,22 @@ export class ProductListContainer extends React.Component {
   render() {
     const { products } = this.props;
 
-    if (!products) {
-      return <div>Loading...</div>;
-    }
-
+    if (!products) return <div>Loading...</div>;
     return (
       <div className="content-wrapper">
         <div className="container-fluid">
-          <div className="row mt-3">
-            <div className="col">
-              <h1>Products</h1>
+          <div className="card mt-3">
+            <div className="card-header">
+              <h3 className="card-title">Sản phẩm</h3>
             </div>
-          </div>
-
-          <div className="row mt-3">
-            <div className="col">
-              <div className="btn-group" role="group">
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={this.handleAdd}
-                >
-                  <i className="fa fa-plus" aria-hidden="true" /> New
-                </button>
-
-                <button
-                  type="button"
-                  className="btn btn-warning ml-2"
-                  onClick={this.handleEdit}
-                >
-                  <i className="fa fa-pencil" aria-hidden="true" /> Edit
-                </button>
-
-                <button
-                  type="button"
-                  className="btn btn-danger ml-2"
-                  onClick={this.handleDelete}
-                >
-                  <i
-                    className="fa fa-trash-o"
-                    aria-hidden="true"
-                    onClick={this.handleDelete}
-                  />{" "}
-                  Delete
-                </button>
-              </div>
+            <div className="card-footer clearfix">
+              <ListButton
+                handleAdd={this.handleAdd}
+                handleEdit={this.handleEdit}
+                handleDelete={this.handleDelete}
+              />
             </div>
-          </div>
-
-          <div className="row">
-            <div className="col">
+            <div className="card-body p-0">
               <ProductList
                 products={products}
                 handleRowSelect={this.handleRowSelect}

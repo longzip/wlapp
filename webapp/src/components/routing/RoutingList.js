@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 
+const titleFormatter = (cell, row) => {
+  return `<a href=/datas/routing/${row.id}/detail target="_blank">${cell}</a>`;
+};
+
 class RoutingList extends React.Component {
   constructor(props) {
     super(props);
@@ -33,7 +37,9 @@ class RoutingList extends React.Component {
           #
         </TableHeaderColumn>
 
-        <TableHeaderColumn dataField="code">Mã</TableHeaderColumn>
+        <TableHeaderColumn dataField="code" dataFormat={titleFormatter}>
+          Mã
+        </TableHeaderColumn>
 
         <TableHeaderColumn dataField="name">Tên</TableHeaderColumn>
         <TableHeaderColumn dataField="note">Ghi chú</TableHeaderColumn>

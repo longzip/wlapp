@@ -64,6 +64,19 @@ export const uomsFormattedForDropdown = uoms => {
   });
 };
 
+export const bomsFormattedForDropdown = boms => {
+  if (!boms) {
+    return;
+  }
+
+  return boms.map(bom => {
+    return {
+      value: bom.id,
+      label: `${bom.name}`
+    };
+  });
+};
+
 export const contactsFormattedForDropdown = contacts => {
   if (!contacts) {
     return;

@@ -4,6 +4,7 @@ import { Field, reduxForm } from "redux-form";
 import FieldInput from "../common/FieldInput";
 import SelectInput from "../common/SelectInput";
 import FormSubmitButton from "../common/FormSubmitButton";
+import DatePicker, { formatDates, normalizeDates } from "../common/Datepicker";
 
 export const ProductionForm = ({
   handleSubmit,
@@ -11,6 +12,8 @@ export const ProductionForm = ({
   reset,
   submitting,
   heading,
+  products,
+  boms,
   handleSave,
   handleCancel
 }) => {
@@ -28,41 +31,42 @@ export const ProductionForm = ({
             placeholder="Lệnh sản xuất số"
             component={FieldInput}
           />
-          {/* <Field
-            type="text"
-            name="contact"
-            options={products}
-            label="Sản phẩm"
-            component={SelectInput}
-          />
           <Field
             type="text"
-            name="name"
-            label="Số"
-            placeholder="Số lượng cần sản xuất"
+            name="origin"
+            label="Nguồn"
+            placeholder=""
             component={FieldInput}
           />
           <Field
             type="text"
-            name="boms"
+            name="Product"
+            label="Sản phẩm"
             options={products}
+            component={SelectInput}
+          />
+          <Field
+            type="text"
+            name="Bom"
             label="Định mức nguyên vật liệu"
+            options={boms}
             component={SelectInput}
           />
           <Field
-            type="text"
-            name="boms"
-            options={products}
-            label="Quy trình sản xuất"
-            component={SelectInput}
+            type="number"
+            name="productQty"
+            label="Số lượng cần Sản xuất"
+            placeholder="0"
+            component={FieldInput}
           />
+
           <Field
-            type="text"
-            name="boms"
-            options={products}
-            label="Hạn chót để bắt đầu"
-            component={SelectInput}
-          /> */}
+            name={"datePlannedFinished"}
+            component={DatePicker}
+            parse={normalizeDates}
+            format={formatDates}
+            label="Hạn chót để Hoàn thành"
+          />
         </div>
         <div className="card-footer">
           <FormSubmitButton

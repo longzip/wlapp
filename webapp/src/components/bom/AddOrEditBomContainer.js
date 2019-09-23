@@ -35,16 +35,15 @@ export class AddOrEditBomContainer extends React.Component {
   }
 
   handleSave(values) {
-    console.log("log values");
+    console.log("values");
     console.log(values);
-
     const bom = {
       id: values.id,
       name: values.name,
       productQty: values.productQty,
-      productUom: values.Product.oum,
-      ProductId: values.Product.value,
-      RoutingId: values.Routing.value
+      productUom: values.Product ? values.Product.uom : values.ProductId.uom,
+      ProductId: values.Product ? values.Product.value : values.ProductId.value,
+      RoutingId: values.RoutingId
     };
 
     this.props.action

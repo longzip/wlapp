@@ -7,16 +7,15 @@ function validate(data) {
   const schema = {
     code: Joi.string().required(),
     name: Joi.string(),
-    sequence: Joi.number(),
     description: Joi.string(),
-    description_purchase: Joi.string(),
-    description_sale: Joi.string(),
     type: Joi.string(),
-    categoryId: Joi.number(),
+    uom: Joi.string(),
     listPrice: Joi.number(),
     active: Joi.boolean(),
     saleOk: Joi.boolean(),
-    purchaseOk: Joi.boolean()
+    imageUrl: Joi.string(),
+    purchaseOk: Joi.boolean(),
+    ProductCategoryId: Joi.number()
   };
   return Joi.validate(data, schema);
 }

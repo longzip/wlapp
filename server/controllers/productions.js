@@ -1,4 +1,4 @@
-const { Production } = require("../models/index");
+const { Production, Product, Bom } = require("../models/index");
 const Joi = require("@hapi/joi");
 const { Op } = require("sequelize");
 const moment = require("moment");
@@ -7,20 +7,18 @@ function validate(data) {
   const schema = {
     name: Joi.string().required(),
     origin: Joi.string(),
-    productId: Joi.number(),
     productQty: Joi.number(),
-    productUomId: Joi.number(),
+    productUom: Joi.string(),
     datePlannedStart: Joi.date(),
     datePlannedFinished: Joi.date(),
     dateStart: Joi.date(),
     dateFinished: Joi.date(),
-    bomId: Joi.number(),
-    routingId: Joi.number(),
-    createId: Joi.number(),
-    userId: Joi.number(),
     priority: Joi.number(),
     state: Joi.string(),
-    availability: Joi.string()
+    availability: Joi.string(),
+    ProductId: Joi.number(),
+    BomId: Joi.number(),
+    RoutingId: Joi.number()
   };
   return Joi.validate(data, schema);
 }
@@ -150,6 +148,7 @@ module.exports = {
     console.log(req.query.name);
     // find multiple entries
     Production.findAll({
+      include: [{ model: Product }, { model: Bom }],
       offset: req.query.offset || 0,
       limit: req.query.limit || 0,
       where: req.query.name

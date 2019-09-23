@@ -200,7 +200,7 @@ export class MenuContainer extends React.Component {
                 </ul>
               </li>
 
-              <li className="nav-item has-treeview">
+              {/* <li className="nav-item has-treeview">
                 <NavLink
                   activeClassName="active"
                   to="/reporting"
@@ -244,7 +244,7 @@ export class MenuContainer extends React.Component {
                     </NavLink>
                   </li>
                 </ul>
-              </li>
+              </li> */}
               <li className="nav-item has-treeview">
                 <NavLink
                   activeClassName="active"

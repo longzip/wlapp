@@ -28,6 +28,7 @@ class ContactList extends React.Component {
         pagination={true}
         selectRow={this.selectRowProp}
         options={this.options}
+        version="4"
         bordered={false}
         striped
         hover
@@ -90,7 +91,6 @@ class ContactList extends React.Component {
         >
           Tỉnh thành
         </TableHeaderColumn>
-
       </BootstrapTable>
     );
   }

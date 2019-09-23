@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { Field, reduxForm } from "redux-form";
 import FieldInput from "../common/FieldInput";
 import FormSubmitButton from "../common/FormSubmitButton";
+import CityInput from "../common/CityInput";
+import TextareaInput from "../common/TextareaInput";
 
 export const ProductForm = ({
   handleSubmit,
@@ -10,6 +12,7 @@ export const ProductForm = ({
   reset,
   submitting,
   heading,
+  uoms,
   handleSave,
   handleCancel
 }) => {
@@ -40,6 +43,27 @@ export const ProductForm = ({
             name="listPrice"
             label="Giá"
             placeholder="0"
+            component={FieldInput}
+          />
+          <Field
+            type="text"
+            name="uom"
+            options={uoms}
+            label="Đơn vị"
+            component={CityInput}
+          />
+          <Field
+            type="text"
+            name="description"
+            label="Mô tả"
+            placeholder="Mô tả sản phẩm"
+            component={TextareaInput}
+          />
+          <Field
+            type="text"
+            name="imageUrl"
+            label="Đường dẫn ảnh (lấy từ website)"
+            placeholder="https://"
             component={FieldInput}
           />
         </div>

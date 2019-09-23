@@ -30,10 +30,11 @@ class UomList extends React.Component {
             pagination={true}
             selectRow={this.selectRowProp}
             options={this.options}
-            bordered={false}
+            version="4"
             striped
             hover
             condensed
+            search
           >
             <TableHeaderColumn dataField="id" isKey hidden>
               #

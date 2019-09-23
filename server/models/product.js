@@ -10,8 +10,9 @@ module.exports = (sequelize, DataTypes) => {
         unique: true
       },
       name: DataTypes.STRING,
-      description: DataTypes.TEXT(),
+      description: DataTypes.TEXT,
       type: DataTypes.STRING,
+      uom: DataTypes.STRING,
       listPrice: DataTypes.FLOAT,
       active: DataTypes.BOOLEAN,
       saleOk: DataTypes.BOOLEAN,

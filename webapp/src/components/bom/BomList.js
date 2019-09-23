@@ -3,13 +3,12 @@ import * as PropTypes from "prop-types";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import getCaret from "../common/GetCaret";
 import dateFormat from "../common/MyFormat";
-import {
-  productFormatter,
-  routingFormatter
-} from "../common/TableColumnFormat";
 
 const titleFormatter = (cell, row) => {
-  return `<a href=/datas/bom/${row.id}/detail>${cell}</a>`;
+  return `<a href=/datas/bom/${row.id}/detail>${cell.name}</a>`;
+};
+const nameFormatter = cell => {
+  return cell.name;
 };
 
 class BomList extends React.Component {
@@ -38,38 +37,56 @@ class BomList extends React.Component {
             pagination={true}
             selectRow={this.selectRowProp}
             options={this.options}
-            bordered={false}
             striped
             hover
             condensed
+            search
           >
             <TableHeaderColumn dataField="id" isKey hidden>
               #
             </TableHeaderColumn>
 
             <TableHeaderColumn
+              width="150"
               dataField="Product"
-              dataFormat={productFormatter}
+              dataFormat={titleFormatter}
             >
               Sản phẩm
             </TableHeaderColumn>
 
-            <TableHeaderColumn dataField="name" dataFormat={titleFormatter}>
+            <TableHeaderColumn width="250" dataField="name">
               Biến thể sản phẩm
             </TableHeaderColumn>
 
-            <TableHeaderColumn dataField="productQty">
+            <TableHeaderColumn
+              dataAlign="center"
+              width="80"
+              dataField="productQty"
+            >
               Số lượng
             </TableHeaderColumn>
 
             <TableHeaderColumn
+              dataAlign="center"
+              width="70"
+              dataField="productUom"
+            >
+              ĐVT
+            </TableHeaderColumn>
+
+            <TableHeaderColumn
+              width="550"
               dataField="Routing"
-              dataFormat={routingFormatter}
+              dataFormat={nameFormatter}
             >
               Quy trình sản xuất
             </TableHeaderColumn>
 
-            <TableHeaderColumn dataField="createdAt" dataFormat={dateFormat}>
+            <TableHeaderColumn
+              width="120"
+              dataField="createdAt"
+              dataFormat={dateFormat}
+            >
               Ngày tạo
             </TableHeaderColumn>
           </BootstrapTable>
