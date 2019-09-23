@@ -36,7 +36,6 @@ class QuoteList extends React.Component {
         bordered={false}
         striped
         hover
-        condensed
         pagination
         search
       >
@@ -45,41 +44,41 @@ class QuoteList extends React.Component {
         </TableHeaderColumn>
 
         <TableHeaderColumn
+          width="120"
           dataField="description"
           dataFormat={titleFormatter}
-          dataSort={true}
         >
           Gói thầu
         </TableHeaderColumn>
 
         <TableHeaderColumn
+          width="80"
           dataField="Contact"
           dataFormat={contactFormatter}
-          dataSort={true}
         >
           Dự án
         </TableHeaderColumn>
 
-        <TableHeaderColumn dataField="version" dataSort={true}>
+        <TableHeaderColumn width="50" dataField="version" dataAlign="center">
           Lần
         </TableHeaderColumn>
 
-        <TableHeaderColumn dataField="stage" dataSort={true}>
+        <TableHeaderColumn width="80" dataField="stage">
           Tình trạng
         </TableHeaderColumn>
 
         <TableHeaderColumn
+          width="90"
           dataFormat={userFormatter}
           dataField="User"
-          dataSort={true}
         >
           Tạo bởi
         </TableHeaderColumn>
 
         <TableHeaderColumn
+          width="120"
           dataFormat={dateFormat}
           dataField="createdAt"
-          dataSort={true}
         >
           Ngày
         </TableHeaderColumn>

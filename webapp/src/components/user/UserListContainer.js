@@ -63,7 +63,7 @@ export class UserListContainer extends Component {
         <div className="container-fluid">
           <div className="card">
             <div className="card-header">
-              <h3 className="card-title">Users</h3>
+              <h3 className="card-title">Tài khoản người dùng</h3>
             </div>
             <div className="card-header">
               <ListButton

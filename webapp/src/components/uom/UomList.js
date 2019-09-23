@@ -29,19 +29,13 @@ class UomList extends React.Component {
             hover
             condensed
             version="4"
+            search
           >
             <TableHeaderColumn dataField="id" isKey hidden>
               #
             </TableHeaderColumn>
 
-            <TableHeaderColumn
-              dataField="name"
-              dataSort={true}
-              filter={{ type: "TextFilter", delay: 0 }}
-              columnTitle
-            >
-              Tên
-            </TableHeaderColumn>
+            <TableHeaderColumn dataField="name">Tên</TableHeaderColumn>
           </BootstrapTable>
         </div>
       </div>

@@ -289,7 +289,7 @@ export class MenuContainer extends React.Component {
                   >
                     <i className="nav-icon fa fa-cogs" />
                     <p>
-                      Settings
+                      Cài đặt
                       <i className="right fas fa-angle-left" />
                     </p>
                   </NavLink>

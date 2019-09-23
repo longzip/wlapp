@@ -63,7 +63,7 @@ export class UomListContainer extends React.Component {
         <div className="container-fluid">
           <div className="card mt-3">
             <div className="card-header">
-              <h3 className="card-title">Unit of Mesure</h3>
+              <h3 className="card-title">Đơn vị tính</h3>
             </div>
             <div className="card-footer clearfix">
               <ListButton
