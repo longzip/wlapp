@@ -1,13 +1,35 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
+const formatter = new Intl.NumberFormat("vi");
 const contactFormatter = (cell, row) => {
   return `<a href=/sales/contact/${cell.id}>${cell.name +
     "-" +
     cell.description}</a>`;
 };
 const productFormatter = (cell, row) => {
-  if (cell) return cell.code + "-" + cell.name;
+  if (cell) return cell.name;
+  return;
+};
+
+const currencyFormatter = cell => {
+  if (cell)
+    return new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND"
+    }).format(cell);
+  return;
+};
+
+const subtotalLineFormatter = (cell, row) => {
+  if (cell) {
+    return formatter.format(cell * row.productUomQty);
+  }
+  return;
+};
+
+const numberFormatter = cell => {
+  if (cell) return formatter.format(cell);
   return;
 };
 
@@ -35,6 +57,7 @@ class OrderLineList extends React.Component {
         data={this.props.orderLines}
         selectRow={this.selectRowProp}
         options={this.options}
+        version="4"
         bordered={false}
         striped
         hover
@@ -44,46 +67,42 @@ class OrderLineList extends React.Component {
           Id
         </TableHeaderColumn>
 
-        <TableHeaderColumn
-          dataField="Product"
-          dataFormat={productFormatter}
-          dataSort={true}
-          columnTitle
-        >
+        <TableHeaderColumn dataField="Product" dataFormat={productFormatter}>
           Tên sản phẩm
         </TableHeaderColumn>
 
-        <TableHeaderColumn dataField="productSpec" dataSort={true} columnTitle>
-          Spec
-        </TableHeaderColumn>
+        <TableHeaderColumn dataField="productSpec">Spec</TableHeaderColumn>
 
-        <TableHeaderColumn
-          dataField="productDimension"
-          dataSort={true}
-          columnTitle
-        >
+        <TableHeaderColumn dataField="productDimension">
           Kích thước
         </TableHeaderColumn>
 
-        <TableHeaderColumn dataField="productUom" dataSort={true} columnTitle>
-          ĐVT
-        </TableHeaderColumn>
-
-        <TableHeaderColumn dataField="productUom" dataSort={true} columnTitle>
-          Khối lượng
-        </TableHeaderColumn>
-
-        <TableHeaderColumn dataField="productUom" dataSort={true} columnTitle>
+        <TableHeaderColumn
+          dataField="productPrice"
+          dataFormat={numberFormatter}
+        >
           Đơn giá
         </TableHeaderColumn>
 
-        <TableHeaderColumn dataField="productUom" dataSort={true} columnTitle>
+        <TableHeaderColumn dataField="productUom">
+          Đơn vị tính
+        </TableHeaderColumn>
+
+        <TableHeaderColumn
+          dataField="productUomQty"
+          dataFormat={numberFormatter}
+        >
+          Số lượng
+        </TableHeaderColumn>
+
+        <TableHeaderColumn
+          dataField="productPrice"
+          dataFormat={subtotalLineFormatter}
+        >
           Thành tiền
         </TableHeaderColumn>
 
-        <TableHeaderColumn dataField="productUom" dataSort={true} columnTitle>
-          Ghi chú
-        </TableHeaderColumn>
+        {/* <TableHeaderColumn dataField="note">Ghi chú</TableHeaderColumn> */}
       </BootstrapTable>
     );
   }

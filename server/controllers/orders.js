@@ -68,7 +68,7 @@ module.exports = {
     let status = 200;
 
     Order.findOne({
-      include: [{ model: Contact }],
+      include: [{ model: Contact }, { model: User }],
       where: { id: req.params.id }
     })
       .then(item => {

@@ -1,0 +1,16 @@
+2019-09-23 11:09:36 - Starting C:\Program Files\nodejs\node.exe  --harmony --max_old_space_size=4096 C:\Users\admin\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file F:\Projects\wlapp\server\index.js --log "Woodsland App wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2019-09-23 11:09:36 - Started 11892
+2019-09-23 11:20:33 - Stopping woodslandapp.exe
+2019-09-23 11:20:33 - ProcessKill 11892
+2019-09-23 11:20:33 - Found child process: 14888 Name: conhost.exe
+2019-09-23 11:20:33 - Found child process: 8940 Name: node.exe
+2019-09-23 11:20:33 - Stopping process 14888
+2019-09-23 11:20:33 - Send SIGINT 14888
+2019-09-23 11:20:33 - SIGINT to 14888 failed - Killing as fallback
+2019-09-23 11:20:33 - Stopping process 8940
+2019-09-23 11:20:33 - Send SIGINT 8940
+2019-09-23 11:20:33 - SIGINT to 8940 failed - Killing as fallback
+2019-09-23 11:20:33 - Stopping process 11892
+2019-09-23 11:20:33 - Send SIGINT 11892
+2019-09-23 11:20:33 - SIGINT to 11892 failed - Killing as fallback
+2019-09-23 11:20:33 - Finished woodslandapp.exe

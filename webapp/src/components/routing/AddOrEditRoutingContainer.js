@@ -14,11 +14,12 @@ export class AddOrEditRoutingContainer extends React.Component {
   }
 
   componentDidMount() {
-    this.props.action
-      .getRoutingAction(this.props.match.params.id)
-      .catch(error => {
-        toastr.error(error);
-      });
+    if (this.props.match.params.id)
+      this.props.action
+        .getRoutingAction(this.props.match.params.id)
+        .catch(error => {
+          toastr.error(error);
+        });
   }
 
   handleSave(values) {
@@ -32,7 +33,7 @@ export class AddOrEditRoutingContainer extends React.Component {
       .saveRoutingAction(product)
       .then(() => {
         toastr.success("Đã lưu thành công");
-        this.props.history.push("/products");
+        this.props.history.push("/datas/routings");
       })
       .catch(error => {
         toastr.error(error);
@@ -41,7 +42,7 @@ export class AddOrEditRoutingContainer extends React.Component {
 
   handleCancel(event) {
     event.preventDefault();
-    this.props.history.replace("/products");
+    this.props.history.replace("/datas/routings");
   }
 
   render() {
@@ -64,14 +65,14 @@ export class AddOrEditRoutingContainer extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const productId = parseInt(ownProps.match.params.id);
+  const routingId = parseInt(ownProps.match.params.id);
   if (
-    productId &&
-    state.selectedProductReducer.product &&
-    productId === state.selectedProductReducer.product.id
+    routingId &&
+    state.selectedRoutingReducer.routing &&
+    routingId === state.selectedRoutingReducer.routing.id
   ) {
     return {
-      initialValues: state.selectedProductReducer.product
+      initialValues: state.selectedRoutingReducer.routing
     };
   } else {
     return {};

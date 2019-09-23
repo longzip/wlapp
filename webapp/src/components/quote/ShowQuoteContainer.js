@@ -10,11 +10,22 @@ import * as orderLineAction from "../../action/OrderLineAction";
 import * as contactAction from "../../action/ContactAction";
 import OrderLineList from "../orderLine/OrderLineList";
 import OrderLineForm from "../orderLine/OrderLineForm";
+import moment from "moment";
+import { createSelector } from "reselect";
+
 import {
   productsFormattedForDropdown,
   uomsFormattedForDropdown,
   contactsFormattedForDropdown
 } from "../../selectors/selectors";
+
+const subtotal = orderLines => {
+  return orderLines.reduce(
+    (acc, orderLine) => acc + orderLine.productPrice * orderLine.productUomQty,
+    0
+  );
+};
+const formatter = new Intl.NumberFormat("vi");
 
 export class ShowQuoteContainer extends React.Component {
   constructor() {
@@ -85,7 +96,7 @@ export class ShowQuoteContainer extends React.Component {
       name: values.name,
       productDimension: values.productDimension,
       productSpec: values.productSpec,
-      productUom: values.productUom,
+      productUom: values.productUom.value,
       productUomQty: values.productUomQty,
       productPrice: values.productPrice,
       note: values.note,
@@ -160,6 +171,7 @@ export class ShowQuoteContainer extends React.Component {
     const heading = initialValues && initialValues.id ? "Edit" : "Add";
     const dt = new Date(Date.now());
     const { allowAdd } = this.state;
+
     return (
       <div className="content-wrapper">
         <section className="content-header">
@@ -183,13 +195,13 @@ export class ShowQuoteContainer extends React.Component {
           <div className="container-fluid">
             <div className="row">
               <div className="col-12">
-                <div className="callout callout-info">
+                {/* <div className="callout callout-info">
                   <h5>
                     <i className="fas fa-info"></i> Note:
                   </h5>
                   This page has been enhanced for printing. Click the print
                   button at the bottom of the invoice to test.
-                </div>
+                </div> */}
                 <div className="invoice p-3 mb-3">
                   <div className="row">
                     <div className="col-12">
@@ -218,36 +230,38 @@ export class ShowQuoteContainer extends React.Component {
                     </div>
                     <div className="col-sm-4 invoice-col">
                       Đến
-                      <address>
-                        <strong>John Doe</strong>
-                        <br />
-                        795 Folsom Ave, Suite 600
-                        <br />
-                        San Francisco, CA 94107
-                        <br />
-                        Phone: (555) 539-1037
-                        <br />
-                        Email: john.doe@example.com
-                      </address>
+                      {initialValues && (
+                        <address>
+                          <strong>{initialValues.Contact.description}</strong>
+                          <br />
+                          {initialValues.Contact.addressLine}
+                          <br />
+                          {initialValues.Contact.city}
+                          <br />
+                          Phone: {initialValues.Contact.phone}
+                          <br />
+                          Email: {initialValues.Contact.email}
+                        </address>
+                      )}
                     </div>
-                    <div className="col-sm-4 invoice-col">
-                      <b>Invoice #007612</b>
-                      <br />
-                      <br />
-                      <b>Order ID:</b> 4F3S8J
-                      <br />
-                      <b>Payment Due:</b> 2/22/2014
-                      <br />
-                      <b>Account:</b> 968-34567
-                    </div>
+                    {initialValues && (
+                      <div className="col-sm-4 invoice-col">
+                        <b>Số ID # {initialValues.id}</b>
+                        <br />
+                        <br />
+                        <b>Lần:</b> {initialValues.version}
+                        <br />
+                        <b>Tạo ngày:</b>{" "}
+                        {moment(initialValues.createdAt).format("L")}
+                        <br />
+                        <b>Nhân viên:</b>
+                        {initialValues.User.name +
+                          " - " +
+                          initialValues.User.id}
+                      </div>
+                    )}
                   </div>
 
-                  {/* <QuoteForm
-                    heading={heading}
-                    handleSave={this.handleSave}
-                    handleCancel={this.handleCancel}
-                    initialValues={this.props.initialValues}
-                  /> */}
                   {allowAdd && (
                     <OrderLineForm
                       heading="Add"
@@ -299,7 +313,7 @@ export class ShowQuoteContainer extends React.Component {
 
                   <div className="row">
                     <div className="col-6">
-                      <p className="lead">Payment Methods:</p>
+                      {/* <p className="lead">Payment Methods:</p>
                       <p
                         className="text-muted well well-sm shadow-none"
                         style={{ marginTop: "10px" }}
@@ -308,28 +322,39 @@ export class ShowQuoteContainer extends React.Component {
                         zoodles, weebly ning heekya handango imeem plugg dopplr
                         jibjab, movity jajah plickers sifteo edmodo ifttt
                         zimbra.
-                      </p>
+                      </p> */}
                     </div>
 
                     <div className="col-6">
-                      <p className="lead">Amount Due 2/22/2014</p>
+                      {initialValues && (
+                        <p className="lead">
+                          Ngày hết hạn{" "}
+                          {moment(initialValues.dateFinished).format("L")}
+                        </p>
+                      )}
+
                       <div className="table-responsive">
                         <table className="table">
                           <tr>
-                            <th style={{ width: "50%" }}>Subtotal:</th>
-                            <td>$250.30</td>
+                            <th style={{ width: "50%" }}>Tổng cộng:</th>
+                            <td>{formatter.format(subtotal(orderLines))}</td>
                           </tr>
                           <tr>
-                            <th>Tax (9.3%)</th>
-                            <td>$10.34</td>
+                            <th>VAT (10%)</th>
+                            <td>
+                              {formatter.format(
+                                (subtotal(orderLines) * 10) / 100
+                              )}
+                            </td>
                           </tr>
                           <tr>
-                            <th>Shipping:</th>
-                            <td>$5.80</td>
-                          </tr>
-                          <tr>
-                            <th>Total:</th>
-                            <td>$265.24</td>
+                            <th>Thành tiền:</th>
+                            <td>
+                              {formatter.format(
+                                subtotal(orderLines) +
+                                  (subtotal(orderLines) * 10) / 100
+                              )}
+                            </td>
                           </tr>
                         </table>
                       </div>
