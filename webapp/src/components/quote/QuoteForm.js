@@ -6,7 +6,7 @@ import SelectInput from "../common/SelectInput";
 import DatePicker, { formatDates, normalizeDates } from "../common/Datepicker";
 import FormSubmitButton from "../common/FormSubmitButton";
 
-export const QuoteForm = ({
+const QuoteForm = ({
   handleSubmit,
   pristine,
   reset,
@@ -26,30 +26,6 @@ export const QuoteForm = ({
       </div>
       <form role="form" onSubmit={handleSubmit(handleSave)}>
         <div className="card-body">
-          {heading === "Add" && (
-            <Field
-              type="text"
-              name="Contact"
-              options={contacts}
-              label="Chọn dự án"
-              component={SelectInput}
-            />
-          )}
-
-          {heading === "Edit" && (
-            <div className="form-group">
-              <label>Dự án</label>
-              <div className="field">
-                <input
-                  className="form-control"
-                  type="text"
-                  value={quote ? quote.Contact.name : ""}
-                  disabled
-                />
-              </div>
-            </div>
-          )}
-
           <Field
             type="text"
             name="description"

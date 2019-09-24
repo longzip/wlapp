@@ -1,7 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
-import getCaret from "../common/GetCaret";
+import dateFormat from "../common/MyFormat";
+const titleFormatter = (cell, row) => {
+  return `<a href=/sales/contact/${row.id}/detail>${cell}</a>`;
+};
 
 class ContactList extends React.Component {
   constructor(props) {
@@ -39,28 +42,35 @@ class ContactList extends React.Component {
           Id
         </TableHeaderColumn>
 
-        <TableHeaderColumn width="80" dataField="name">
+        <TableHeaderColumn
+          width="80"
+          dataField="name"
+          dataFormat={titleFormatter}
+        >
           Mã dự án
         </TableHeaderColumn>
 
-        <TableHeaderColumn width="180" dataField="description">
+        <TableHeaderColumn width="210" dataField="description">
           Tên chủ đầu tư
         </TableHeaderColumn>
 
-        <TableHeaderColumn width="90" dataField="phone">
+        <TableHeaderColumn width="90" dataField="phone" dataAlign="center">
           Phone
         </TableHeaderColumn>
 
-        <TableHeaderColumn width="120" dataField="email">
+        <TableHeaderColumn width="220" dataField="email">
           Email
         </TableHeaderColumn>
 
-        <TableHeaderColumn width="190" dataField="addressLine">
+        <TableHeaderColumn width="220" dataField="addressLine">
           Địa chỉ
         </TableHeaderColumn>
 
-        <TableHeaderColumn width="80" dataField="city">
+        <TableHeaderColumn width="110" dataField="city">
           Tỉnh thành
+        </TableHeaderColumn>
+        <TableHeaderColumn dataField="createdAt" dataFormat={dateFormat}>
+          Ngày tạo
         </TableHeaderColumn>
       </BootstrapTable>
     );

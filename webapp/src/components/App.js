@@ -15,6 +15,7 @@ import BomLineListContainer from "./bomLine/BomLineListContainer";
 import AddOrEditBomLineContainer from "./bomLine/AddOrEditBomLineContainer";
 import ContactListContainer from "./contact/ContactListContainer";
 import AddOrEditContactContainer from "./contact/AddOrEditContactContainer";
+import ContactDetailContainer from "./contact/ContactDetailContainer";
 import DeliverListContainer from "./deliver/DeliverListContainer";
 import AddOrEditDeliverContainer from "./deliver/AddOrEditDeliverContainer";
 import InventoryListContainer from "./inventory/InventoryListContainer";
@@ -130,6 +131,11 @@ export class App extends React.Component {
               exact
               path="/sales/contact"
               component={AddOrEditContactContainer}
+            />
+            <PrivateRoute
+              authed={userAuth}
+              path="/sales/contact/:id/detail"
+              component={ContactDetailContainer}
             />
             <PrivateRoute
               authed={userAuth}

@@ -19,9 +19,9 @@ export class MenuContainer extends React.Component {
       <aside className="main-sidebar sidebar-dark-primary elevation-4">
         <Link to="/" className="brand-link">
           <img
-            src="/dist/img/AdminLTELogo.png"
-            alt="AdminLTE"
-            className="brand-image img-circle elevation-3"
+            src="/dist/img/logo.png"
+            alt="Woodsland"
+            className="brand-image  elevation-3"
             style={{ opacity: ".8" }}
           />
 
@@ -29,7 +29,7 @@ export class MenuContainer extends React.Component {
         </Link>
 
         <div className="sidebar">
-          <div className="user-panel mt-3 pb-3 mb-3 d-flex">
+          {/* <div className="user-panel mt-3 pb-3 mb-3 d-flex">
             <div className="image">
               <img
                 src="/dist/img/user2-160x160.jpg"
@@ -42,7 +42,7 @@ export class MenuContainer extends React.Component {
                 {this.props.userAuth.name}
               </Link>
             </div>
-          </div>
+          </div> */}
 
           <nav className="mt-2">
             <ul
@@ -62,7 +62,18 @@ export class MenuContainer extends React.Component {
                 </NavLink>
               </li>
 
-              <li className="nav-item has-treeview">
+              <li className="nav-item">
+                <NavLink
+                  activeClassName="active"
+                  to="/sales/contacts"
+                  className="nav-link"
+                >
+                  <i className="fab fa-delicious nav-icon" />
+                  <p>Dự án</p>
+                </NavLink>
+              </li>
+
+              {/* <li className="nav-item has-treeview">
                 <NavLink
                   activeClassName="active"
                   to="/sales"
@@ -106,7 +117,7 @@ export class MenuContainer extends React.Component {
                     </NavLink>
                   </li>
                 </ul>
-              </li>
+              </li> */}
 
               <li className="nav-item has-treeview">
                 <NavLink

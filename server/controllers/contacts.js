@@ -1,4 +1,4 @@
-const { Contact } = require("../models/index");
+const { Contact, Order } = require("../models/index");
 const Joi = require("@hapi/joi");
 const { Op } = require("sequelize");
 const moment = require("moment");
@@ -66,7 +66,10 @@ module.exports = {
     let result = {};
     let status = 200;
 
-    Contact.findByPk(req.params.id)
+    Contact.findOne({
+      include: [{ model: Order }],
+      where: { id: req.params.id }
+    })
       .then(item => {
         result.status = status;
         result.result = item;

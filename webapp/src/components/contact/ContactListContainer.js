@@ -63,7 +63,7 @@ export class ContactListContainer extends Component {
         <div className="container-fluid">
           <div className="card mt-3">
             <div className="card-header">
-              <h3 className="card-title">Khách hàng</h3>
+              <h3 className="card-title">Dự án</h3>
             </div>
             <div className="card-footer clearfix">
               <ListButton

@@ -1,15 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
-import getCaret from "../common/GetCaret";
 import dateFormat from "../common/MyFormat";
 
 const titleFormatter = (cell, row) => {
   return `<a href=/sales/quote/${row.id}/detail>${cell}</a>`;
 };
-const contactFormatter = cell => {
-  return cell.name + "-" + cell.description;
-};
+// const contactFormatter = cell => {
+//   return cell.name + "-" + cell.description;
+// };
 const userFormatter = cell => {
   return cell.name;
 };
@@ -36,7 +35,6 @@ class QuoteList extends React.Component {
         bordered={false}
         striped
         hover
-        pagination
         search
       >
         <TableHeaderColumn dataField="id" isKey hidden>
@@ -51,13 +49,13 @@ class QuoteList extends React.Component {
           Gói thầu
         </TableHeaderColumn>
 
-        <TableHeaderColumn
+        {/* <TableHeaderColumn
           width="80"
           dataField="Contact"
           dataFormat={contactFormatter}
         >
           Dự án
-        </TableHeaderColumn>
+        </TableHeaderColumn> */}
 
         <TableHeaderColumn width="50" dataField="version" dataAlign="center">
           Lần
