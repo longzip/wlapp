@@ -8,12 +8,12 @@ export const getQuotesResponse = quotes => ({
   quotes
 });
 
-export function getQuotesAction() {
+export function getQuotesAction(contactId) {
   return dispatch => {
     dispatch(ApiCallBeginAction());
 
     return fetchClient
-      .get("orders")
+      .get("orders?contactId=" + contactId)
       .then(response => {
         dispatch(getQuotesResponse(response.data.result));
       })

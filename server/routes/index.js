@@ -1,24 +1,25 @@
-const users = require('./users');
-const uoms = require('./uoms');
-const excels = require('./excels');
-const contacts = require('./contacts');
-const boms = require('./boms');
-const bomlines = require('./bomlines');
-const delivers = require('./delivers');
-const inventories = require('./inventories');
-const orders = require('./orders');
-const orderlines = require('./orderlines');
-const products = require('./products');
-const productcategories = require('./productcategories');
-const productions = require('./productions');
-const routings = require('./routings');
-const routingworkcenters = require('./routingworkcenters');
-const uomcategories = require('./uomcategories');
-const workcenters = require('./workcenters');
-const workcenterproductivities = require('./workcenterproductivities');
-const workorders = require('./workorders');
+const users = require("./users");
+const uoms = require("./uoms");
+const excels = require("./excels");
+const contacts = require("./contacts");
+const boms = require("./boms");
+const bomlines = require("./bomlines");
+const delivers = require("./delivers");
+const inventories = require("./inventories");
+const orders = require("./orders");
+const orderlines = require("./orderlines");
+const products = require("./products");
+const productcategories = require("./productcategories");
+const productions = require("./productions");
+const routings = require("./routings");
+const routingworkcenters = require("./routingworkcenters");
+const uomcategories = require("./uomcategories");
+const workcenters = require("./workcenters");
+const workcenterproductivities = require("./workcenterproductivities");
+const workorders = require("./workorders");
+const documents = require("./documents");
 
-module.exports = (router) => {
+module.exports = router => {
   users(router);
   uoms(router);
   excels(router);
@@ -38,5 +39,6 @@ module.exports = (router) => {
   workcenterproductivities(router);
   workorders(router);
   contacts(router);
+  documents(router);
   return router;
 };

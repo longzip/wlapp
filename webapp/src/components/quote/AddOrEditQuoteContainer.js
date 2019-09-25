@@ -79,7 +79,7 @@ export class AddOrEditQuoteContainer extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const contacts = contactsFormattedForDropdown(state.contactsReducer.contacts);
+  const contacts = contactsFormattedForDropdown(state);
   const currentUser = state.loginedUserReducer.userAuth;
   const initialValues = state.selectedQuoteReducer.quote;
   const quoteId = parseInt(ownProps.match.params.id);

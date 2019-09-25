@@ -12,8 +12,8 @@ const QuoteForm = ({
   reset,
   submitting,
   heading,
-  quote,
-  contacts,
+  // quote,
+  // contacts,
   handleSave,
   handleCancel
 }) => {

@@ -11,20 +11,15 @@ import * as contactAction from "../../action/ContactAction";
 import OrderLineList from "../orderLine/OrderLineList";
 import OrderLineForm from "../orderLine/OrderLineForm";
 import moment from "moment";
-import { createSelector } from "reselect";
-
 import {
   productsFormattedForDropdown,
   uomsFormattedForDropdown,
-  contactsFormattedForDropdown
+  contactsFormattedForDropdown,
+  subtotalSelector,
+  taxSelector,
+  totalSelector
 } from "../../selectors/selectors";
 
-const subtotal = orderLines => {
-  return orderLines.reduce(
-    (acc, orderLine) => acc + orderLine.productPrice * orderLine.productUomQty,
-    0
-  );
-};
 const formatter = new Intl.NumberFormat("vi");
 
 export class ShowQuoteContainer extends React.Component {
@@ -166,7 +161,10 @@ export class ShowQuoteContainer extends React.Component {
       products,
       uoms,
       contacts,
-      selectedOrderLineRow
+      selectedOrderLineRow,
+      subtotal,
+      tax,
+      total
     } = this.props;
     const heading = initialValues && initialValues.id ? "Edit" : "Add";
     const dt = new Date(Date.now());
@@ -337,24 +335,15 @@ export class ShowQuoteContainer extends React.Component {
                         <table className="table">
                           <tr>
                             <th style={{ width: "50%" }}>Tổng cộng:</th>
-                            <td>{formatter.format(subtotal(orderLines))}</td>
+                            <td>{formatter.format(subtotal)}</td>
                           </tr>
                           <tr>
                             <th>VAT (10%)</th>
-                            <td>
-                              {formatter.format(
-                                (subtotal(orderLines) * 10) / 100
-                              )}
-                            </td>
+                            <td>{formatter.format(tax)}</td>
                           </tr>
                           <tr>
                             <th>Thành tiền:</th>
-                            <td>
-                              {formatter.format(
-                                subtotal(orderLines) +
-                                  (subtotal(orderLines) * 10) / 100
-                              )}
-                            </td>
+                            <td>{formatter.format(total)}</td>
                           </tr>
                         </table>
                       </div>
@@ -372,6 +361,9 @@ export class ShowQuoteContainer extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   const quoteId = parseInt(ownProps.match.params.id);
+  const subtotal = subtotalSelector(state);
+  const tax = taxSelector(state);
+  const total = totalSelector(state);
   if (
     quoteId &&
     state.selectedQuoteReducer.quote &&
@@ -379,19 +371,25 @@ const mapStateToProps = (state, ownProps) => {
   ) {
     return {
       initialValues: state.selectedQuoteReducer.quote,
-      products: productsFormattedForDropdown(state.productsReducer.products),
-      uoms: uomsFormattedForDropdown(state.uomsReducer.uoms),
-      contacts: contactsFormattedForDropdown(state.contactsReducer.contacts),
+      products: productsFormattedForDropdown(state),
+      uoms: uomsFormattedForDropdown(state),
+      contacts: contactsFormattedForDropdown(state),
       orderLines: state.orderLinesReducer.orderLines,
-      currentUser: state.loginedUserReducer.userAuth
+      currentUser: state.loginedUserReducer.userAuth,
+      subtotal,
+      tax,
+      total
     };
   } else {
     return {
-      products: productsFormattedForDropdown(state.productsReducer.products),
-      uoms: uomsFormattedForDropdown(state.uomsReducer.uoms),
-      contacts: contactsFormattedForDropdown(state.contactsReducer.contacts),
+      products: productsFormattedForDropdown(state),
+      uoms: uomsFormattedForDropdown(state),
+      contacts: contactsFormattedForDropdown(state),
       orderLines: state.orderLinesReducer.orderLines,
-      currentUser: state.loginedUserReducer.userAuth
+      currentUser: state.loginedUserReducer.userAuth,
+      subtotal,
+      tax,
+      total
     };
   }
 };

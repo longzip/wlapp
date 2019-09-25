@@ -156,12 +156,12 @@ module.exports = {
       ],
       offset: req.query.offset || 0,
       limit: req.query.limit || 0,
-      where: req.query.name
+      where: req.query.contactId
         ? {
             [Op.and]: [
               {
-                name: {
-                  [Op.like]: "%" + req.query.name + "%"
+                contactId: {
+                  [Op.like]: req.query.contactId
                 },
                 createdAt: {
                   [Op.lte]:

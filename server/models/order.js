@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     Order.belongsTo(models.User);
     Order.hasMany(models.Inventory);
     Order.hasMany(models.Deliver);
+    Order.hasMany(models.Document);
   };
   return Order;
 };

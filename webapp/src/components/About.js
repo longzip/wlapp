@@ -4,6 +4,11 @@ import {
   Table,
   TableHeaderRow
 } from "@devexpress/dx-react-grid-bootstrap4";
+import UploadForm from "./upload/UploadForm";
+
+const save = data => {
+  console.log(data.ten[0]);
+};
 
 const About = () => {
   return (
@@ -14,6 +19,8 @@ const About = () => {
         sanctus ut has, partem dolorem atomorum est ad, sumo fabellas electram
         ex vim.
       </p>
+      <input type="file" name="test" />
+      <UploadForm handleSave={save} />
       <Grid
         rows={[
           { id: 0, product: "DevExtreme", owner: "DevExpress" },

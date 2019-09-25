@@ -162,5 +162,9 @@ export default {
 
   apiReducer: {
     apiCallsInProgress: 0
+  },
+
+  documentsReducer: {
+    documents: []
   }
 };

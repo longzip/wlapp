@@ -41,6 +41,7 @@ import coursesReducer from "./coursesReducer";
 import selectedCourseReducer from "./selectedCourseReducer";
 import authorReducer from "./authorReducer";
 import apiReducer from "./apiReducer";
+import documentsReducer from "./documentsReducer";
 
 export default combineReducers({
   workcentersReducer,
@@ -84,5 +85,6 @@ export default combineReducers({
   selectedCourseReducer,
   authorReducer,
   apiReducer,
+  documentsReducer,
   form: formReducer
 });

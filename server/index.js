@@ -38,7 +38,7 @@ if (environment !== "production") {
 const routes = require("./routes/index.js");
 
 app.use("/api/v1", routes(router));
-app.use(express.static(path.join(__dirname, "./public/")));
+app.use("/public", express.static(path.join(__dirname, "./public/")));
 app.get("/.*/", (req, res) =>
   res.sendFile(path.join(__dirname, "./public/index.html"))
 );

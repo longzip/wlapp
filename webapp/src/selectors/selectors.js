@@ -1,3 +1,5 @@
+import { createSelector } from "reselect";
+
 export const authorsFormattedForDropdown = authors => {
   if (!authors) {
     return;
@@ -24,67 +26,87 @@ export const productCategoriesFormattedForDropdown = productCategories => {
   });
 };
 
-export const productsFormattedForDropdown = products => {
-  if (!products) {
-    return;
-  }
+const productsSelector = state => state.productsReducer.products;
 
-  return products.map(product => {
-    return {
-      value: product.id,
-      label: `${product.name}`,
-      uom: product.uom
-    };
-  });
-};
+export const productsFormattedForDropdown = createSelector(
+  productsSelector,
+  products =>
+    products.map(product => {
+      return {
+        value: product.id,
+        label: product.name,
+        uom: product.uom
+      };
+    })
+);
 
-export const routingsFormattedForDropdown = routings => {
-  if (!routings) {
-    return;
-  }
+const routingsSelector = state => state.routingsReducer.routings;
 
-  return routings.map(routing => {
-    return {
-      value: routing.id,
-      label: `${routing.name}`
-    };
-  });
-};
+export const routingsFormattedForDropdown = createSelector(
+  routingsSelector,
+  routings =>
+    routings.map(routing => {
+      return {
+        value: routing.id,
+        label: routing.name
+      };
+    })
+);
 
-export const uomsFormattedForDropdown = uoms => {
-  if (!uoms) {
-    return;
-  }
+const uomsSelector = state => state.uomsReducer.uoms;
 
-  return uoms.map(uom => {
-    return {
-      value: uom.name,
-      label: `${uom.name}`
-    };
-  });
-};
+export const uomsFormattedForDropdown = createSelector(
+  uomsSelector,
+  uoms =>
+    uoms.map(uom => {
+      return {
+        value: uom.name,
+        label: `${uom.name}`
+      };
+    })
+);
 
-export const bomsFormattedForDropdown = boms => {
-  if (!boms) {
-    return;
-  }
+const bomsSelector = state => state.bomsReducer.boms;
 
-  return boms.map(bom => {
-    return {
-      value: bom.id,
-      label: `${bom.name}`
-    };
-  });
-};
+export const bomsFormattedForDropdown = createSelector(
+  bomsSelector,
+  boms =>
+    boms.map(bom => {
+      return {
+        value: bom.id,
+        label: bom.name
+      };
+    })
+);
 
-export const contactsFormattedForDropdown = contacts => {
-  if (!contacts) {
-    return;
-  }
-  return contacts.map(contact => {
-    return {
-      value: contact.id,
-      label: `${contact.name}-${contact.description}`
-    };
-  });
-};
+const contactsSelector = state => state.contactsReducer.contacts;
+
+export const contactsFormattedForDropdown = createSelector(
+  contactsSelector,
+  contacts =>
+    contacts.map(contact => {
+      return {
+        value: contact.id,
+        label: `${contact.name}-${contact.description}`
+      };
+    })
+);
+
+const orderLinesSelector = state => state.orderLinesReducer.orderLines;
+
+export const subtotalSelector = createSelector(
+  orderLinesSelector,
+  items =>
+    items.reduce((acc, item) => acc + item.productPrice * item.productUomQty, 0)
+);
+
+export const taxSelector = createSelector(
+  subtotalSelector,
+  subtotal => subtotal * (10 / 100)
+);
+
+export const totalSelector = createSelector(
+  subtotalSelector,
+  taxSelector,
+  (subtotal, tax) => subtotal + tax
+);

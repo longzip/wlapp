@@ -140,8 +140,6 @@ module.exports = {
     // Uom.sync();
     let result = {};
     let status = 200;
-    console.log(req.query.name);
-    // find multiple entries
     Contact.findAll({
       offset: req.query.offset || 0,
       limit: req.query.limit || 0,
