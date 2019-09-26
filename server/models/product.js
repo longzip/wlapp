@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
       code: {
         // needs to be unique
         type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
+        allowNull: true,
+        unique: false
       },
       name: DataTypes.STRING,
       description: DataTypes.TEXT,
