@@ -62,6 +62,7 @@ export class ShowQuoteContainer extends React.Component {
     this.props.action.getUomsAction().catch(error => {
       toastr.error(error);
     });
+    console.log(this.props);
   }
 
   handleSaveQuote(values) {
@@ -160,13 +161,11 @@ export class ShowQuoteContainer extends React.Component {
       orderLines,
       products,
       uoms,
-      contacts,
       selectedOrderLineRow,
       subtotal,
       tax,
       total
     } = this.props;
-    const heading = initialValues && initialValues.id ? "Edit" : "Add";
     const dt = new Date(Date.now());
     const { allowAdd } = this.state;
 

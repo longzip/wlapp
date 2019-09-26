@@ -92,6 +92,19 @@ export const contactsFormattedForDropdown = createSelector(
     })
 );
 
+const workcentersSelector = state => state.workcentersReducer.workcenters;
+
+export const workcentersFormattedForDropdown = createSelector(
+  workcentersSelector,
+  workcenters =>
+    workcenters.map(workcenter => {
+      return {
+        value: workcenter.id,
+        label: workcenter.name
+      };
+    })
+);
+
 const orderLinesSelector = state => state.orderLinesReducer.orderLines;
 
 export const subtotalSelector = createSelector(

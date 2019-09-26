@@ -6,10 +6,12 @@ import toastr from "toastr";
 import * as productionAction from "../../action/ProductionAction";
 import * as productAction from "../../action/ProductAction";
 import * as bomAction from "../../action/BomAction";
+import * as routingAction from "../../action/RoutingAction";
 import ProductionForm from "./ProductionForm";
 import {
   productsFormattedForDropdown,
-  bomsFormattedForDropdown
+  bomsFormattedForDropdown,
+  routingsFormattedForDropdown
 } from "../../selectors/selectors";
 
 export class AddOrEditProductionContainer extends React.Component {
@@ -32,6 +34,7 @@ export class AddOrEditProductionContainer extends React.Component {
     this.props.action.getBomsAction().catch(error => {
       toastr.error(error);
     });
+    this.props.action.getRoutingsAction().catch(error => toastr.error(error));
   }
 
   handleSave(values) {
@@ -49,8 +52,8 @@ export class AddOrEditProductionContainer extends React.Component {
       state: values.state,
       availability: values.availability,
       ProductId: values.Product.value,
-      BomId: values.Bom.value,
-      RoutingId: values.Routing
+      BomId: values.Bom ? values.Bom.value : undefined,
+      RoutingId: values.Routing.value
     };
 
     this.props.action
@@ -70,7 +73,7 @@ export class AddOrEditProductionContainer extends React.Component {
   }
 
   render() {
-    const { initialValues, products, boms } = this.props;
+    const { initialValues, products, boms, routings } = this.props;
     const heading = initialValues && initialValues.id ? "Edit" : "Add";
     console.log(this.props.initialValues);
     return (
@@ -80,6 +83,7 @@ export class AddOrEditProductionContainer extends React.Component {
             heading={heading}
             products={products}
             boms={boms}
+            routings={routings}
             handleSave={this.handleSave}
             handleCancel={this.handleCancel}
             initialValues={this.props.initialValues}
@@ -92,8 +96,9 @@ export class AddOrEditProductionContainer extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   const productionId = parseInt(ownProps.match.params.id);
-  const products = productsFormattedForDropdown(state.productsReducer.products);
-  const boms = bomsFormattedForDropdown(state.bomsReducer.boms);
+  const products = productsFormattedForDropdown(state);
+  const boms = bomsFormattedForDropdown(state);
+  const routings = routingsFormattedForDropdown(state);
   if (
     productionId &&
     state.selectedProductionReducer.production &&
@@ -102,16 +107,17 @@ const mapStateToProps = (state, ownProps) => {
     return {
       initialValues: state.selectedProductionReducer.production,
       products,
-      boms
+      boms,
+      routings
     };
   } else {
-    return { products, boms };
+    return { products, boms, routings };
   }
 };
 
 const mapDispatchToProps = dispatch => ({
   action: bindActionCreators(
-    { ...productionAction, ...productAction, ...bomAction },
+    { ...productionAction, ...productAction, ...bomAction, ...routingAction },
     dispatch
   )
 });

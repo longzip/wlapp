@@ -2,53 +2,74 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Field, reduxForm } from "redux-form";
 import FieldInput from "../common/FieldInput";
+import SelectInput from "../common/SelectInput";
+import TextareaInput from "../common/TextareaInput";
+import FormSubmitButton from "../common/FormSubmitButton";
 
-export const RoutingWorkcenterForm = ({
+const RoutingWorkcenterForm = ({
   handleSubmit,
   pristine,
   reset,
   submitting,
   heading,
+  workcenters,
   handleSave,
   handleCancel
 }) => {
   return (
-    <form onSubmit={handleSubmit(handleSave)}>
-      <h1>{heading}</h1>
-
-      <Field
-        type="text"
-        name="name"
-        label="Name"
-        placeholder="Name of the course"
-        component={FieldInput}
-      />
-
-      <div>
-        <button type="submit" disabled={submitting} className="btn btn-primary">
-          <i className="fa fa-paper-plane-o" aria-hidden="true" /> Submit
-        </button>
-
-        {heading === "Add" && (
-          <button
-            type="button"
-            disabled={pristine || submitting}
-            onClick={reset}
-            className="btn btn-default btn-space"
-          >
-            Clear Values
-          </button>
-        )}
-
-        <button
-          type="button"
-          className="btn btn-default btn-space"
-          onClick={handleCancel}
-        >
-          Cancel
-        </button>
+    <div className="card card-primary">
+      <div className="card-header">
+        <h3 className="card-title">
+          {heading === "Add"
+            ? "Tạo quy trình sản xuất"
+            : "Sửa quy trình sản xuất"}
+        </h3>
       </div>
-    </form>
+      <form role="form" onSubmit={handleSubmit(handleSave)}>
+        <div className="card-body">
+          <Field
+            type="number"
+            name="sequence"
+            label="Thứ tự"
+            component={FieldInput}
+          />
+
+          <Field
+            type="text"
+            name="name"
+            label="Tên quy trình"
+            placeholder="Name of the course"
+            component={FieldInput}
+          />
+
+          <Field
+            type="text"
+            options={workcenters}
+            name="Workcenter"
+            label="Công đoạn sản xuất"
+            component={SelectInput}
+          />
+
+          <Field
+            type="text"
+            name="note"
+            label="Ghi chú"
+            placeholder="Ghi chú"
+            component={TextareaInput}
+          />
+        </div>
+
+        <div className="card-footer">
+          <FormSubmitButton
+            pristine={pristine}
+            heading={heading}
+            submitting={submitting}
+            reset={reset}
+            handleCancel={handleCancel}
+          />
+        </div>
+      </form>
+    </div>
   );
 };
 

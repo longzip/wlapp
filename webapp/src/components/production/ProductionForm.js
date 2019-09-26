@@ -14,6 +14,7 @@ export const ProductionForm = ({
   heading,
   products,
   boms,
+  routings,
   handleSave,
   handleCancel
 }) => {
@@ -50,6 +51,13 @@ export const ProductionForm = ({
             name="Bom"
             label="Định mức nguyên vật liệu"
             options={boms}
+            component={SelectInput}
+          />
+          <Field
+            type="text"
+            name="Routing"
+            label="Quy trình sản xuất"
+            options={routings}
             component={SelectInput}
           />
           <Field

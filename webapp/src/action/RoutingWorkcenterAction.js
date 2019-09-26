@@ -2,18 +2,19 @@ import * as ActionType from "./ActionType";
 
 import fetchClient from "../api/fetchClient";
 import { ApiCallBeginAction, ApiCallErrorAction } from "./ApiAction";
+import { reset } from "redux-form";
 
-export const getRoutingWorkcentersResponse = RoutingWorkcenters => ({
+export const getRoutingWorkcentersResponse = routingWorkcenters => ({
   type: ActionType.GET_ROUTINGWORKCENTERS_RESPONSE,
-  RoutingWorkcenters
+  routingWorkcenters
 });
 
-export function getRoutingWorkcentersAction() {
+export function getRoutingWorkcentersAction(routingId) {
   return dispatch => {
     dispatch(ApiCallBeginAction());
 
     return fetchClient
-      .get("RoutingWorkcenters")
+      .get("routingWorkcenters?routingId=" + routingId)
       .then(response => {
         dispatch(getRoutingWorkcentersResponse(response.data.result));
       })
@@ -31,17 +32,20 @@ export const updateExistingRoutingWorkcenterResponse = () => ({
   type: ActionType.UPDATE_EXISTING_ROUTINGWORKCENTER_RESPONSE
 });
 
-export function saveRoutingWorkcenterAction(RoutingWorkcenterBeingAddedOrEdited) {
+export function saveRoutingWorkcenterAction(
+  routingWorkcenterBeingAddedOrEdited
+) {
   return function(dispatch) {
     dispatch(ApiCallBeginAction());
-    if (RoutingWorkcenterBeingAddedOrEdited.id) {
+    if (routingWorkcenterBeingAddedOrEdited.id) {
       return fetchClient
         .put(
-          "RoutingWorkcenters/" + RoutingWorkcenterBeingAddedOrEdited.id,
-          RoutingWorkcenterBeingAddedOrEdited
+          "RoutingWorkcenters/" + routingWorkcenterBeingAddedOrEdited.id,
+          routingWorkcenterBeingAddedOrEdited
         )
         .then(() => {
           dispatch(updateExistingRoutingWorkcenterResponse());
+          dispatch(reset("RoutingWorkcenterForm"));
         })
         .catch(error => {
           dispatch(ApiCallErrorAction());
@@ -49,9 +53,10 @@ export function saveRoutingWorkcenterAction(RoutingWorkcenterBeingAddedOrEdited)
         });
     } else {
       return fetchClient
-        .post("RoutingWorkcenters", RoutingWorkcenterBeingAddedOrEdited)
+        .post("RoutingWorkcenters", routingWorkcenterBeingAddedOrEdited)
         .then(() => {
           dispatch(addNewRoutingWorkcenterResponse());
+          dispatch(reset("RoutingWorkcenterForm"));
         })
         .catch(error => {
           dispatch(ApiCallErrorAction());
@@ -61,17 +66,17 @@ export function saveRoutingWorkcenterAction(RoutingWorkcenterBeingAddedOrEdited)
   };
 }
 
-export const getRoutingWorkcenterResponse = RoutingWorkcenterFound => ({
+export const getRoutingWorkcenterResponse = routingWorkcenterFound => ({
   type: ActionType.GET_ROUTINGWORKCENTER_RESPONSE,
-  RoutingWorkcenter: RoutingWorkcenterFound
+  routingWorkcenter: routingWorkcenterFound
 });
 
-export function getRoutingWorkcenterAction(RoutingWorkcenterId) {
+export function getRoutingWorkcenterAction(routingWorkcenterId) {
   return dispatch => {
     dispatch(ApiCallBeginAction());
 
     return fetchClient
-      .get("RoutingWorkcenters/" + RoutingWorkcenterId)
+      .get("routingWorkcenters/" + routingWorkcenterId)
       .then(response => {
         dispatch(getRoutingWorkcenterResponse(response.data.result));
       })
@@ -85,17 +90,17 @@ export const deleteRoutingWorkcenterResponse = () => ({
   type: ActionType.DELETE_ROUTINGWORKCENTER_RESPONSE
 });
 
-export function deleteRoutingWorkcenterAction(RoutingWorkcenterId) {
+export function deleteRoutingWorkcenterAction(routingWorkcenterId) {
   return dispatch => {
     dispatch(ApiCallBeginAction());
 
     return fetchClient
-      .delete("RoutingWorkcenters/" + RoutingWorkcenterId)
+      .delete("routingWorkcenters/" + routingWorkcenterId)
       .then(() => {
         dispatch(deleteRoutingWorkcenterResponse());
       })
       .then(() => {
-        dispatch(getRoutingWorkcentersAction());
+        // dispatch(getRoutingWorkcentersAction());
       })
       .catch(error => {
         throw error;

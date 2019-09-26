@@ -401,12 +401,16 @@ sequelize
         RoutingId: 1,
         WorkcenterId: 5
       }
-    ]);
+    ]).then(() => {
+      db.RoutingWorkcenter.findAll().then(res => {
+        console.log(res.dataValues());
+      });
+    });
   })
   .then(() => {
     //Workorder
-    db.RoutingWorkcenter.findAll().then(routingWorkcenter => {
-      console.log(routingWorkcenter);
+    db.RoutingWorkcenter.findAll().then(res => {
+      console.log(res);
     });
   });
 

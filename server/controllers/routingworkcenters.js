@@ -6,9 +6,9 @@ const moment = require("moment");
 function validate(data) {
   const schema = {
     name: Joi.string(),
-    workcenterId: Joi.number(),
+    WorkcenterId: Joi.number(),
     sequence: Joi.number(),
-    routingId: Joi.number(),
+    RoutingId: Joi.number(),
     note: Joi.string(),
     worksheet: Joi.string(),
     active: Joi.boolean()
@@ -143,25 +143,14 @@ module.exports = {
     RoutingWorkcenter.findAll({
       offset: req.query.offset || 0,
       limit: req.query.limit || 0,
-      where: req.query.name
+      where: req.query.routingId
         ? {
-            [Op.and]: [
-              {
-                name: {
-                  [Op.like]: "%" + req.query.name + "%"
-                },
-                createdAt: {
-                  [Op.lte]:
-                    moment(req.query.dateFinished).endOf("day") || moment(),
-                  [Op.gte]:
-                    moment(req.query.dateStart).startOf("day") ||
-                    moment("2019-08-29")
-                }
-              }
-            ]
+            RoutingId: {
+              [Op.like]: req.query.routingId
+            }
           }
         : {},
-      order: req.query.sort ? req.query.sort : [["createdAt", "DESC"]]
+      order: req.query.sort ? req.query.sort : [["sequence", "ASC"]]
     })
       .then(uoms => {
         // uoms will be an array of all Uom instances
