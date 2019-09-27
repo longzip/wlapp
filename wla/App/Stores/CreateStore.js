@@ -1,5 +1,7 @@
 import { applyMiddleware, compose, createStore } from 'redux'
 import createSagaMiddleware from 'redux-saga'
+// import logger from 'redux-logger'
+import { createLogger } from 'redux-logger'
 import { persistReducer, persistStore } from 'redux-persist'
 
 /**
@@ -31,6 +33,7 @@ export default (rootReducer, rootSaga) => {
   // Connect the sagas to the redux store
   const sagaMiddleware = createSagaMiddleware()
   middleware.push(sagaMiddleware)
+  middleware.push(createLogger({}))
 
   enhancers.push(applyMiddleware(...middleware))
 

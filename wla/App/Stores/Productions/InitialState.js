@@ -1,5 +1,5 @@
 export const INITIAL_STATE = {
-  productions: {},
+  productions: [],
   productionsIsLoading: false,
   productionsErrorMessage: null,
 }
