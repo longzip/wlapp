@@ -1,4 +1,9 @@
-import { createAppContainer, createStackNavigator, createDrawerNavigator, createSwitchNavigator } from 'react-navigation'
+import {
+  createAppContainer,
+  createStackNavigator,
+  createDrawerNavigator,
+  createSwitchNavigator,
+} from 'react-navigation'
 
 import ExampleScreen from 'App/Containers/Example/ExampleScreen'
 import SplashScreen from 'App/Containers/SplashScreen/SplashScreen'
@@ -6,6 +11,7 @@ import SignInScreen from 'App/Containers/Authentication/SignInScreen'
 import SignOutScreen from 'App/Containers/Authentication/SignOutScreen'
 import AuthLoadingScreen from 'App/Containers/Authentication/AuthLoadingScreen'
 import ProductsScreen from 'App/Containers/Product/ProductsScreen'
+import ProductionsScreen from 'App/Containers/Productions//ProductionsScreen'
 /**
  * The root screen contains the application's navigation.
  *
@@ -18,7 +24,7 @@ const StackNavigator = createStackNavigator(
     SplashScreen: SplashScreen,
     // The main application screen is our "ExampleScreen". Feel free to replace it with your
     // own screen and remove the example.
-    MainScreen: ExampleScreen,
+    MainScreen: ProductionsScreen,
   },
   {
     // By default the application will show the splash screen
@@ -28,37 +34,43 @@ const StackNavigator = createStackNavigator(
   }
 )
 
-const MyDrawerNavigator = createDrawerNavigator({
-  Home: {
-    screen: StackNavigator,
-  },
-  Notifications: {
-    screen: ExampleScreen,
-  },
-  Products :{
-    screen: ProductsScreen,
-  },
-  Exit: {
-    screen: SignOutScreen,
-  }
-},
-{
-
-  drawerOpenRoute: 'DrawerOpen',
-  drawerCloseRoute: 'DrawerClose',
-  drawerToggleRoute: 'DrawerToggle'
-});
-
-const AppStack = createStackNavigator({ Home: MyDrawerNavigator, Other: ExampleScreen });
-const AuthStack = createStackNavigator({ SignIn: SignInScreen }, { headerMode: 'none' });
-
-export default createAppContainer(createSwitchNavigator(
+const MyDrawerNavigator = createDrawerNavigator(
   {
-    AuthLoading: AuthLoadingScreen,
-    App: MyDrawerNavigator,
-    Auth: AuthStack,
+    Home: {
+      screen: StackNavigator,
+    },
+    Notifications: {
+      screen: ExampleScreen,
+    },
+    Products: {
+      screen: ProductsScreen,
+    },
+    Productions: {
+      screen: ProductionsScreen,
+    },
+    Exit: {
+      screen: SignOutScreen,
+    },
   },
   {
-    initialRouteName: 'AuthLoading',
+    drawerOpenRoute: 'DrawerOpen',
+    drawerCloseRoute: 'DrawerClose',
+    drawerToggleRoute: 'DrawerToggle',
   }
-))
+)
+
+const AppStack = createStackNavigator({ Home: MyDrawerNavigator, Other: ExampleScreen })
+const AuthStack = createStackNavigator({ SignIn: SignInScreen }, { headerMode: 'none' })
+
+export default createAppContainer(
+  createSwitchNavigator(
+    {
+      AuthLoading: AuthLoadingScreen,
+      App: MyDrawerNavigator,
+      Auth: AuthStack,
+    },
+    {
+      initialRouteName: 'AuthLoading',
+    }
+  )
+)
