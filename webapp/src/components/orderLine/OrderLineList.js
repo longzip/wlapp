@@ -2,12 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 const formatter = new Intl.NumberFormat("vi");
-const contactFormatter = (cell, row) => {
-  return `<a href=/sales/contact/${cell.id}>${cell.name +
-    "-" +
-    cell.description}</a>`;
+const titleFormatter = (cell, row) => {
+  return `<a href=/sales/order-line/${row.id}/detail>${cell}</a>`;
 };
-const productFormatter = (cell, row) => {
+const productFormatter = cell => {
   if (cell) return cell.name;
   return;
 };
@@ -71,7 +69,9 @@ class OrderLineList extends React.Component {
           Tên sản phẩm
         </TableHeaderColumn>
 
-        <TableHeaderColumn dataField="productSpec">Spec</TableHeaderColumn>
+        <TableHeaderColumn dataField="productSpec" dataFormat={titleFormatter}>
+          Spec
+        </TableHeaderColumn>
 
         <TableHeaderColumn dataField="productDimension">
           Kích thước

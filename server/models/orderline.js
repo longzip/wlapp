@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   OrderLine.associate = function(models) {
     OrderLine.belongsTo(models.Order);
     OrderLine.belongsTo(models.Product);
+    OrderLine.belongsTo(models.Contact);
   };
   return OrderLine;
 };

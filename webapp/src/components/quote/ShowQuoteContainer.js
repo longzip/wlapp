@@ -98,7 +98,8 @@ export class ShowQuoteContainer extends React.Component {
       note: values.note,
       state: values.state,
       OrderId: this.props.initialValues.id,
-      ProductId: values.product.value
+      ProductId: values.product.value,
+      ContactId: this.props.initialValues.Contact.id
     };
 
     this.props.action

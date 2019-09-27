@@ -62,7 +62,7 @@ export class MenuContainer extends React.Component {
                 </NavLink>
               </li>
 
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <NavLink
                   activeClassName="active"
                   to="/sales/contacts"
@@ -71,9 +71,9 @@ export class MenuContainer extends React.Component {
                   <i className="fab fa-delicious nav-icon" />
                   <p>Dự án</p>
                 </NavLink>
-              </li>
+              </li> */}
 
-              {/* <li className="nav-item has-treeview">
+              <li className="nav-item has-treeview">
                 <NavLink
                   activeClassName="active"
                   to="/sales"
@@ -81,7 +81,7 @@ export class MenuContainer extends React.Component {
                 >
                   <i className="nav-icon fab fa-delicious" />
                   <p>
-                    Dự án
+                    Bán hàng
                     <i className="right fas fa-angle-left" />
                   </p>
                 </NavLink>
@@ -117,7 +117,7 @@ export class MenuContainer extends React.Component {
                     </NavLink>
                   </li>
                 </ul>
-              </li> */}
+              </li>
 
               <li className="nav-item has-treeview">
                 <NavLink

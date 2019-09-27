@@ -19,9 +19,11 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   Production.associate = function(models) {
-    Production.belongsTo(models.Product);
+    Production.belongsTo(models.OrderLine);
+    Production.belongsTo(models.Contact);
     Production.belongsTo(models.Bom);
     Production.belongsTo(models.Routing);
+    Production.belongsTo(models.Product);
   };
   return Production;
 };

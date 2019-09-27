@@ -401,17 +401,23 @@ sequelize
         RoutingId: 1,
         WorkcenterId: 5
       }
-    ]).then(() => {
-      db.RoutingWorkcenter.findAll().then(res => {
-        console.log(res.dataValues());
-      });
-    });
-  })
-  .then(() => {
-    //Workorder
-    db.RoutingWorkcenter.findAll().then(res => {
-      console.log(res);
-    });
+    ]);
+    db.OrderLine.bulkCreate([
+      {
+        id: 1,
+        name: null,
+        productDimension: "23x23x23",
+        productSpec: "Cánh phải",
+        productUom: "Kiện",
+        productUomQty: 120,
+        productPrice: 24500000,
+        state: null,
+        note: null,
+        OrderId: 1,
+        ProductId: 1,
+        ContactId: 1
+      }
+    ]);
   });
 
 db.sequelize = sequelize;

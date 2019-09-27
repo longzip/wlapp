@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": "https://4w-rma.anonymous.wla.exp.direct",
-  "packagerNgrokUrl": "https://packager.4w-rma.anonymous.wla.exp.direct",
-  "ngrokPid": 161
+  "packagerPort": 19001,
+  "packagerPid": 13768,
+  "expoServerNgrokUrl": "https://us-i4a.anonymous.wla.exp.direct",
+  "packagerNgrokUrl": "https://packager.us-i4a.anonymous.wla.exp.direct",
+  "ngrokPid": 15288
 }

@@ -1,4 +1,4 @@
-const { Production, Product, Bom } = require("../models/index");
+const { Production, Contact, OrderLine } = require("../models/index");
 const Joi = require("@hapi/joi");
 const { Op } = require("sequelize");
 const moment = require("moment");
@@ -18,7 +18,9 @@ function validate(data) {
     availability: Joi.string(),
     ProductId: Joi.number(),
     BomId: Joi.number(),
-    RoutingId: Joi.number()
+    RoutingId: Joi.number(),
+    OrderLineId: Joi.number(),
+    ContactId: Joi.number()
   };
   return Joi.validate(data, schema);
 }
@@ -74,7 +76,14 @@ module.exports = {
     let result = {};
     let status = 200;
 
-    Production.findByPk(req.params.id)
+    Production.findOne({
+      include: [{ model: OrderLine }, { model: Contact }],
+      where: {
+        id: {
+          [Op.like]: req.params.id
+        }
+      }
+    })
       .then(item => {
         result.status = status;
         result.result = item;
@@ -148,7 +157,7 @@ module.exports = {
     console.log(req.query.name);
     // find multiple entries
     Production.findAll({
-      include: [{ model: Product }, { model: Bom }],
+      include: [{ model: OrderLine }, { model: Contact }],
       offset: req.query.offset || 0,
       limit: req.query.limit || 0,
       where: req.query.name

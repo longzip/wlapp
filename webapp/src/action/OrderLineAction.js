@@ -62,17 +62,17 @@ export function saveOrderLineAction(OrderLineBeingAddedOrEdited) {
   };
 }
 
-export const getOrderLineResponse = OrderLineFound => ({
+export const getOrderLineResponse = orderLineFound => ({
   type: ActionType.GET_ORDERLINE_RESPONSE,
-  orderLine: OrderLineFound
+  orderLine: orderLineFound
 });
 
-export function getOrderLineAction(OrderLineId) {
+export function getOrderLineAction(orderLineId) {
   return dispatch => {
     dispatch(ApiCallBeginAction());
 
     return fetchClient
-      .get("OrderLines/" + OrderLineId)
+      .get("orderLines/" + orderLineId)
       .then(response => {
         dispatch(getOrderLineResponse(response.data.result));
       })

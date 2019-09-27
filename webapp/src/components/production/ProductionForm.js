@@ -6,7 +6,7 @@ import SelectInput from "../common/SelectInput";
 import FormSubmitButton from "../common/FormSubmitButton";
 import DatePicker, { formatDates, normalizeDates } from "../common/Datepicker";
 
-export const ProductionForm = ({
+const ProductionForm = ({
   handleSubmit,
   pristine,
   reset,
@@ -21,7 +21,7 @@ export const ProductionForm = ({
   return (
     <div className="card card-primary">
       <div className="card-header">
-        <h3 className="card-title">Thêm lệnh sản xuất</h3>
+        <h3 className="card-title">Thêm</h3>
       </div>
       <form role="form" onSubmit={handleSubmit(handleSave)}>
         <div className="card-body">
@@ -32,13 +32,13 @@ export const ProductionForm = ({
             placeholder="Lệnh sản xuất số"
             component={FieldInput}
           />
-          <Field
+          {/* <Field
             type="text"
             name="origin"
             label="Nguồn"
             placeholder=""
             component={FieldInput}
-          />
+          /> */}
           <Field
             type="text"
             name="Product"
@@ -46,13 +46,13 @@ export const ProductionForm = ({
             options={products}
             component={SelectInput}
           />
-          <Field
+          {/* <Field
             type="text"
             name="Bom"
             label="Định mức nguyên vật liệu"
             options={boms}
             component={SelectInput}
-          />
+          /> */}
           <Field
             type="text"
             name="Routing"
@@ -73,7 +73,7 @@ export const ProductionForm = ({
             component={DatePicker}
             parse={normalizeDates}
             format={formatDates}
-            label="Hạn chót để Hoàn thành"
+            label="Hạn chót để sản xuất"
           />
         </div>
         <div className="card-footer">

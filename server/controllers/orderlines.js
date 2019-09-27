@@ -1,7 +1,6 @@
-const { OrderLine, Product } = require("../models/index");
+const { OrderLine, Product, Contact, Order } = require("../models/index");
 const Joi = require("@hapi/joi");
 const { Op } = require("sequelize");
-const moment = require("moment");
 
 function validate(data) {
   const schema = {
@@ -14,6 +13,7 @@ function validate(data) {
     note: Joi.string(),
     state: Joi.string(),
     OrderId: Joi.number(),
+    ContactId: Joi.number(),
     ProductId: Joi.number()
   };
   return Joi.validate(data, schema);
@@ -70,7 +70,24 @@ module.exports = {
     let result = {};
     let status = 200;
 
-    OrderLine.findByPk(req.params.id)
+    OrderLine.findOne({
+      include: [
+        {
+          model: Product
+        },
+        {
+          model: Contact
+        },
+        {
+          model: Order
+        }
+      ],
+      where: {
+        id: {
+          [Op.like]: req.params.id
+        }
+      }
+    })
       .then(item => {
         result.status = status;
         result.result = item;
@@ -144,6 +161,12 @@ module.exports = {
       include: [
         {
           model: Product
+        },
+        {
+          model: Contact
+        },
+        {
+          model: Order
         }
       ],
       where: req.query.orderId
