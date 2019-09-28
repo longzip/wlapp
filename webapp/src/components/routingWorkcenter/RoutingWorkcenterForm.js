@@ -25,7 +25,7 @@ const RoutingWorkcenterForm = ({
             : "Sửa quy trình sản xuất"}
         </h3>
       </div>
-      <form role="form" onSubmit={handleSubmit(handleSave)}>
+      <form onSubmit={handleSubmit(handleSave)}>
         <div className="card-body">
           <Field
             type="number"

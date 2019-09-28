@@ -3,16 +3,9 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import toastr from "toastr";
-import * as productAction from "../../action/ProductAction";
+import * as productionAction from "../../action/ProductionAction";
 import * as workorderAction from "../../action/WorkorderAction";
-import ProductionForm from "../production/ProductionForm";
-import ProductionList from "../production/ProductionList";
-import {
-  productsFormattedForDropdown,
-  bomsFormattedForDropdown,
-  routingsFormattedForDropdown
-} from "../../selectors/selectors";
-import ListButton from "../common/ListButton";
+import * as routingWorkcenterAction from "../../action/RoutingWorkcenterAction";
 
 export class ProductionDetailContainer extends Component {
   constructor(props) {
@@ -21,110 +14,29 @@ export class ProductionDetailContainer extends Component {
       selectedProductionId: undefined,
       showAdd: true
     };
-    this.handleRowSelect = this.handleRowSelect.bind(this);
-    this.handleSaveProduction = this.handleSaveProduction.bind(this);
-    this.handleCancel = this.handleCancel.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
+    // this.handleRowSelect = this.handleRowSelect.bind(this);
+    // this.handleSaveProduction = this.handleSaveProduction.bind(this);
+    // this.handleCancel = this.handleCancel.bind(this);
+    // this.handleDelete = this.handleDelete.bind(this);
   }
   componentDidMount() {
     let id = this.props.match.params.id;
-    const {
-      getOrderLineAction,
-      getProductionsAction,
-      getRoutingsAction,
-      getProductsAction
-    } = this.props.action;
+    const { getProductionAction } = this.props.action;
     if (id) {
-      getOrderLineAction(id).catch(error => {
-        toastr.error(error);
-      });
-      getProductionsAction(id).catch(error => {
-        toastr.error(error);
-      });
-      getRoutingsAction().catch(error => {
-        toastr.error(error);
-      });
-      getProductsAction().catch(error => {
+      getProductionAction(id).catch(error => {
         toastr.error(error);
       });
     }
-    console.log(this.props);
-  }
-  handleSaveProduction(values) {
-    const production = {
-      id: values.id,
-      name: values.name,
-      origin: values.origin,
-      productQty: values.productQty,
-      productUom: values.productUom,
-      datePlannedStart: values.datePlannedStart,
-      datePlannedFinished: values.datePlannedFinished,
-      dateStart: values.dateStart,
-      dateFinished: values.dateFinished,
-      priority: values.priority,
-      state: values.state,
-      availability: values.availability,
-      ProductId: values.Product.value,
-      BomId: values.Bom ? values.Bom.value : undefined,
-      RoutingId: values.Routing.value,
-      OrderLineId: this.props.orderLine.id,
-      ContactId: this.props.orderLine.ContactId
-    };
-
-    this.props.action
-      .saveProductionAction(production)
-      .then(() => {
-        toastr.success("Đã lưu thành công");
-        // this.props.history.push("/mrp/productions");
-        this.props.action
-          .getProductionsAction(this.props.orderLine.id)
-          .catch(error => {
-            toastr.error(error);
-          });
-        this.props.action.resetForm();
-      })
-      .catch(error => {
-        toastr.error(error);
-      });
   }
 
-  handleCancel(event) {
-    event.preventDefault();
-    this.props.history.replace("/mrp/productions");
-  }
-
-  handleRowSelect(row, isSelected) {
-    if (isSelected) {
-      this.setState({ selectedProductionId: row.id });
-      //   toastr.error(row.id);
-    }
-  }
-  handleCancel() {
-    this.setState({
-      showAdd: !this.state.showAdd
-    });
-  }
-  handleDelete() {
-    const selectedProductionId = this.state.selectedProductionId;
-    const { orderLine } = this.props;
-    if (selectedProductionId) {
-      this.setState({ selectedProductionId: undefined });
-      this.props.action
-        .deleteProductionAction(selectedProductionId)
-        .then(() => {
-          this.props.action.getProductionsAction(orderLine.id);
-          toastr.success("Đã xóa");
-        })
-        .catch(error => {
-          toastr.error(error);
-        });
-    }
-  }
   render() {
-    const { production, workorders } = this.props;
-    // console.log(orderLine);
+    console.log("props kdkfjksjdkfjskdfjksd");
+    console.log(this.props.production);
+    const { production } = this.props;
+    if (!production)
+      return <div className="content-wrapper">Đang tải dữ liệu</div>;
     return (
-      <div className="content-wrapper">
+      <div>
         <section className="content">
           <div className="card">
             <div className="card-header">
@@ -133,58 +45,27 @@ export class ProductionDetailContainer extends Component {
             <div className="card-body">
               <div className="row">
                 <div className="col-12 col-md-12 col-lg-8 order-2 order-md-1">
-                  {productions && (
-                    <div className="card">
-                      <div className="card-header">
-                        <h3 className="card-title">Chi tiết sản phẩm</h3>
-                      </div>
-
-                      <div className="card-body p-0">
-                        {/* <ProductionList
-                          productions={productions}
-                          handleRowSelect={this.handleRowSelect}
-                        /> */}
-                      </div>
-                      <div className="card-footer clearfix">
-                        {/* <ListButton
-                          handleAdd={this.handleCancel}
-                          handleDelete={this.handleDelete}
-                          handleEdit={this.handleEditQuote}
-                        /> */}
-                      </div>
-                    </div>
-                  )}
-                  {/* {this.state.showAdd && (
-                    <ProductionForm
-                      heading="Add"
-                      products={products}
-                      boms={boms}
-                      routings={routings}
-                      handleSave={this.handleSaveProduction}
-                      handleCancel={this.handleCancel}
-                      initialValues={null}
-                    />
-                  )} */}
+                  hello
                 </div>
-                {production && (
-                  <div className="col-12 col-md-12 col-lg-4 order-1 order-md-2">
-                    <h3 className="text-primary">{production.name}</h3>
-                    <p className="lead">{production.state}</p>
-                    <br></br>
-                    <div className="text-muted">
-                      <p className="text-sm">
-                        <h3>Sản phẩm</h3>
-                        <b className="d-block">{production.productDimension}</b>
-                        <b className="d-block">{production.productQty}</b>
-                        <b className="d-block">{production.productUom}</b>
-                        <b className="d-block">
-                          {orderLine.Contact.addressLine}
-                        </b>
-                        <b className="d-block">{orderLine.Contact.city}</b>
-                      </p>
-                    </div>
+                <div className="col-12 col-md-12 col-lg-4 order-1 order-md-2">
+                  <h3 className="text-primary">{production.name}</h3>
+                  <p className="lead">{production.state}</p>
+                  <br></br>
+                  <div className="text-muted">
+                    <p className="text-sm">
+                      Sản phẩm
+                      <b className="d-block">{production.productDimension}</b>
+                      <b className="d-block">{production.productQty}</b>
+                      <b className="d-block">{production.productUom}</b>
+                      <b className="d-block">
+                        {production.Contact && production.Contact.addressLine}
+                      </b>
+                      <b className="d-block">
+                        {production.Contact && production.Contact.city}
+                      </b>
+                    </p>
                   </div>
-                )}
+                </div>
               </div>
             </div>
           </div>
@@ -196,14 +77,16 @@ export class ProductionDetailContainer extends Component {
 const mapStateToProps = (state, ownProps) => {
   const productionId = parseInt(ownProps.match.params.id);
   const workorders = state.workordersReducer.productions;
+  const routingWorkcenters = state.routingWorkcentersReducer.routingWorkcenters;
   if (
     productionId &&
-    state.selectedOrderLineReducer.orderLine &&
-    productionId === state.selectedOrderLineReducer.orderLine.id
+    state.selectedProductionReducer.production &&
+    productionId === state.selectedProductionReducer.production.id
   ) {
     return {
       production: state.selectedProductionReducer.production,
-      workorders
+      workorders,
+      routingWorkcenters
     };
   } else {
     return {};
@@ -214,7 +97,8 @@ const mapDispatchToProps = dispatch => ({
   action: bindActionCreators(
     {
       ...productionAction,
-      ...workorderAction
+      ...workorderAction,
+      ...routingWorkcenterAction
     },
     dispatch
   )

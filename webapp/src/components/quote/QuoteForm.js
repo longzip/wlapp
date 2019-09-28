@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Field, reduxForm } from "redux-form";
 import FieldInput from "../common/FieldInput";
-import SelectInput from "../common/SelectInput";
 import DatePicker, { formatDates, normalizeDates } from "../common/Datepicker";
 import FormSubmitButton from "../common/FormSubmitButton";
 
@@ -24,7 +23,7 @@ const QuoteForm = ({
           {heading === "Add" ? "Tạo báo giá" : "Sửa báo giá"}
         </h3>
       </div>
-      <form role="form" onSubmit={handleSubmit(handleSave)}>
+      <form onSubmit={handleSubmit(handleSave)}>
         <div className="card-body">
           <Field
             type="text"

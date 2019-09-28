@@ -2,7 +2,6 @@ import React from "react";
 import * as PropTypes from "prop-types";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 import dateFormat from "../common/MyFormat";
-import { WSATYPE_NOT_FOUND } from "constants";
 
 function titleFormatter(cell, row) {
   return `<a href="/mrp/production/${row.id}/detail" > ${cell} </a>`;

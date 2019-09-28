@@ -22,7 +22,7 @@ export const BomForm = ({
       <div className="card-header">
         <h3 className="card-title">Thêm định mức nguyên vật liệu</h3>
       </div>
-      <form role="form" onSubmit={handleSubmit(handleSave)}>
+      <form onSubmit={handleSubmit(handleSave)}>
         <div className="card-body">
           {heading === "Add" && (
             <Field

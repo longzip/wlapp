@@ -31,6 +31,7 @@ import AddOrEditOrderLineContainer from "./orderLine/AddOrEditOrderLineContainer
 import ProductCategoryListContainer from "./productCategory/ProductCategoryListContainer";
 import AddOrEditProductCategoryContainer from "./productCategory/AddOrEditProductCategoryContainer";
 import ProductionListContainer from "./production/ProductionListContainer";
+import ProductionDetailContainer from "./production/ProductionDetailContainer";
 import AddOrEditProductionContainer from "./production/AddOrEditProductionContainer";
 import RoutingListContainer from "./routing/RoutingListContainer";
 import RoutingDetailContainer from "./routing/RoutingDetailContainer";
@@ -263,6 +264,11 @@ export class App extends React.Component {
               exact
               path="/mrp/production"
               component={AddOrEditProductionContainer}
+            />
+            <PrivateRoute
+              authed={userAuth}
+              path="/mrp/production/:id/detail"
+              component={ProductionDetailContainer}
             />
             <PrivateRoute
               authed={userAuth}

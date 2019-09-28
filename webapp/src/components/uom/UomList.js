@@ -1,8 +1,6 @@
 import React from "react";
 import * as PropTypes from "prop-types";
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
-import getCaret from "../common/GetCaret";
-import dateFormat from "../common/MyFormat";
 
 class UomList extends React.Component {
   constructor(props) {

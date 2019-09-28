@@ -23,7 +23,7 @@ const ProductionForm = ({
       <div className="card-header">
         <h3 className="card-title">Thêm</h3>
       </div>
-      <form role="form" onSubmit={handleSubmit(handleSave)}>
+      <form onSubmit={handleSubmit(handleSave)}>
         <div className="card-body">
           <Field
             type="text"

@@ -76,7 +76,7 @@ export class ShowBomContainer extends React.Component {
 
   render() {
     const { initialValues, bomLines } = this.props;
-    const heading = initialValues && initialValues.id ? "Edit" : "Add";
+
     return (
       <div className="content-wrapper">
         <div className="container">

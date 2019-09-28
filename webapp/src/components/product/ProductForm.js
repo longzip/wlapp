@@ -21,7 +21,7 @@ export const ProductForm = ({
       <div className="card-header">
         <h3 className="card-title">Thêm sản phẩm</h3>
       </div>
-      <form role="form" onSubmit={handleSubmit(handleSave)}>
+      <form onSubmit={handleSubmit(handleSave)}>
         <div className="card-body">
           <Field
             type="text"
