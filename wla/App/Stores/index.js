@@ -3,6 +3,7 @@ import configureStore from './CreateStore'
 import rootSaga from 'App/Sagas'
 import { reducer as ExampleReducer } from './Example/Reducers'
 import { reducer as ProductionsReducer } from './Productions/Reducers'
+import { reducer as SelectedProductionReducer } from './SelectedProduction/Reducers'
 
 export default () => {
   const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ export default () => {
      */
     example: ExampleReducer,
     productions: ProductionsReducer,
+    selectedProduction: SelectedProductionReducer,
   })
 
   return configureStore(rootReducer, rootSaga)

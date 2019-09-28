@@ -8,24 +8,42 @@ const isWithin = curryN(3, (min, max, value) => {
 const in200s = isWithin(200, 299)
 
 function fetchProductions() {
-  // Simulate an error 50% of the time just for testing purposes
-  // if (Math.random() > 0.5) {
-  //   return new Promise(function(resolve, reject) {
-  //     resolve(null)
-  //   })
-  // }
-
-  // let number = Math.floor(Math.random() / 0.1) + 1
-
-  return apiClient.get('products').then((response) => {
+  return apiClient.get('productions').then((response) => {
     if (in200s(response.status)) {
       return response.data.result
     }
+    return null
+  })
+}
 
+function fetchProduction(id) {
+  return apiClient.get(`productions/${id}`).then((response) => {
+    if (in200s(response.status)) {
+      return response.data.result
+    }
+    return null
+  })
+}
+
+function saveProduction(production) {
+  if (production.id)
+    return apiClient.put(`productions/${production.id}`).then((response) => {
+      if (in200s(response.status)) {
+        return response.data.result
+      }
+      return null
+    })
+
+  return apiClient.post('productions', production).then((response) => {
+    if (in200s(response.status)) {
+      return response.data.result
+    }
     return null
   })
 }
 
 export const productionsService = {
   fetchProductions,
+  fetchProduction,
+  saveProduction,
 }

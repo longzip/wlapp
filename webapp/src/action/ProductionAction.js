@@ -31,14 +31,14 @@ export const updateExistingProductionResponse = () => ({
   type: ActionType.UPDATE_EXISTING_PRODUCTION_RESPONSE
 });
 
-export function saveProductionAction(ProductionBeingAddedOrEdited) {
+export function saveProductionAction(productionBeingAddedOrEdited) {
   return function(dispatch) {
     dispatch(ApiCallBeginAction());
-    if (ProductionBeingAddedOrEdited.id) {
+    if (productionBeingAddedOrEdited.id) {
       return fetchClient
         .put(
-          "Productions/" + ProductionBeingAddedOrEdited.id,
-          ProductionBeingAddedOrEdited
+          "Productions/" + productionBeingAddedOrEdited.id,
+          productionBeingAddedOrEdited
         )
         .then(() => {
           dispatch(updateExistingProductionResponse());
@@ -49,7 +49,7 @@ export function saveProductionAction(ProductionBeingAddedOrEdited) {
         });
     } else {
       return fetchClient
-        .post("Productions", ProductionBeingAddedOrEdited)
+        .post("Productions", productionBeingAddedOrEdited)
         .then(() => {
           dispatch(addNewProductionResponse());
         })

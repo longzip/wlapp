@@ -11,7 +11,8 @@ import SignInScreen from 'App/Containers/Authentication/SignInScreen'
 import SignOutScreen from 'App/Containers/Authentication/SignOutScreen'
 import AuthLoadingScreen from 'App/Containers/Authentication/AuthLoadingScreen'
 import ProductsScreen from 'App/Containers/Product/ProductsScreen'
-import ProductionsScreen from 'App/Containers/Productions//ProductionsScreen'
+import ProductionsScreen from 'App/Containers/Productions/ProductionsScreen'
+import ProductionDetailScreen from 'App/Containers/ProductionDetail/ProductionDetailScreen'
 /**
  * The root screen contains the application's navigation.
  *
@@ -25,25 +26,21 @@ const StackNavigator = createStackNavigator(
     // The main application screen is our "ExampleScreen". Feel free to replace it with your
     // own screen and remove the example.
     MainScreen: ProductionsScreen,
+    ProductionsScreen: ProductionsScreen,
+    ProductionDetailScreen: ProductionDetailScreen,
   },
   {
     // By default the application will show the splash screen
-    initialRouteName: 'MainScreen',
+    initialRouteName: 'SplashScreen',
     // See https://reactnavigation.org/docs/en/stack-navigator.html#stacknavigatorconfig
-    headerMode: 'none',
+    // headerMode: 'none',
   }
 )
 
-const MyDrawerNavigator = createDrawerNavigator(
+const AppStack = createDrawerNavigator(
   {
     Home: {
       screen: StackNavigator,
-    },
-    Notifications: {
-      screen: ExampleScreen,
-    },
-    Products: {
-      screen: ProductsScreen,
     },
     Productions: {
       screen: ProductionsScreen,
@@ -59,14 +56,13 @@ const MyDrawerNavigator = createDrawerNavigator(
   }
 )
 
-const AppStack = createStackNavigator({ Home: MyDrawerNavigator, Other: ExampleScreen })
 const AuthStack = createStackNavigator({ SignIn: SignInScreen }, { headerMode: 'none' })
 
 export default createAppContainer(
   createSwitchNavigator(
     {
       AuthLoading: AuthLoadingScreen,
-      App: MyDrawerNavigator,
+      App: AppStack,
       Auth: AuthStack,
     },
     {

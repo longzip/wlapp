@@ -7,6 +7,8 @@ import {
   AsyncStorage,
   ScrollView,
   TouchableOpacity,
+  Alert,
+  Platform,
 } from 'react-native'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
@@ -14,29 +16,20 @@ import ProductionsActions from 'App/Stores/Productions/Actions'
 import Style from './ProductionsScreenStyle'
 
 class ProductionsScreen extends React.Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: 'Lệnh sản xuất',
+    }
+  }
   constructor() {
     super()
-
-    this.tmpArray = [
-      { name: 'Pankaj', age: 10, class: 'M.C.A' },
-      { name: 'Rita', age: 11, class: 'B.C.A' },
-      { name: 'Mohan', age: 12, class: 'M.C.A' },
-      { name: 'Amit', age: 13, class: 'M.C.A' },
-      { name: 'Babulal', age: 14, class: 'B.TECH' },
-      { name: 'Mohit', age: 15, class: 'B.C.A' },
-      { name: 'Amit', age: 16, class: 'B.C.A' },
-      { name: 'Ramkishan', age: 17, class: 'B.C.A' },
-      { name: 'Gopal', age: 18, class: 'B.C.A' },
-      { name: 'Jogesh', age: 19, class: 'B.C.A' },
-      { name: 'Yogesh', age: 20, class: 'B.C.A' },
-    ]
   }
   componentDidMount() {
     this._fetchProductions()
   }
 
   showArrayItem = (item) => {
-    Alert.alert(item)
+    this.props.navigation.navigate('ProductionDetailScreen', { id: item.id })
   }
 
   render() {
@@ -52,30 +45,20 @@ class ProductionsScreen extends React.Component {
             ) : (
               <View>
                 <ScrollView>
-                  {this.tmpArray.map((item, key) => (
-                    <TouchableOpacity key={key} onPress={this.showArrayItem.bind(this, item.name)}>
-                      <Text style={Style.result}> Name = {item.name} </Text>
+                  {this.props.productions.map((item, key) => (
+                    <TouchableOpacity key={key} onPress={this.showArrayItem.bind(this, item)}>
+                      <Text style={Style.result}> {item.name} </Text>
 
-                      <Text style={Style.result}> Age = {item.age} </Text>
+                      <Text style={Style.result}> Số lượng = {item.productQty} </Text>
 
-                      <Text style={Style.result}> Class = {item.class} </Text>
+                      <Text style={Style.result}> Đơn vị: {item.productUom} </Text>
 
                       <View style={{ width: '100%', height: 1, backgroundColor: '#000' }} />
                     </TouchableOpacity>
                   ))}
                 </ScrollView>
-                {/* <Text style={Style.result}>
-                  {"I'm a fake user, my name is fd"}
-                  {this.props.user.name}
-                </Text>
-                <Text style={Style.result}>
-                  {this.props.liveInEurope ? 'I live in Europe !' : "I don't live in Europe."}
-                </Text> */}
               </View>
             )}
-            <Button onPress={() => this._fetchProductions()} title="Refresh" />
-
-            <Button title="Actually, sign me out :)" onPress={this._signOutAsync} />
           </View>
         )}
       </View>

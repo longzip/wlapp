@@ -1,8 +1,25 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, Alert, ScrollView, Platform, TouchableOpacity } from 'react-native'
+import {
+  StyleSheet,
+  Text,
+  View,
+  Alert,
+  ScrollView,
+  Platform,
+  TouchableOpacity,
+  Button,
+} from 'react-native'
 import { connect } from 'react-redux'
 
 export class ProductsScreen extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: 'Sản phẩm',
+      headerRight: (
+        <Button onPress={null} title="+1" color={Platform.OS === 'ios' ? '#fff' : null} />
+      ),
+    }
+  }
   constructor() {
     super()
 

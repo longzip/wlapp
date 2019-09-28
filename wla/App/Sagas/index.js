@@ -1,10 +1,11 @@
-import { takeLatest, all } from 'redux-saga/effects'
+import { takeLatest, takeEvery, all } from 'redux-saga/effects'
 import { ExampleTypes } from 'App/Stores/Example/Actions'
 import { ProductionsTypes } from 'App/Stores/Productions/Actions'
+import { SelectedProductionTypes } from 'App/Stores/SelectedProduction/Actions'
 import { StartupTypes } from 'App/Stores/Startup/Actions'
 
 import { fetchUser } from './ExampleSaga'
-import { fetchProductions } from './ProductionsSaga'
+import { fetchProductions, fetchProduction, saveProduction } from './ProductionsSaga'
 import { startup } from './StartupSaga'
 
 export default function* root() {
@@ -17,5 +18,7 @@ export default function* root() {
     // Call `fetchUser()` when a `FETCH_USER` action is triggered
     takeLatest(ExampleTypes.FETCH_USER, fetchUser),
     takeLatest(ProductionsTypes.FETCH_PRODUCTIONS, fetchProductions),
+    takeEvery(SelectedProductionTypes.FETCH_PRODUCTION, fetchProduction),
+    // takeLatest(SelectedProductionTypes.SAVE_PRODUCTION, saveProduction),
   ])
 }
