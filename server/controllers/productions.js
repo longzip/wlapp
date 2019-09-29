@@ -1,4 +1,10 @@
-const { Production, Contact, OrderLine } = require("../models/index");
+const {
+  Production,
+  Contact,
+  OrderLine,
+  RoutingWorkcenter,
+  Workorder
+} = require("../models/index");
 const Joi = require("@hapi/joi");
 const { Op } = require("sequelize");
 const moment = require("moment");
@@ -23,6 +29,38 @@ function validate(data) {
     ContactId: Joi.number()
   };
   return Joi.validate(data, schema);
+}
+async function todo(productionId) {
+  const production = await Production.findOne({
+    raw: true,
+    where: {
+      id: productionId
+    }
+  });
+
+  const routingWorkcenters = await RoutingWorkcenter.findAll({
+    raw: true,
+    where: {
+      RoutingId: production.RoutingId
+    },
+    order: [["sequence", "DESC"]]
+  });
+
+  let workorders = [];
+  for (const routingWorkorder of routingWorkcenters) {
+    let nextWorkorder = workorders.pop();
+    const workorder = await Workorder.findOrCreate({
+      where: {
+        WorkcenterId: routingWorkorder.WorkcenterId,
+        ProductionId: productionId,
+        ProductId: production.ProductId
+      },
+      defaults: {
+        nextWorkOrderId: nextWorkorder ? nextWorkorder[0].get("id") : null
+      }
+    });
+    workorders.push(await Promise.all(workorder));
+  }
 }
 
 module.exports = {
@@ -140,6 +178,23 @@ module.exports = {
       .then(affectedRows => {
         result.status = status;
         result.result = affectedRows;
+        return res.status(status).send(result);
+      })
+      .catch(err => {
+        status = 500;
+        result.status = status;
+        result.error = err;
+        return res.status(status).send(result);
+      });
+  },
+  todo: (req, res) => {
+    let result = {};
+    let status = 200;
+
+    todo(req.params.id)
+      .then(item => {
+        result.status = status;
+        result.result = item;
         return res.status(status).send(result);
       })
       .catch(err => {

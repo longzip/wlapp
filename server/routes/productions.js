@@ -6,6 +6,7 @@ module.exports = router => {
     .route("/productions")
     .post(controller.add)
     .get(controller.getAll);
+  router.route("/productions/:id/todo").get(controller.todo);
   router
     .route("/productions/:id")
     .get(controller.show)

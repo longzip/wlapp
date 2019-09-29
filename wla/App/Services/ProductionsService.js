@@ -20,6 +20,20 @@ function fetchProductions() {
     return null
   })
 }
+function fetchProductionTodo(id) {
+  // Simulate an error 50% of the time just for testing purposes
+  if (Math.random() > 0.5) {
+    return new Promise(function(resolve, reject) {
+      resolve(null)
+    })
+  }
+  return apiClient.get(`productions/${id}/todo`).then((response) => {
+    if (in200s(response.status)) {
+      return response.data.result
+    }
+    return null
+  })
+}
 
 function fetchProduction(id) {
   // Simulate an error 50% of the time just for testing purposes
@@ -57,4 +71,5 @@ export const productionsService = {
   fetchProductions,
   fetchProduction,
   saveProduction,
+  fetchProductionTodo,
 }

@@ -36,7 +36,80 @@ Object.keys(db).forEach(modelName => {
     db[modelName].associate(db);
   }
 });
-// sequelize.sync();
+// sequelize.sync().then(()=>{
+//   db.U
+// });
+async function test(productionId) {
+  const production = await db.Production.findOne({
+    raw: true,
+    where: {
+      id: productionId
+    }
+  });
+  console.log("Tim lenh san xuat:");
+  console.log(production);
+  //Tim Quy trinh san xuat
+  const routingWorkcenters = await db.RoutingWorkcenter.findAll({
+    raw: true,
+    where: {
+      RoutingId: production.RoutingId
+    },
+    order: [["sequence", "DESC"]]
+  });
+  console.log("Quy trinh san xuat:");
+  console.log(routingWorkcenters);
+  let workorders = [];
+  await db.Workorder.destroy({ where: {} });
+  // for (const routingWorkorder of routingWorkcenters) {
+  //   let nextWorkorder = workorders.pop();
+  //   const workorder = await db.Workorder.findOrCreate({
+  //     where: {
+  //       WorkcenterId: routingWorkorder.WorkcenterId,
+  //       ProductionId: productionId,
+  //       ProductId: production.ProductId
+  //     },
+  //     defaults: {
+  //       nextWorkOrderId: nextWorkorder ? nextWorkorder[0].get("id") : null
+  //     }
+  //   });
+  //   workorders.push(await Promise.all(workorder));
+  // }
+  console.log("Tao lenh lam viec:");
+  const allWorkorders = await db.Workorder.findAll({ raw: true });
+  console.log(allWorkorders);
+}
+test(3).then(() => console.log("Done!"));
+// db.Production.findOne({
+//   raw: true,
+//   where: {
+//     id: 3
+//   }
+// }).then(production => {
+//   console.log("Production Raw:");
+//   console.log(production);
+//   db.RoutingWorkcenter.findAll({
+//     where: { RoutingId: production.RoutingId },
+//     raw: true
+//   }).then(routingWorkcenters => {
+//     console.log(routingWorkcenters);
+//     db.Workorder.destroy({ where: {} });
+//     routingWorkcenters.map(routingWorkcenter => {
+//       //
+//       db.Workorder.create({
+//         WorkcenterId: routingWorkcenter.WorkcenterId,
+//         ProductionId: production.id,
+//         ProductId: production.ProductId
+//       });
+//     });
+//     db.Workorder.findAll({
+//       raw: true,
+//       where: { ProductionId: production.id }
+//     }).then(workorders => {
+//       console.log("Da tao lenh lam viec:");
+//       console.log(workorders);
+//     });
+//   });
+// });
 
 // sequelize
 //   .sync({

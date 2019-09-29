@@ -21,6 +21,7 @@ import { createActions } from 'reduxsauce'
 const { Types, Creators } = createActions({
   // Fetch user informations
   fetchProduction: ['id'],
+  fetchProductionTodo: ['id'],
   // The operation has started and is loading
   fetchProductionLoading: null,
   // Productions informations were successfully fetched

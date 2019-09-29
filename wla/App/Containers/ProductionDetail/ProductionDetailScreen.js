@@ -3,6 +3,7 @@ import { Text, View, Button, ActivityIndicator, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import SelectedProductionActions from 'App/Stores/SelectedProduction/Actions'
+import RoutingWorkcentersAction from 'App/Stores/RoutingWorkcenters/Actions'
 // import Style from './ProductionDetailScreenStyle.js'
 import { StyleSheet } from 'react-native'
 import Fonts from 'App/Theme/Fonts'
@@ -48,7 +49,14 @@ class ProductionsScreen extends React.Component {
             ) : (
               <View>
                 <Text>Số: {this.props.production.name}</Text>
-                {this.props.workorders ? <View></View> : <Button title="Tạo lệnh làm việc" />}
+                {this.props.workorders ? (
+                  <View></View>
+                ) : (
+                  <Button
+                    onPress={() => this._fetchProductionTodo(this.props.navigation.state.params.id)}
+                    title="Tạo lệnh làm việc"
+                  />
+                )}
               </View>
             )}
           </View>
@@ -59,6 +67,9 @@ class ProductionsScreen extends React.Component {
 
   _fetchProduction(id) {
     this.props.fetchProduction(id)
+  }
+  _fetchProductionTodo(id) {
+    this.props.fetchProductionTodo(id)
   }
 }
 
@@ -74,6 +85,11 @@ const mapStateToProps = (state) => ({
   production: state.selectedProductionReducer.production,
   productionIsLoading: state.selectedProductionReducer.productionIsLoading,
   productionErrorMessage: state.selectedProductionReducer.productionErrorMessage,
+  //RoutingWorkcenter
+  routingWorkcenters: state.routingWorkcentersReducer.routingWorkcenters,
+  routingWorkcentersIsLoading: state.routingWorkcentersReducer.routingWorkcentersIsLoading,
+  routingWorkcentersErrorMessage: state.routingWorkcentersReducer.routingWorkcentersErrorMessage,
+  //Workorder
 })
 
 // Object {
@@ -82,7 +98,9 @@ const mapStateToProps = (state) => ({
 // }
 const mapDispatchToProps = (dispatch) => ({
   fetchProduction: (id) => dispatch(SelectedProductionActions.fetchProduction(id)),
-  saveProduction: (production) => dispatch(SelectedProductionActions.saveProduction(production)),
+  fetchProductionTodo: (id) => dispatch(SelectedProductionActions.fetchProductionTodo(id)),
+  fetchRoutingWorkcenters: (routingId) =>
+    dispatch(RoutingWorkcentersAction.fetchRoutingWorkcenters(routingId)),
 })
 
 export default connect(
