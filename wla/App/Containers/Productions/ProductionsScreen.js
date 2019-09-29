@@ -41,7 +41,10 @@ class ProductionsScreen extends React.Component {
         ) : (
           <View>
             {this.props.productionsErrorMessage ? (
-              <Text style={Style.error}>{this.props.productionsErrorMessage}</Text>
+              <View>
+                <Text style={Style.error}>{this.props.productionsErrorMessage}</Text>
+                <Button onPress={() => this._fetchProductions()} title="Refresh" />
+              </View>
             ) : (
               <View>
                 <ScrollView>
@@ -84,9 +87,9 @@ ProductionsScreen.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  productions: state.productions.productions,
-  productionsIsLoading: state.productions.productionsIsLoading,
-  productionsErrorMessage: state.productions.productionsErrorMessage,
+  productions: state.productionsReducer.productions,
+  productionsIsLoading: state.productionsReducer.productionsIsLoading,
+  productionsErrorMessage: state.productionsReducer.productionsErrorMessage,
 })
 
 const mapDispatchToProps = (dispatch) => ({

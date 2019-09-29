@@ -7,7 +7,6 @@ export default StyleSheet.create({
     ...ApplicationStyles.screen.container,
     margin: 30,
     flex: 1,
-    justifyContent: 'center',
   },
   title: {
     ...Fonts.style.h2,

@@ -3,7 +3,10 @@ import { Text, View, Button, ActivityIndicator, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import SelectedProductionActions from 'App/Stores/SelectedProduction/Actions'
-// import Style from './ProductionDetailScreenStyle'
+// import Style from './ProductionDetailScreenStyle.js'
+import { StyleSheet } from 'react-native'
+import Fonts from 'App/Theme/Fonts'
+import ApplicationStyles from 'App/Theme/ApplicationStyles'
 
 class ProductionsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -15,8 +18,10 @@ class ProductionsScreen extends React.Component {
     super()
   }
   componentDidMount() {
-    const { id } = this.props.navigation.state.params
-    this._fetchProduction(id)
+    if (this.props.navigation.state.params && this.props.navigation.state.params.id) {
+      const { id } = this.props.navigation.state.params
+      this._fetchProduction(id)
+    }
   }
 
   showArrayItem = (item) => {
@@ -27,8 +32,27 @@ class ProductionsScreen extends React.Component {
     console.log('sjkdfjksdfkj sdfjksjdkfjsdkfjksdkfskdfjksdjfkjsdfjksdjfk')
     console.log(this.props)
     return (
-      <View>
-        <Text>To get started, edit App.js</Text>
+      <View style={Style.container}>
+        {this.props.productionIsLoading ? (
+          <ActivityIndicator size="large" color="#0000ff" />
+        ) : (
+          <View>
+            {this.props.productionErrorMessage ? (
+              <View>
+                <Text style={Style.error}>{this.props.productionErrorMessage}</Text>
+                <Button
+                  onPress={() => this._fetchProduction(this.props.navigation.state.params.id)}
+                  title="Refresh"
+                />
+              </View>
+            ) : (
+              <View>
+                <Text>Số: {this.props.production.name}</Text>
+                {this.props.workorders ? <View></View> : <Button title="Tạo lệnh làm việc" />}
+              </View>
+            )}
+          </View>
+        )}
       </View>
     )
   }
@@ -39,7 +63,7 @@ class ProductionsScreen extends React.Component {
 }
 
 ProductionsScreen.propTypes = {
-  production: PropTypes.array,
+  production: PropTypes.object,
   productionIsLoading: PropTypes.bool,
   productionErrorMessage: PropTypes.string,
   fetchProduction: PropTypes.func,
@@ -47,9 +71,9 @@ ProductionsScreen.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  production: state.selectedProduction.productions,
-  productionIsLoading: state.selectedProduction.productionIsLoading,
-  productionErrorMessage: state.selectedProduction.productionErrorMessage,
+  production: state.selectedProductionReducer.production,
+  productionIsLoading: state.selectedProductionReducer.productionIsLoading,
+  productionErrorMessage: state.selectedProductionReducer.productionErrorMessage,
 })
 
 // Object {
@@ -65,3 +89,17 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(ProductionsScreen)
+
+const Style = StyleSheet.create({
+  container: {
+    ...ApplicationStyles.screen.container,
+    margin: 30,
+    flex: 1,
+  },
+  error: {
+    ...Fonts.style.normal,
+    textAlign: 'center',
+    marginBottom: 5,
+    color: 'red',
+  },
+})
