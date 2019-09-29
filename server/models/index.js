@@ -78,7 +78,7 @@ async function test(productionId) {
   const allWorkorders = await db.Workorder.findAll({ raw: true });
   console.log(allWorkorders);
 }
-test(3).then(() => console.log("Done!"));
+// test(3).then(() => console.log("Done!"));
 // db.Production.findOne({
 //   raw: true,
 //   where: {

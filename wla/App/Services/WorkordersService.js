@@ -7,43 +7,17 @@ const isWithin = curryN(3, (min, max, value) => {
 })
 const in200s = isWithin(200, 299)
 
-function fetchWorkorders() {
-  return apiClient.get('workorders').then((response) => {
-    if (in200s(response.status)) {
-      return response.data.result
-    }
-    return null
-  })
-}
-
-function fetchWorkorder(id) {
-  return apiClient.get(`workorders/${id}`).then((response) => {
-    if (in200s(response.status)) {
-      return response.data.result
-    }
-    return null
-  })
-}
-
-function saveWorkorder(workorder) {
-  if (workorder.id)
-    return apiClient.put(`workorders/${workorder.id}`).then((response) => {
+function fetchWorkorders(productionId, workcenterId) {
+  return apiClient
+    .get(`workorders?productionId=${productionId}&workcenterId=${workcenterId}`)
+    .then((response) => {
       if (in200s(response.status)) {
         return response.data.result
       }
       return null
     })
-
-  return apiClient.post('workorders', workorder).then((response) => {
-    if (in200s(response.status)) {
-      return response.data.result
-    }
-    return null
-  })
 }
 
 export const workordersService = {
   fetchWorkorders,
-  fetchWorkorder,
-  saveWorkorder,
 }

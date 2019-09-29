@@ -16,6 +16,9 @@ export function* fetchProductions() {
     )
   }
 }
+export function* fetchProductionTodo({ id }) {
+  yield call(productionsService.fetchProductionTodo, id)
+}
 
 export function* fetchProduction({ id }) {
   yield put(SelectedProductionActions.fetchProductionLoading())

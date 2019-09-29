@@ -1,10 +1,9 @@
 import React from 'react'
-import { Text, View, Button, ActivityIndicator, Platform } from 'react-native'
+import { Text, View, Button, ActivityIndicator, ScrollView, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import SelectedProductionActions from 'App/Stores/SelectedProduction/Actions'
-import RoutingWorkcentersAction from 'App/Stores/RoutingWorkcenters/Actions'
-// import Style from './ProductionDetailScreenStyle.js'
+import WorkordersActions from 'App/Stores/Workorders/Actions'
 import { StyleSheet } from 'react-native'
 import Fonts from 'App/Theme/Fonts'
 import ApplicationStyles from 'App/Theme/ApplicationStyles'
@@ -22,6 +21,7 @@ class ProductionsScreen extends React.Component {
     if (this.props.navigation.state.params && this.props.navigation.state.params.id) {
       const { id } = this.props.navigation.state.params
       this._fetchProduction(id)
+      this._fetchWorkorders(id)
     }
   }
 
@@ -49,8 +49,40 @@ class ProductionsScreen extends React.Component {
             ) : (
               <View>
                 <Text>Số: {this.props.production.name}</Text>
-                {this.props.workorders ? (
-                  <View></View>
+                <View>
+                  {this.props.workordersErrorMessage ? (
+                    <View>
+                      <Text style={Style.error}>{this.props.workordersErrorMessage}</Text>
+                      <Button
+                        onPress={() => this._fetchWorkorders(this.props.navigation.state.params.id)}
+                        title="Refresh"
+                      />
+                    </View>
+                  ) : (
+                    <View></View>
+                  )}
+                </View>
+                {this.props.workorders && this.props.workorders.length > 0 ? (
+                  <View>
+                    <ScrollView>
+                      {this.props.workorders.map((item, key) => (
+                        <TouchableOpacity key={key} onPress={null}>
+                          <Text style={Style.result}> {item.Product.name} </Text>
+                          <Text style={Style.result}> {item.Production.productDimension} </Text>
+
+                          <Text style={Style.result}>Số lượng = {item.Production.productQty} </Text>
+                          <Text style={Style.result}>
+                            Thực hiện =
+                            {this._workcenterProductivitiesNumber(item.WorkcenterProductivities)}{' '}
+                          </Text>
+                          <Text style={Style.result}> Đơn vị: {item.Production.productUom} </Text>
+                          <Text style={Style.result}> Công đoạn: {item.Workcenter.name} </Text>
+
+                          <View style={{ width: '100%', height: 1, backgroundColor: '#000' }} />
+                        </TouchableOpacity>
+                      ))}
+                    </ScrollView>
+                  </View>
                 ) : (
                   <Button
                     onPress={() => this._fetchProductionTodo(this.props.navigation.state.params.id)}
@@ -70,6 +102,14 @@ class ProductionsScreen extends React.Component {
   }
   _fetchProductionTodo(id) {
     this.props.fetchProductionTodo(id)
+    this.props.fetchWorkorders(id)
+  }
+  _fetchWorkorders(id) {
+    this.props.fetchWorkorders(id)
+  }
+
+  _workcenterProductivitiesNumber(workcenterProductivities) {
+    return workcenterProductivities.reduce((acc, item) => acc + item.qtyProduced, 0)
   }
 }
 
@@ -85,11 +125,10 @@ const mapStateToProps = (state) => ({
   production: state.selectedProductionReducer.production,
   productionIsLoading: state.selectedProductionReducer.productionIsLoading,
   productionErrorMessage: state.selectedProductionReducer.productionErrorMessage,
-  //RoutingWorkcenter
-  routingWorkcenters: state.routingWorkcentersReducer.routingWorkcenters,
-  routingWorkcentersIsLoading: state.routingWorkcentersReducer.routingWorkcentersIsLoading,
-  routingWorkcentersErrorMessage: state.routingWorkcentersReducer.routingWorkcentersErrorMessage,
   //Workorder
+  workorders: state.workordersReducer.workorders,
+  workordersIsLoading: state.workordersReducer.workordersIsLoading,
+  workordersErrorMessage: state.workordersReducer.workordersErrorMessage,
 })
 
 // Object {
@@ -99,8 +138,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchProduction: (id) => dispatch(SelectedProductionActions.fetchProduction(id)),
   fetchProductionTodo: (id) => dispatch(SelectedProductionActions.fetchProductionTodo(id)),
-  fetchRoutingWorkcenters: (routingId) =>
-    dispatch(RoutingWorkcentersAction.fetchRoutingWorkcenters(routingId)),
+  fetchWorkorders: (productionId) => dispatch(WorkordersActions.fetchWorkorders(productionId)),
 })
 
 export default connect(

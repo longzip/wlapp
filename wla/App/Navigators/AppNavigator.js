@@ -5,12 +5,13 @@ import {
   createSwitchNavigator,
 } from 'react-navigation'
 
-import ExampleScreen from 'App/Containers/Example/ExampleScreen'
+// import ExampleScreen from 'App/Containers/Example/ExampleScreen'
 import SplashScreen from 'App/Containers/SplashScreen/SplashScreen'
 import SignInScreen from 'App/Containers/Authentication/SignInScreen'
 import SignOutScreen from 'App/Containers/Authentication/SignOutScreen'
 import AuthLoadingScreen from 'App/Containers/Authentication/AuthLoadingScreen'
-import ProductsScreen from 'App/Containers/Product/ProductsScreen'
+import WorkcentersScreen from 'App/Containers/Workcenters/WorkcentersScreen'
+import WorkcenterDetailScreen from 'App/Containers/WorkcenterDetail/WorkcenterDetailScreen'
 import ProductionsScreen from 'App/Containers/Productions/ProductionsScreen'
 import ProductionDetailScreen from 'App/Containers/ProductionDetail/ProductionDetailScreen'
 /**
@@ -25,9 +26,11 @@ const StackNavigator = createStackNavigator(
     SplashScreen: SplashScreen,
     // The main application screen is our "ExampleScreen". Feel free to replace it with your
     // own screen and remove the example.
-    MainScreen: ProductionsScreen,
-    ProductionsScreen: ProductionsScreen,
-    ProductionDetailScreen: ProductionDetailScreen,
+    MainScreen: WorkcentersScreen,
+    // ProductionsScreen,
+    WorkcentersScreen,
+    ProductionDetailScreen,
+    WorkcenterDetailScreen,
   },
   {
     // By default the application will show the splash screen
@@ -44,6 +47,9 @@ const AppStack = createDrawerNavigator(
     },
     Productions: {
       screen: ProductionsScreen,
+    },
+    Workcenters: {
+      screen: WorkcentersScreen,
     },
     Exit: {
       screen: SignOutScreen,

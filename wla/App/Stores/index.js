@@ -5,17 +5,21 @@ import { reducer as ExampleReducer } from './Example/Reducers'
 import { reducer as productionsReducer } from './Productions/Reducers'
 import { reducer as selectedProductionReducer } from './SelectedProduction/Reducers'
 import { reducer as workordersReducer } from './Workorders/Reducers'
+import { reducer as workcentersReducer } from './Workcenters/Reducers'
 import { reducer as selectedWorkorderReducer } from './SelectedWorkorder/Reducers'
+import { reducer as selectedWorkcenterReducer } from './SelectedWorkcenter/Reducers'
 import { reducer as routingWorkcentersReducer } from './RoutingWorkcenters/Reducers'
 
 export default () => {
   const rootReducer = combineReducers({
-    example: ExampleReducer,
+    // example: ExampleReducer,
     productionsReducer,
-    selectedProductionReducer,
-    workordersReducer,
-    selectedWorkorderReducer,
-    routingWorkcentersReducer,
+    // selectedProductionReducer,
+    // workordersReducer,
+    workcentersReducer,
+    // selectedWorkorderReducer,
+    // routingWorkcentersReducer,
+    selectedWorkcenterReducer,
   })
 
   return configureStore(rootReducer, rootSaga)

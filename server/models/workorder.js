@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     Workorder.belongsTo(models.Workcenter);
     Workorder.belongsTo(models.Production);
     Workorder.belongsTo(models.Product);
+    Workorder.hasMany(models.WorkcenterProductivity);
   };
   return Workorder;
 };

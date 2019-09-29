@@ -25,7 +25,7 @@ class ProductionsScreen extends React.Component {
     super()
   }
   componentDidMount() {
-    this._fetchProductions()
+    // this._fetchProductions()
   }
 
   showArrayItem = (item) => {

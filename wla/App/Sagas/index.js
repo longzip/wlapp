@@ -1,33 +1,26 @@
 import { takeLatest, takeEvery, all } from 'redux-saga/effects'
 import { ExampleTypes } from 'App/Stores/Example/Actions'
 import { ProductionsTypes } from 'App/Stores/Productions/Actions'
+import { WorkcentersTypes } from 'App/Stores/Workcenters/Actions'
+import { fetchWorkcenters, fetchWorkcenter } from './WorkcentersSaga'
+import { WorkordersTypes } from 'App/Stores/Workorders/Actions'
 import { SelectedProductionTypes } from 'App/Stores/SelectedProduction/Actions'
-import { RoutingWorkcentersTypes } from 'App/Stores/RoutingWorkcenters/Actions'
+import { SelectedWorkcenterTypes } from 'App/Stores/SelectedWorkcenter/Actions'
 import { StartupTypes } from 'App/Stores/Startup/Actions'
-
 import { fetchUser } from './ExampleSaga'
-import {
-  fetchProductions,
-  fetchProduction,
-  fetchProductionTodo,
-  saveProduction,
-} from './ProductionsSaga'
-import { fetchRoutingWorkcenters } from './RoutingWorkcentersSaga'
+import { fetchProductions, fetchProduction, fetchProductionTodo } from './ProductionsSaga'
+import { fetchWorkorders } from './WorkordersSaga'
 import { startup } from './StartupSaga'
 
 export default function* root() {
   yield all([
-    /**
-     * @see https://redux-saga.js.org/docs/basics/UsingSagaHelpers.html
-     */
-    // Run the startup saga when the application starts
     takeLatest(StartupTypes.STARTUP, startup),
-    // Call `fetchUser()` when a `FETCH_USER` action is triggered
     takeLatest(ExampleTypes.FETCH_USER, fetchUser),
     takeLatest(ProductionsTypes.FETCH_PRODUCTIONS, fetchProductions),
+    takeLatest(WorkordersTypes.FETCH_WORKORDERS, fetchWorkorders),
+    takeLatest(WorkcentersTypes.FETCH_WORKCENTERS, fetchWorkcenters),
     takeLatest(SelectedProductionTypes.FETCH_PRODUCTION_TODO, fetchProductionTodo),
+    takeLatest(SelectedWorkcenterTypes.FETCH_WORKCENTER, fetchWorkcenter),
     takeEvery(SelectedProductionTypes.FETCH_PRODUCTION, fetchProduction),
-    // takeLatest(SelectedProductionTypes.SAVE_PRODUCTION, saveProduction),
-    takeEvery(RoutingWorkcentersTypes.FETCH_ROUTING_WORKCENTERS, fetchRoutingWorkcenters),
   ])
 }

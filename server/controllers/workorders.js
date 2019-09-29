@@ -1,4 +1,10 @@
-const { Workorder } = require("../models/index");
+const {
+  Workorder,
+  Production,
+  Product,
+  Workcenter,
+  WorkcenterProductivity
+} = require("../models/index");
 const Joi = require("@hapi/joi");
 const { Op } = require("sequelize");
 const moment = require("moment");
@@ -150,15 +156,19 @@ module.exports = {
     console.log(req.query.name);
     // find multiple entries
     Workorder.findAll({
+      include: [
+        { model: Product },
+        { model: Production },
+        { model: Workcenter },
+        { model: WorkcenterProductivity }
+      ],
       offset: req.query.offset || 0,
       limit: req.query.limit || 0,
-      where: req.query.name
+      where: req.query.ProductionId
         ? {
             [Op.and]: [
               {
-                name: {
-                  [Op.like]: "%" + req.query.name + "%"
-                },
+                ProductionId: req.query.ProductionId,
                 createdAt: {
                   [Op.lte]:
                     moment(req.query.dateFinished).endOf("day") || moment(),
@@ -170,7 +180,7 @@ module.exports = {
             ]
           }
         : {},
-      Workorder: req.query.sort ? req.query.sort : [["createdAt", "DESC"]]
+      Workorder: req.query.sort ? req.query.sort : [["createdAt", "ASC"]]
     })
       .then(uoms => {
         // uoms will be an array of all Uom instances
