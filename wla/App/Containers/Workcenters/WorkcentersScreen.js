@@ -12,8 +12,7 @@ import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import WorkcentersActions from 'App/Stores/Workcenters/Actions'
 import { StyleSheet } from 'react-native'
-import Fonts from 'App/Theme/Fonts'
-import ApplicationStyles from 'App/Theme/ApplicationStyles'
+import { ApplicationStyles, Helpers, Fonts } from 'App/Theme'
 
 class WorkcentersScreen extends React.Component {
   static navigationOptions = () => {
@@ -45,17 +44,21 @@ class WorkcentersScreen extends React.Component {
                 <Button onPress={() => this._fetchWorkcenters()} title="Refresh" />
               </View>
             ) : (
-              <View>
-                <ScrollView>
-                  {this.props.workcenters.map((item, key) => (
-                    <TouchableOpacity key={key} onPress={this.showArrayItem.bind(this, item)}>
-                      <Text style={Style.result}> {item.name} </Text>
+              <ScrollView>
+                {this.props.workcenters.map((item, key) => (
+                  <TouchableOpacity
+                    style={Style.fillColCenter}
+                    key={key}
+                    onPress={this.showArrayItem.bind(this, item)}
+                  >
+                    <View style={Style.workcenterContainer}>
+                      <Text style={Style.result}>{item.name}</Text>
 
-                      <View style={{ width: '100%', height: 1, backgroundColor: '#000' }} />
-                    </TouchableOpacity>
-                  ))}
-                </ScrollView>
-              </View>
+                      {/* <View style={{ width: '100%', height: 1, backgroundColor: '#000' }} /> */}
+                    </View>
+                  </TouchableOpacity>
+                ))}
+              </ScrollView>
             )}
           </View>
         )}
@@ -107,5 +110,20 @@ const Style = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 5,
     color: 'red',
+  },
+  fillColCenter: {
+    ...Helpers.fillColCenter,
+    justifyContent: 'space-between',
+  },
+  result: {
+    ...Fonts.style.h3,
+    textAlign: 'center',
+    marginBottom: 5,
+  },
+  workcenterContainer: {
+    width: '100%',
+    height: 60,
+    marginBottom: 25,
+    backgroundColor: 'whitesmoke',
   },
 })

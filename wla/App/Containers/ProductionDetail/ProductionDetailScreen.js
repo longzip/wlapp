@@ -7,6 +7,7 @@ import WorkordersActions from 'App/Stores/Workorders/Actions'
 import { StyleSheet } from 'react-native'
 import Fonts from 'App/Theme/Fonts'
 import ApplicationStyles from 'App/Theme/ApplicationStyles'
+import WorkorderList from '../Workorders/WorkorderList'
 
 class ProductionsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -63,26 +64,7 @@ class ProductionsScreen extends React.Component {
                   )}
                 </View>
                 {this.props.workorders && this.props.workorders.length > 0 ? (
-                  <View>
-                    <ScrollView>
-                      {this.props.workorders.map((item, key) => (
-                        <TouchableOpacity key={key} onPress={null}>
-                          <Text style={Style.result}> {item.Product.name} </Text>
-                          <Text style={Style.result}> {item.Production.productDimension} </Text>
-
-                          <Text style={Style.result}>Số lượng = {item.Production.productQty} </Text>
-                          <Text style={Style.result}>
-                            Thực hiện =
-                            {this._workcenterProductivitiesNumber(item.WorkcenterProductivities)}{' '}
-                          </Text>
-                          <Text style={Style.result}> Đơn vị: {item.Production.productUom} </Text>
-                          <Text style={Style.result}> Công đoạn: {item.Workcenter.name} </Text>
-
-                          <View style={{ width: '100%', height: 1, backgroundColor: '#000' }} />
-                        </TouchableOpacity>
-                      ))}
-                    </ScrollView>
-                  </View>
+                  <WorkorderList workorders={this.props.workorders} />
                 ) : (
                   <Button
                     onPress={() => this._fetchProductionTodo(this.props.navigation.state.params.id)}

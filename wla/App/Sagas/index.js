@@ -10,6 +10,8 @@ import { StartupTypes } from 'App/Stores/Startup/Actions'
 import { fetchUser } from './ExampleSaga'
 import { fetchProductions, fetchProduction, fetchProductionTodo } from './ProductionsSaga'
 import { fetchWorkorders } from './WorkordersSaga'
+import { WorkcenterProductivitiesTypes } from '../Stores/WorkcenterProductivities/Actions'
+import { saveWorkcenterProductivity } from './WorkcenterProductivitiesSaga'
 import { startup } from './StartupSaga'
 
 export default function* root() {
@@ -22,5 +24,9 @@ export default function* root() {
     takeLatest(SelectedProductionTypes.FETCH_PRODUCTION_TODO, fetchProductionTodo),
     takeLatest(SelectedWorkcenterTypes.FETCH_WORKCENTER, fetchWorkcenter),
     takeEvery(SelectedProductionTypes.FETCH_PRODUCTION, fetchProduction),
+    takeEvery(
+      WorkcenterProductivitiesTypes.SAVE_WORKCENTER_PRODUCTIVITY,
+      saveWorkcenterProductivity
+    ),
   ])
 }

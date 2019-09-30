@@ -14,6 +14,7 @@ import WorkcentersScreen from 'App/Containers/Workcenters/WorkcentersScreen'
 import WorkcenterDetailScreen from 'App/Containers/WorkcenterDetail/WorkcenterDetailScreen'
 import ProductionsScreen from 'App/Containers/Productions/ProductionsScreen'
 import ProductionDetailScreen from 'App/Containers/ProductionDetail/ProductionDetailScreen'
+import WorkordersScreen from 'App/Containers/Workorders/WorkordersScreen'
 /**
  * The root screen contains the application's navigation.
  *
@@ -26,11 +27,12 @@ const StackNavigator = createStackNavigator(
     SplashScreen: SplashScreen,
     // The main application screen is our "ExampleScreen". Feel free to replace it with your
     // own screen and remove the example.
-    MainScreen: WorkcentersScreen,
+    MainScreen: WorkordersScreen,
     // ProductionsScreen,
     WorkcentersScreen,
     ProductionDetailScreen,
     WorkcenterDetailScreen,
+    WorkordersScreen,
   },
   {
     // By default the application will show the splash screen
@@ -50,6 +52,9 @@ const AppStack = createDrawerNavigator(
     },
     Workcenters: {
       screen: WorkcentersScreen,
+    },
+    Workorders: {
+      screen: WorkordersScreen,
     },
     Exit: {
       screen: SignOutScreen,
