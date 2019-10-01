@@ -3,7 +3,7 @@ import { Text, View, Button, ActivityIndicator, ScrollView, TouchableOpacity } f
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import WorkordersActions from 'App/Stores/Workorders/Actions'
-// import WorkcenterProductivitiesActions from 'App/Stores/WorkcenterProductivites/Actions'
+import WorkcenterProductivitiesActions from 'App/Stores/WorkcenterProductivities/Actions'
 import Style from './WorkordersScreenStyle'
 import WorkorderList from './WorkorderList'
 
@@ -38,7 +38,10 @@ class WorkordersScreen extends React.Component {
                 <Button onPress={() => this._fetchWorkorders()} title="Refresh" />
               </View>
             ) : (
-              <WorkorderList workorders={this.props.workorders} />
+              <WorkorderList
+                workorders={this.props.workorders}
+                saveWorkcenterProductivity={this._saveWorkcenterProductivity}
+              />
             )}
           </View>
         )}
@@ -50,8 +53,8 @@ class WorkordersScreen extends React.Component {
     this.props.fetchWorkorders()
   }
 
-  _saveWorkorderProductivities(workcenterProductivityBeingAddedOrEdited) {
-    this.props.saveWorkorderProductivities(workcenterProductivityBeingAddedOrEdited)
+  _saveWorkcenterProductivity(workcenterProductivityBeingAddedOrEdited) {
+    this.props.saveWorkcenterProductivity(workcenterProductivityBeingAddedOrEdited)
   }
 }
 
@@ -66,10 +69,22 @@ const mapStateToProps = (state) => ({
   workorders: state.workordersReducer.workorders,
   workordersIsLoading: state.workordersReducer.workordersIsLoading,
   workordersErrorMessage: state.workordersReducer.workordersErrorMessage,
+  workcenterProductivitiesSuccessMessage:
+    state.workcenterProductivitiesReducer.workcenterProductivitiesSuccessMessage,
+  workcenterProductivitiesIsLoading:
+    state.workcenterProductivitiesReducer.workcenterProductivitiesIsLoading,
+  workcenterProductivitiesErrorMessage:
+    state.workcenterProductivitiesReducer.workcenterProductivitiesErrorMessage,
 })
 
 const mapDispatchToProps = (dispatch) => ({
   fetchWorkorders: () => dispatch(WorkordersActions.fetchWorkorders()),
+  saveWorkcenterProductivity: (workcenterProductivityBeingAddedOrEdited) =>
+    dispatch(
+      WorkcenterProductivitiesActions.saveWorkcenterProductivity(
+        workcenterProductivityBeingAddedOrEdited
+      )
+    ),
 })
 
 export default connect(

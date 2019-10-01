@@ -5,16 +5,14 @@ const moment = require("moment");
 
 function validate(data) {
   const schema = {
-    workcenterId: Joi.number(),
-    workorderId: Joi.number(),
-    user_id: Joi.number(),
     qtyProduced: Joi.number(),
-    loss_id: Joi.number(),
-    loss_type: Joi.string(),
-    description: Joi.string(),
-    date_start: Joi.date(),
-    date_end: Joi.date(),
-    duration: Joi.number()
+    productUom: Joi.string(),
+    factor: Joi.number(),
+    WorkcenterId: Joi.number(),
+    WorkorderId: Joi.number(),
+    ProductId: Joi.number(),
+    ProductionId: Joi.number(),
+    userId: Joi.number()
   };
   return Joi.validate(data, schema);
 }

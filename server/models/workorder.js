@@ -3,7 +3,9 @@ module.exports = (sequelize, DataTypes) => {
   const Workorder = sequelize.define(
     "Workorder",
     {
-      nextWorkOrderId: DataTypes.INTEGER
+      nextWorkOrderId: DataTypes.INTEGER,
+      productUom: DataTypes.STRING,
+      factor: DataTypes.INTEGER
     },
     {}
   );

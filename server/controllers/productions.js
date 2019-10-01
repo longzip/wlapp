@@ -15,6 +15,7 @@ function validate(data) {
     origin: Joi.string(),
     productQty: Joi.number(),
     productUom: Joi.string(),
+    factor: Joi.number(),
     datePlannedStart: Joi.date(),
     datePlannedFinished: Joi.date(),
     dateStart: Joi.date(),

@@ -32,13 +32,6 @@ const ProductionForm = ({
             placeholder="Lệnh sản xuất số"
             component={FieldInput}
           />
-          {/* <Field
-            type="text"
-            name="origin"
-            label="Nguồn"
-            placeholder=""
-            component={FieldInput}
-          /> */}
           <Field
             type="text"
             name="Product"
@@ -46,13 +39,6 @@ const ProductionForm = ({
             options={products}
             component={SelectInput}
           />
-          {/* <Field
-            type="text"
-            name="Bom"
-            label="Định mức nguyên vật liệu"
-            options={boms}
-            component={SelectInput}
-          /> */}
           <Field
             type="text"
             name="Routing"
@@ -64,6 +50,22 @@ const ProductionForm = ({
             type="number"
             name="productQty"
             label="Số lượng cần Sản xuất"
+            placeholder="0"
+            component={FieldInput}
+          />
+
+          <Field
+            type="text"
+            name="productUom"
+            label="Đơn vị tính"
+            placeholder="0"
+            component={FieldInput}
+          />
+
+          <Field
+            type="number"
+            name="factor"
+            label="Hệ số"
             placeholder="0"
             component={FieldInput}
           />

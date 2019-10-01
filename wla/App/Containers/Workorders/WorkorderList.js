@@ -81,12 +81,22 @@ class WorkorderList extends Component {
     // ...Your logic
     console.log('ghi nhận item')
     console.log(this.state.item)
+    const { id, ProductionId, WorkcenterId, ProductId, productUom } = this.state
+    this.props.saveWorkcenterProductivity({
+      ProductionId,
+      WorkorderId: id,
+      ProductId,
+      WorkcenterId,
+      qtyProduced: this.state.textInputValue,
+      productUom,
+    })
     this.setState({ dialogVisible: false })
   }
 }
 
 WorkorderList.propTypes = {
   workorders: PropTypes.array.isRequired,
+  saveWorkcenterProductivity: PropTypes.func,
 }
 
 export default WorkorderList
