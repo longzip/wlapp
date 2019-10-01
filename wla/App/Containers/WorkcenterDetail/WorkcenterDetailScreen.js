@@ -3,10 +3,11 @@ import { Text, View, Button, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import SelectedWorkcenterActions from 'App/Stores/SelectedWorkcenter/Actions'
+import WorkcenterProductivitiesActions from 'App/Stores/WorkcenterProductivities/Actions'
 import WorkordersActions from 'App/Stores/Workorders/Actions'
 import { StyleSheet } from 'react-native'
 import Fonts from 'App/Theme/Fonts'
-import { ApplicationStyles, Helpers } from 'App/Theme'
+import { ApplicationStyles } from 'App/Theme'
 import WorkorderList from '../Workorders/WorkorderList'
 
 class WorkcenterDetailScreen extends React.Component {
@@ -18,18 +19,11 @@ class WorkcenterDetailScreen extends React.Component {
   }
   constructor() {
     super()
+    this._saveWorkcenterProductivity = this._saveWorkcenterProductivity.bind(this)
   }
   componentDidMount() {
-    if (this.props.navigation.state.params && this.props.navigation.state.params.id) {
-      const { id } = this.props.navigation.state.params
-      this._fetchWorkcenter(id)
-      this._fetchWorkorders()
-      // this.props.navigation.setParams({ otherParam: this.props.workcenter.name })
-    }
-  }
-
-  showArrayItem = (item) => {
-    // this.props.navigation.navigate('WorkcenterDetailScreen', { id: item.id })
+    this._fetchWorkcenter()
+    this._fetchWorkorders()
   }
 
   render() {
@@ -42,15 +36,14 @@ class WorkcenterDetailScreen extends React.Component {
             {this.props.workcenterErrorMessage ? (
               <View>
                 <Text style={Style.error}>{this.props.workcenterErrorMessage}</Text>
-                <Button
-                  onPress={() => this._fetchWorkcenter(this.props.navigation.state.params.id)}
-                  title="Refresh"
-                />
+                <Button onPress={() => this._fetchWorkcenter()} title="Refresh" />
               </View>
             ) : (
               <View>
-                <Text style={Style.result}>{this.props.workcenter.name}</Text>
-                <WorkorderList workorders={this.props.workorders} />
+                <WorkorderList
+                  workorders={this.props.workorders}
+                  saveWorkcenterProductivity={this._saveWorkcenterProductivity}
+                />
               </View>
             )}
           </View>
@@ -59,12 +52,19 @@ class WorkcenterDetailScreen extends React.Component {
     )
   }
 
-  _fetchWorkcenter(id) {
-    this.props.fetchWorkcenter(id)
+  _fetchWorkcenter() {
+    if (this.props.navigation.state.params && this.props.navigation.state.params.id) {
+      const { id } = this.props.navigation.state.params
+      this.props.fetchWorkcenter(id)
+    }
   }
 
   _fetchWorkorders() {
     this.props.fetchWorkorders()
+  }
+  _saveWorkcenterProductivity(workcenterProductivityBeingAddedOrEdited) {
+    this.props.saveWorkcenterProductivity(workcenterProductivityBeingAddedOrEdited)
+    this._fetchWorkorders()
   }
 }
 
@@ -82,11 +82,24 @@ const mapStateToProps = (state) => ({
   workorders: state.workordersReducer.workorders,
   workordersIsLoading: state.workordersReducer.workordersIsLoading,
   workordersErrorMessage: state.workordersReducer.workordersErrorMessage,
+  //
+  workcenterProductivitiesSuccessMessage:
+    state.workcenterProductivitiesReducer.workcenterProductivitiesSuccessMessage,
+  workcenterProductivitiesIsLoading:
+    state.workcenterProductivitiesReducer.workcenterProductivitiesIsLoading,
+  workcenterProductivitiesErrorMessage:
+    state.workcenterProductivitiesReducer.workcenterProductivitiesErrorMessage,
 })
 
 const mapDispatchToProps = (dispatch) => ({
   fetchWorkcenter: (id) => dispatch(SelectedWorkcenterActions.fetchWorkcenter(id)),
   fetchWorkorders: () => dispatch(WorkordersActions.fetchWorkorders()),
+  saveWorkcenterProductivity: (workcenterProductivityBeingAddedOrEdited) =>
+    dispatch(
+      WorkcenterProductivitiesActions.saveWorkcenterProductivity(
+        workcenterProductivityBeingAddedOrEdited
+      )
+    ),
 })
 
 export default connect(

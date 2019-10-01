@@ -27,12 +27,12 @@ const StackNavigator = createStackNavigator(
     SplashScreen: SplashScreen,
     // The main application screen is our "ExampleScreen". Feel free to replace it with your
     // own screen and remove the example.
-    MainScreen: WorkordersScreen,
+    MainScreen: WorkcentersScreen,
     // ProductionsScreen,
     WorkcentersScreen,
     ProductionDetailScreen,
     WorkcenterDetailScreen,
-    WorkordersScreen,
+    // WorkordersScreen,
   },
   {
     // By default the application will show the splash screen
@@ -44,19 +44,19 @@ const StackNavigator = createStackNavigator(
 
 const AppStack = createDrawerNavigator(
   {
-    Home: {
-      screen: StackNavigator,
-    },
-    Productions: {
+    // Home: {
+    //   screen: StackNavigator,
+    // },
+    'Lệnh sản xuất': {
       screen: ProductionsScreen,
     },
-    Workcenters: {
-      screen: WorkcentersScreen,
+    'Công đoạn sản xuất': {
+      screen: StackNavigator,
     },
-    Workorders: {
-      screen: WorkordersScreen,
-    },
-    Exit: {
+    // Workorders: {
+    //   screen: WorkordersScreen,
+    // },
+    Thoát: {
       screen: SignOutScreen,
     },
   },

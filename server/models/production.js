@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       productDimension: DataTypes.STRING,
       productQty: DataTypes.INTEGER,
       productUom: DataTypes.STRING,
+      factor: DataTypes.INTEGER,
       datePlannedStart: DataTypes.DATEONLY,
       datePlannedFinished: DataTypes.DATEONLY,
       dateStart: DataTypes.DATEONLY,

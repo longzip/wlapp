@@ -1,11 +1,12 @@
 import React from 'react'
-import { Text, View, Button, ActivityIndicator, ScrollView, TouchableOpacity } from 'react-native'
+import { Text, View, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import WorkordersActions from 'App/Stores/Workorders/Actions'
 import WorkcenterProductivitiesActions from 'App/Stores/WorkcenterProductivities/Actions'
 import Style from './WorkordersScreenStyle'
 import WorkorderList from './WorkorderList'
+import { Button, ThemeProvider } from 'react-native-elements'
 
 class WorkordersScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -15,6 +16,7 @@ class WorkordersScreen extends React.Component {
   }
   constructor() {
     super()
+    this._saveWorkcenterProductivity = this._saveWorkcenterProductivity.bind(this)
   }
   componentDidMount() {
     this._fetchWorkorders()
@@ -25,27 +27,28 @@ class WorkordersScreen extends React.Component {
   }
 
   render() {
-    // console.log(this.props)
     return (
-      <View style={Style.container}>
-        {this.props.workordersIsLoading ? (
-          <ActivityIndicator size="large" color="#0000ff" />
-        ) : (
-          <View>
-            {this.props.workordersErrorMessage ? (
-              <View>
-                <Text style={Style.error}>{this.props.workordersErrorMessage}</Text>
-                <Button onPress={() => this._fetchWorkorders()} title="Refresh" />
-              </View>
-            ) : (
-              <WorkorderList
-                workorders={this.props.workorders}
-                saveWorkcenterProductivity={this._saveWorkcenterProductivity}
-              />
-            )}
-          </View>
-        )}
-      </View>
+      <ThemeProvider>
+        <View style={Style.container}>
+          {this.props.workordersIsLoading ? (
+            <ActivityIndicator size="large" color="#0000ff" />
+          ) : (
+            <View>
+              {this.props.workordersErrorMessage ? (
+                <View>
+                  <Text style={Style.error}>{this.props.workordersErrorMessage}</Text>
+                  <Button onPress={() => this._fetchWorkorders()} title="Refresh" />
+                </View>
+              ) : (
+                <WorkorderList
+                  workorders={this.props.workorders}
+                  saveWorkcenterProductivity={this._saveWorkcenterProductivity}
+                />
+              )}
+            </View>
+          )}
+        </View>
+      </ThemeProvider>
     )
   }
 
@@ -55,6 +58,7 @@ class WorkordersScreen extends React.Component {
 
   _saveWorkcenterProductivity(workcenterProductivityBeingAddedOrEdited) {
     this.props.saveWorkcenterProductivity(workcenterProductivityBeingAddedOrEdited)
+    this._fetchWorkorders()
   }
 }
 

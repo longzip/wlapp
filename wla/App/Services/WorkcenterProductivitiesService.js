@@ -20,6 +20,8 @@ function saveWorkcenterProductivity(workcenterProductivityBeingAddedOrEdited) {
         }
         return null
       })
+      .catch((error) => console.log(error))
+
   return apiClient
     .post('workcenter-productivities', workcenterProductivityBeingAddedOrEdited)
     .then((response) => {
@@ -28,6 +30,7 @@ function saveWorkcenterProductivity(workcenterProductivityBeingAddedOrEdited) {
       }
       return null
     })
+    .catch((error) => console.log(error))
 }
 
 export const workcenterProductivitiesService = {

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Field, reduxForm } from "redux-form";
 import FieldInput from "../common/FieldInput";
 import SelectInput from "../common/SelectInput";
+import CityInput from "../common/CityInput";
 import FormSubmitButton from "../common/FormSubmitButton";
 import DatePicker, { formatDates, normalizeDates } from "../common/Datepicker";
 
@@ -13,7 +14,8 @@ const ProductionForm = ({
   submitting,
   heading,
   products,
-  boms,
+  uoms,
+  contacts,
   routings,
   handleSave,
   handleCancel
@@ -33,14 +35,18 @@ const ProductionForm = ({
             component={FieldInput}
           />
           <Field
-            type="text"
+            name="Contact"
+            label="Dự án"
+            options={contacts}
+            component={SelectInput}
+          />
+          <Field
             name="Product"
             label="Sản phẩm"
             options={products}
             component={SelectInput}
           />
           <Field
-            type="text"
             name="Routing"
             label="Quy trình sản xuất"
             options={routings}
@@ -55,11 +61,11 @@ const ProductionForm = ({
           />
 
           <Field
-            type="text"
+            options={uoms}
             name="productUom"
             label="Đơn vị tính"
             placeholder="0"
-            component={FieldInput}
+            component={CityInput}
           />
 
           <Field

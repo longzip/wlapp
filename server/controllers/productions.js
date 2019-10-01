@@ -48,13 +48,18 @@ async function todo(productionId) {
   });
 
   let workorders = [];
+  Workorder.destroy({
+    where: { ProductionId: production.id }
+  });
   for (const routingWorkorder of routingWorkcenters) {
     let nextWorkorder = workorders.pop();
     const workorder = await Workorder.findOrCreate({
       where: {
         WorkcenterId: routingWorkorder.WorkcenterId,
         ProductionId: productionId,
-        ProductId: production.ProductId
+        ProductId: production.ProductId,
+        productUom: production.productUom,
+        factor: production.factor
       },
       defaults: {
         nextWorkOrderId: nextWorkorder ? nextWorkorder[0].get("id") : null
