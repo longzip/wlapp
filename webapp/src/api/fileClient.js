@@ -2,7 +2,7 @@ import axios from "axios";
 
 const fileClient = () => {
   const defaultOptions = {
-    baseURL: "http://localhost:5000/api/v1/",
+    baseURL: "http://zipadmin.ddns.net:5000/api/v1/",
     method: "get",
     headers: {
       "Content-Type": "multipart/form-data"
