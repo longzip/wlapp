@@ -12,18 +12,18 @@ services:
     volumes:
       - ./server:/root/server:cached
     restart: always
-  # webapp:
-  #   image: node:latest
-  #   command: sh -c "npm install && npm start"
-  #   environment:
-  #     - NODE_ENV=development
-  #     - PORT=3000
-  #   ports:
-  #     - "3000:3000"
-  #   working_dir: /root/webapp
-  #   volumes:
-  #     - ./webapp:/root/webapp:cached
-  #   restart: always
+  webapp:
+    image: node:latest
+    command: sh -c "npm install && npm start"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+    ports:
+      - "3000:3000"
+    working_dir: /root/webapp
+    volumes:
+      - ./webapp:/root/webapp:cached
+    restart: always
   # wla:
   #   image: node:latest
   #   command: sh -c "npm install -g expo-cli && npm install && npm start"
