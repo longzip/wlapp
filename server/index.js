@@ -1,10 +1,8 @@
 require("dotenv").config(); // Sets up dotenv as soon as our application starts
 const express = require("express");
-const logger = require("morgan");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
-const db = require("./models/index");
 
 const router = express.Router();
 
@@ -26,21 +24,18 @@ app.use(cors());
 app.use("/", bodyParser.json());
 
 if (environment !== "production") {
+  const logger = require("morgan");
   app.use(logger("dev"));
   // and this
   app.use("/", logger("dev"));
 }
 
-if (environment !== "production") {
-  app.use(logger("dev"));
-}
-
 const routes = require("./routes/index.js");
 
 app.use("/api/v1", routes(router));
-app.use("/", express.static(path.join(__dirname, "./public/")));
+app.use("/", express.static(path.join(__dirname, "./server/public/")));
 app.get("/.*/", (req, res) =>
-  res.sendFile(path.join(__dirname, "./public/index.html"))
+  res.sendFile(path.join(__dirname, "./server/public/index.html"))
 );
 
 const port = process.env.PORT || 5000;
