@@ -2,10 +2,10 @@
   "name": "wlapp",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.dev.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "start": "node index.dev.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.dev.js",
     "debug": "node --nolazy --inspect-brk=9229 index.js"
   },
   "keywords": [],

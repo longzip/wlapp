@@ -6,6 +6,9 @@ const path = require("path");
 
 const router = express.Router();
 
+const environment = process.env.NODE_ENV; // development
+const stage = require("./config")[environment];
+
 const app = express();
 
 // Middleware
@@ -20,12 +23,19 @@ app.use(cors());
 // This is equivalent to
 app.use("/", bodyParser.json());
 
+if (environment !== "production") {
+  const logger = require("morgan");
+  app.use(logger("dev"));
+  // and this
+  app.use("/", logger("dev"));
+}
+
 const routes = require("./routes/index.js");
 
 app.use("/api/v1", routes(router));
-app.use("/", express.static(path.join(__dirname, "./server/public/")));
+app.use("/", express.static(path.join(__dirname, "./public/")));
 app.get("/.*/", (req, res) =>
-  res.sendFile(path.join(__dirname, "./server/public/index.html"))
+  res.sendFile(path.join(__dirname, "./public/index.html"))
 );
 
 const port = process.env.PORT || 5000;
