@@ -9,6 +9,7 @@ import { StyleSheet } from 'react-native'
 import Fonts from 'App/Theme/Fonts'
 import { ApplicationStyles } from 'App/Theme'
 import WorkorderList from '../Workorders/WorkorderList'
+import { makeGetWorkcenterWorkorders } from '../../Stores/Selectors'
 
 class WorkcenterDetailScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -75,21 +76,29 @@ WorkcenterDetailScreen.propTypes = {
   fetchWorkcenter: PropTypes.func,
 }
 
-const mapStateToProps = (state) => ({
-  workcenter: state.selectedWorkcenterReducer.workcenter,
-  workcenterIsLoading: state.selectedWorkcenterReducer.workcenterIsLoading,
-  workcenterErrorMessage: state.selectedWorkcenterReducer.workcenterErrorMessage,
-  workorders: state.workordersReducer.workorders,
-  workordersIsLoading: state.workordersReducer.workordersIsLoading,
-  workordersErrorMessage: state.workordersReducer.workordersErrorMessage,
-  //
-  workcenterProductivitiesSuccessMessage:
-    state.workcenterProductivitiesReducer.workcenterProductivitiesSuccessMessage,
-  workcenterProductivitiesIsLoading:
-    state.workcenterProductivitiesReducer.workcenterProductivitiesIsLoading,
-  workcenterProductivitiesErrorMessage:
-    state.workcenterProductivitiesReducer.workcenterProductivitiesErrorMessage,
-})
+const makeMapStateToProps = () => {
+  const getWorkcenterWorkorders = makeGetWorkcenterWorkorders()
+  const mapStateToProps = (state, props) => {
+    return {
+      workcenter: state.selectedWorkcenterReducer.workcenter,
+      workcenterIsLoading: state.selectedWorkcenterReducer.workcenterIsLoading,
+      workcenterErrorMessage: state.selectedWorkcenterReducer.workcenterErrorMessage,
+      workorders: getWorkcenterWorkorders(state, props),
+      workordersIsLoading: state.workordersReducer.workordersIsLoading,
+      workordersErrorMessage: state.workordersReducer.workordersErrorMessage,
+      //
+      workcenterProductivitiesSuccessMessage:
+        state.workcenterProductivitiesReducer.workcenterProductivitiesSuccessMessage,
+      workcenterProductivitiesIsLoading:
+        state.workcenterProductivitiesReducer.workcenterProductivitiesIsLoading,
+      workcenterProductivitiesErrorMessage:
+        state.workcenterProductivitiesReducer.workcenterProductivitiesErrorMessage,
+    }
+  }
+  return mapStateToProps
+}
+
+const mapStateToProps = (state, props) => ({})
 
 const mapDispatchToProps = (dispatch) => ({
   fetchWorkcenter: (id) => dispatch(SelectedWorkcenterActions.fetchWorkcenter(id)),
@@ -103,7 +112,7 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(
-  mapStateToProps,
+  makeMapStateToProps,
   mapDispatchToProps
 )(WorkcenterDetailScreen)
 
