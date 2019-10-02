@@ -38,9 +38,9 @@ if (environment !== "production") {
 const routes = require("./routes/index.js");
 
 app.use("/api/v1", routes(router));
-app.use("/", express.static(path.join(__dirname, "./public/")));
+app.use("/", express.static(path.join(__dirname, "./server/public/")));
 app.get("/.*/", (req, res) =>
-  res.sendFile(path.join(__dirname, "./public/index.html"))
+  res.sendFile(path.join(__dirname, "./server/public/index.html"))
 );
 
 const port = process.env.PORT || 5000;
