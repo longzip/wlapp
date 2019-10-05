@@ -1,7 +1,7 @@
 import { createActions } from 'reduxsauce'
 
 const { Types, Creators } = createActions({
-  saveWorkcenterProductivity: null,
+  saveWorkcenterProductivity: ['workcenterProductivityBeingAddedOrEdited'],
   saveWorkcenterProductivitySuccess: ['successMessage'],
   saveWorkcenterProductivityFailure: ['errorMessage'],
 })

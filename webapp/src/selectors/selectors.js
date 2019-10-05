@@ -61,7 +61,7 @@ export const uomsFormattedForDropdown = createSelector(
     uoms.map(uom => {
       return {
         value: uom.name,
-        label: `${uom.name}`
+        label: uom.name
       };
     })
 );

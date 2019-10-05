@@ -5,10 +5,18 @@ import { workcentersService } from 'App/Services/WorkcentersService'
 
 export function* fetchWorkcenters() {
   yield put(WorkcentersActions.fetchWorkcentersLoading())
-  const workcenters = yield call(workcentersService.fetchWorkcenters)
-  if (workcenters) {
-    yield put(WorkcentersActions.fetchWorkcentersSuccess(workcenters))
-  } else {
+  try {
+    const workcenters = yield call(workcentersService.fetchWorkcenters)
+    if (workcenters) {
+      yield put(WorkcentersActions.fetchWorkcentersSuccess(workcenters))
+    } else {
+      yield put(
+        WorkcentersActions.fetchWorkcentersFailure(
+          'Có lỗi xảy ra khi tải dữ liệu Công đoạn sản xuất (workcenters).'
+        )
+      )
+    }
+  } catch {
     yield put(
       WorkcentersActions.fetchWorkcentersFailure(
         'Có lỗi xảy ra khi tải dữ liệu Công đoạn sản xuất (workcenters).'
@@ -17,9 +25,11 @@ export function* fetchWorkcenters() {
   }
 }
 
-export function* fetchWorkcenter({ id }) {
+export function* fetchWorkcenter(action) {
+  // console.log('WorkcenterSata')
+  // console.log(action)
   yield put(SelectedWorkcenterActions.fetchWorkcenterLoading())
-  const workcenter = yield call(workcentersService.fetchWorkcenter, id)
+  const workcenter = yield call(workcentersService.fetchWorkcenter, action.id)
   if (workcenter) {
     yield put(SelectedWorkcenterActions.fetchWorkcenterSuccess(workcenter))
   } else {

@@ -3,7 +3,8 @@ const {
   Contact,
   OrderLine,
   RoutingWorkcenter,
-  Workorder
+  Workorder,
+  Product
 } = require("../models/index");
 const Joi = require("@hapi/joi");
 const { Op } = require("sequelize");
@@ -13,8 +14,10 @@ function validate(data) {
   const schema = {
     name: Joi.string().required(),
     origin: Joi.string(),
+    productDimension: Joi.string(),
     productQty: Joi.number(),
     productUom: Joi.string(),
+    factor: Joi.number(),
     datePlannedStart: Joi.date(),
     datePlannedFinished: Joi.date(),
     dateStart: Joi.date(),
@@ -43,17 +46,23 @@ async function todo(productionId) {
     where: {
       RoutingId: production.RoutingId
     },
-    order: [["sequence", "DESC"]]
+    order: [["sequence", "ASC"]]
   });
 
   let workorders = [];
+  Workorder.destroy({
+    where: { ProductionId: production.id }
+  });
   for (const routingWorkorder of routingWorkcenters) {
     let nextWorkorder = workorders.pop();
     const workorder = await Workorder.findOrCreate({
       where: {
         WorkcenterId: routingWorkorder.WorkcenterId,
         ProductionId: productionId,
-        ProductId: production.ProductId
+        ProductId: production.ProductId,
+        ContactId: production.ContactId,
+        productUom: production.productUom,
+        factor: production.factor
       },
       defaults: {
         nextWorkOrderId: nextWorkorder ? nextWorkorder[0].get("id") : null
@@ -99,6 +108,8 @@ module.exports = {
     Production.create(value)
       .then(item => {
         result.status = status;
+        console.log("get id ljsdfsdjfjsdfjsldjfsd:");
+        todo(item.get("id"));
         result.result = item;
         return res.status(status).send(result);
       })
@@ -113,7 +124,7 @@ module.exports = {
   show: (req, res) => {
     let result = {};
     let status = 200;
-
+    todo(req.params.id);
     Production.findOne({
       include: [{ model: OrderLine }, { model: Contact }],
       where: {
@@ -212,7 +223,7 @@ module.exports = {
     console.log(req.query.name);
     // find multiple entries
     Production.findAll({
-      include: [{ model: OrderLine }, { model: Contact }],
+      include: [{ model: OrderLine }, { model: Contact }, { model: Product }],
       offset: req.query.offset || 0,
       limit: req.query.limit || 0,
       where: req.query.name

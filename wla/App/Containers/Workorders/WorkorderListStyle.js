@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native'
 import Fonts from 'App/Theme/Fonts'
-import ApplicationStyles from 'App/Theme/ApplicationStyles'
 
 export default StyleSheet.create({
   textInput: {
@@ -16,5 +15,17 @@ export default StyleSheet.create({
     ...Fonts.style.normal,
     textAlign: 'center',
     marginBottom: 5,
+  },
+  productTitle: {
+    ...Fonts.style.h3,
+    textAlign: 'center',
+    marginBottom: 5,
+  },
+
+  productQty: {
+    ...Fonts.style.normal,
+    textAlign: 'center',
+    marginBottom: 5,
+    color: 'green',
   },
 })

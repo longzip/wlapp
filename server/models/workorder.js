@@ -3,7 +3,9 @@ module.exports = (sequelize, DataTypes) => {
   const Workorder = sequelize.define(
     "Workorder",
     {
-      nextWorkOrderId: DataTypes.INTEGER
+      nextWorkOrderId: DataTypes.INTEGER,
+      productUom: DataTypes.STRING,
+      factor: DataTypes.INTEGER
     },
     {}
   );
@@ -11,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     Workorder.belongsTo(models.Workcenter);
     Workorder.belongsTo(models.Production);
     Workorder.belongsTo(models.Product);
+    Workorder.belongsTo(models.Contact);
     Workorder.hasMany(models.WorkcenterProductivity);
   };
   return Workorder;

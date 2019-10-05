@@ -8,21 +8,29 @@ const isWithin = curryN(3, (min, max, value) => {
 const in200s = isWithin(200, 299)
 
 function fetchWorkcenters() {
-  return apiClient.get('workcenters').then((response) => {
-    if (in200s(response.status)) {
-      return response.data.result
-    }
+  try {
+    return apiClient.get('workcenters').then((response) => {
+      if (in200s(response.status)) {
+        return response.data.result
+      }
+      return null
+    })
+  } catch {
     return null
-  })
+  }
 }
 
 function fetchWorkcenter(id) {
-  return apiClient.get('workcenters/' + id).then((response) => {
-    if (in200s(response.status)) {
-      return response.data.result
-    }
+  try {
+    return apiClient.get('workcenters/' + id).then((response) => {
+      if (in200s(response.status)) {
+        return response.data.result
+      }
+      return null
+    })
+  } catch {
     return null
-  })
+  }
 }
 
 export const workcentersService = {

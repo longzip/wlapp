@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Field, reduxForm } from "redux-form";
 import FieldInput from "../common/FieldInput";
 import SelectInput from "../common/SelectInput";
+import CityInput from "../common/CityInput";
 import FormSubmitButton from "../common/FormSubmitButton";
 import DatePicker, { formatDates, normalizeDates } from "../common/Datepicker";
 
@@ -13,7 +14,8 @@ const ProductionForm = ({
   submitting,
   heading,
   products,
-  boms,
+  uoms,
+  contacts,
   routings,
   handleSave,
   handleCancel
@@ -32,29 +34,19 @@ const ProductionForm = ({
             placeholder="Lệnh sản xuất số"
             component={FieldInput}
           />
-          {/* <Field
-            type="text"
-            name="origin"
-            label="Nguồn"
-            placeholder=""
-            component={FieldInput}
-          /> */}
           <Field
-            type="text"
+            name="Contact"
+            label="Dự án"
+            options={contacts}
+            component={SelectInput}
+          />
+          <Field
             name="Product"
             label="Sản phẩm"
             options={products}
             component={SelectInput}
           />
-          {/* <Field
-            type="text"
-            name="Bom"
-            label="Định mức nguyên vật liệu"
-            options={boms}
-            component={SelectInput}
-          /> */}
           <Field
-            type="text"
             name="Routing"
             label="Quy trình sản xuất"
             options={routings}
@@ -64,6 +56,22 @@ const ProductionForm = ({
             type="number"
             name="productQty"
             label="Số lượng cần Sản xuất"
+            placeholder="0"
+            component={FieldInput}
+          />
+
+          <Field
+            options={uoms}
+            name="productUom"
+            label="Đơn vị tính"
+            placeholder="0"
+            component={CityInput}
+          />
+
+          <Field
+            type="number"
+            name="factor"
+            label="Hệ số"
             placeholder="0"
             component={FieldInput}
           />

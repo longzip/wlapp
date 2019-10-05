@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 version: "3"
 services:
   server:
@@ -68,3 +69,75 @@ services:
   #   ports:
   #     - "${PGADMIN_PORT:-5050}:80"
   #   restart: always
+=======
+version: "3"
+services:
+  server:
+    image: node:latest
+    command: sh -c "npm install && npm run dev"
+    environment:
+      - NODE_ENV=development
+      - PORT=5000
+    ports:
+      - "5000:5000"
+    working_dir: /root/server
+    volumes:
+      - ./server:/root/server:cached
+    restart: always
+  webapp:
+    image: node:latest
+    command: sh -c "npm install && npm start"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+    ports:
+      - "3000:3000"
+    working_dir: /root/webapp
+    volumes:
+      - ./webapp:/root/webapp:cached
+    restart: always
+  # wla:
+  #   image: node:latest
+  #   command: sh -c "npm install -g expo-cli && npm install && npm start"
+  #   environment:
+  #     - NODE_ENV=development
+  #     # - PORT=3000
+  #   ports:
+  #     - "19000:19000"
+  #     - "19001:19001"
+  #     - "19002:19002"
+  #     - "19003:19003"
+  #     - "19004:19004"
+  #   working_dir: /root/wla
+  #   volumes:
+  #     - ./wla:/root/wla:cached
+  #   restart: always
+  # db:
+  #   image: postgres:9.5
+  #   environment:
+  #     - POSTGRES_PASSWORD=odoo
+  #     - POSTGRES_USER=odoo
+  #     - POSTGRES_DB=postgres
+  #   restart: always # run as a service
+  # odoo12:
+  #   image: odoo:12.0
+  #   depends_on:
+  #     - db
+  #   ports:
+  #     - "8071:8069"
+  #   tty: true
+  #   command: -- --dev=reload
+  #   #    command: odoo scaffold /mnt/extra-addons/test_module
+  #   volumes:
+  #     - ./addons:/mnt/extra-addons
+  #     - ./etc:/etc/odoo
+  #   restart: always # run as a service
+  # pgadmin:
+  #   image: dpage/pgadmin4
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-longlv@v-auto.com.vn}
+  #     PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-140819}
+  #   ports:
+  #     - "${PGADMIN_PORT:-5050}:80"
+  #   restart: always
+>>>>>>> 5621a90c13eb984928841215f628cd3da375f6b3

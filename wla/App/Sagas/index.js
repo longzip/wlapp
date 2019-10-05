@@ -18,7 +18,7 @@ export default function* root() {
   yield all([
     takeLatest(StartupTypes.STARTUP, startup),
     takeLatest(ExampleTypes.FETCH_USER, fetchUser),
-    takeLatest(ProductionsTypes.FETCH_PRODUCTIONS, fetchProductions),
+    takeEvery(ProductionsTypes.FETCH_PRODUCTIONS, fetchProductions),
     takeLatest(WorkordersTypes.FETCH_WORKORDERS, fetchWorkorders),
     takeLatest(WorkcentersTypes.FETCH_WORKCENTERS, fetchWorkcenters),
     takeLatest(SelectedProductionTypes.FETCH_PRODUCTION_TODO, fetchProductionTodo),

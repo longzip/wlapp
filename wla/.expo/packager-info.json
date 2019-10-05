@@ -2,8 +2,15 @@
   "devToolsPort": 19002,
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 10648,
+<<<<<<< HEAD
+  "packagerPid": 136,
   "expoServerNgrokUrl": "https://3r-h99.anonymous.wla.exp.direct",
   "packagerNgrokUrl": "https://packager.3r-h99.anonymous.wla.exp.direct",
-  "ngrokPid": 11708
+  "ngrokPid": 184
+=======
+  "packagerPid": 6436,
+  "expoServerNgrokUrl": "https://g7-h9a.anonymous.wla.exp.direct",
+  "packagerNgrokUrl": "https://packager.g7-h9a.anonymous.wla.exp.direct",
+  "ngrokPid": 8144
+>>>>>>> 1a96b8bc573feba2567105f4b44d2d87e1225532
 }

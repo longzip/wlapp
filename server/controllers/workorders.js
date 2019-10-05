@@ -2,8 +2,7 @@ const {
   Workorder,
   Production,
   Product,
-  Workcenter,
-  WorkcenterProductivity
+  Workcenter
 } = require("../models/index");
 const Joi = require("@hapi/joi");
 const { Op } = require("sequelize");
@@ -159,8 +158,7 @@ module.exports = {
       include: [
         { model: Product },
         { model: Production },
-        { model: Workcenter },
-        { model: WorkcenterProductivity }
+        { model: Workcenter }
       ],
       offset: req.query.offset || 0,
       limit: req.query.limit || 0,

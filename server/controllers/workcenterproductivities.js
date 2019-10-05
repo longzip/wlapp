@@ -1,20 +1,27 @@
-const { WorkcenterProductivity } = require("../models/index");
+const {
+  WorkcenterProductivity,
+  Product,
+  Contact,
+  Pallet,
+  Production,
+  Workcenter
+} = require("../models/index");
 const Joi = require("@hapi/joi");
 const { Op } = require("sequelize");
 const moment = require("moment");
 
 function validate(data) {
   const schema = {
-    workcenterId: Joi.number(),
-    workorderId: Joi.number(),
-    user_id: Joi.number(),
     qtyProduced: Joi.number(),
-    loss_id: Joi.number(),
-    loss_type: Joi.string(),
-    description: Joi.string(),
-    date_start: Joi.date(),
-    date_end: Joi.date(),
-    duration: Joi.number()
+    productUom: Joi.string(),
+    factor: Joi.number(),
+    WorkcenterId: Joi.number(),
+    WorkorderId: Joi.number(),
+    ProductId: Joi.number(),
+    ProductionId: Joi.number(),
+    PalletId: Joi.number(),
+    ContactId: Joi.number(),
+    UserId: Joi.number()
   };
   return Joi.validate(data, schema);
 }
@@ -100,18 +107,6 @@ module.exports = {
         result.error = err;
         return res.status(status).send(result);
       });
-    // WorkcenterProductivity.sync({
-    //   force: true
-    // })
-    //   .then(() => {
-
-    //   })
-    //   .catch(err => {
-    //     status = 500;
-    //     result.status = status;
-    //     result.error = err;
-    //     return res.status(status).send(result);
-    //   });
   },
 
   update: (req, res) => {
@@ -145,6 +140,13 @@ module.exports = {
     console.log(req.query.name);
     // find multiple entries
     WorkcenterProductivity.findAll({
+      include: [
+        { model: Product },
+        { model: Pallet },
+        { model: Contact },
+        { model: Workcenter },
+        { model: Production }
+      ],
       offset: req.query.offset || 0,
       limit: req.query.limit || 0,
       where: req.query.name

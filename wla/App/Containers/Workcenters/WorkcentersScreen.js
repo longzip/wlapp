@@ -1,13 +1,6 @@
 import React from 'react'
-import {
-  Text,
-  View,
-  Button,
-  ActivityIndicator,
-  AsyncStorage,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native'
+import { Text, View, ActivityIndicator, ScrollView, Button } from 'react-native'
+import { Divider } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import WorkcentersActions from 'App/Stores/Workcenters/Actions'
@@ -28,7 +21,7 @@ class WorkcentersScreen extends React.Component {
   }
 
   showArrayItem = (item) => {
-    this.props.navigation.navigate('WorkcenterDetailScreen', { id: item.id })
+    this.props.navigation.navigate('WorkcenterDetailScreen', { id: item.id, otherParam: item.name })
   }
 
   render() {
@@ -46,17 +39,10 @@ class WorkcentersScreen extends React.Component {
             ) : (
               <ScrollView>
                 {this.props.workcenters.map((item, key) => (
-                  <TouchableOpacity
-                    style={Style.fillColCenter}
-                    key={key}
-                    onPress={this.showArrayItem.bind(this, item)}
-                  >
-                    <View style={Style.workcenterContainer}>
-                      <Text style={Style.result}>{item.name}</Text>
-
-                      {/* <View style={{ width: '100%', height: 1, backgroundColor: '#000' }} /> */}
-                    </View>
-                  </TouchableOpacity>
+                  <View key={key}>
+                    <Button title={item.name} onPress={this.showArrayItem.bind(this, item)} />
+                    <Divider style={{ backgroundColor: 'blue', marginBottom: 15 }} />
+                  </View>
                 ))}
               </ScrollView>
             )}
@@ -68,11 +54,6 @@ class WorkcentersScreen extends React.Component {
 
   _fetchWorkcenters() {
     this.props.fetchWorkcenters()
-  }
-
-  _signOutAsync = async () => {
-    await AsyncStorage.clear()
-    this.props.navigation.navigate('Auth')
   }
 }
 
@@ -118,7 +99,7 @@ const Style = StyleSheet.create({
   result: {
     ...Fonts.style.h3,
     textAlign: 'center',
-    marginBottom: 5,
+    marginBottom: 25,
   },
   workcenterContainer: {
     width: '100%',

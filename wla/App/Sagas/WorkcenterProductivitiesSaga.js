@@ -3,6 +3,8 @@ import WorkcenterProductivitiesActions from 'App/Stores/WorkcenterProductivities
 import { workcenterProductivitiesService } from 'App/Services/WorkcenterProductivitiesService'
 
 export function* saveWorkcenterProductivity({ workcenterProductivityBeingAddedOrEdited }) {
+  // console.log('saveWorkcenterProductivity Sata')
+  // console.log(action)
   const workcenterProductivity = yield call(
     workcenterProductivitiesService.saveWorkcenterProductivity,
     workcenterProductivityBeingAddedOrEdited
