@@ -58,8 +58,6 @@ Object.keys(db).forEach(modelName => {
 //     db.Production.bulkCreate(require("../data/Productions")).then(() => {});
 //   })
 //   .then(() => {
-//     // todo(1);
-//     // todo(2);
 //     console.log("Done!");
 //   })
 //   .catch(error => {
