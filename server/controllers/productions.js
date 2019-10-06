@@ -125,6 +125,7 @@ module.exports = {
     let result = {};
     let status = 200;
     todo(req.params.id);
+    console.log("Todo" + req.params.id);
     Production.findOne({
       include: [{ model: OrderLine }, { model: Contact }],
       where: {
