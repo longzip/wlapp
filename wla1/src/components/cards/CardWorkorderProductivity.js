@@ -14,7 +14,9 @@ class CardWorkorderProductivity extends Component {
       qtyProduced,
       productUom,
       updatedAt,
-      accepted
+      accepted,
+      Pallet,
+      isChecked
     } = this.props.workcenterProductivity;
     return (
       <div className={classes.root}>
@@ -44,12 +46,19 @@ class CardWorkorderProductivity extends Component {
                 <Typography gutterBottom>Đơn vị: {productUom}</Typography>
               </div>
               <div className={classes.inline}>
+                <Typography
+                  style={{ textTransform: "uppercase" }}
+                  variant="h6"
+                  gutterBottom
+                >
+                  PALLET: {Pallet && Pallet.name}
+                </Typography>
                 <Typography gutterBottom>
                   Ngày: {updatedAt.slice(0, 10)}
                 </Typography>
               </div>
               <div className={classes.inline}>
-                {edit && (
+                {!isChecked && (
                   <ButtonBarWorkcenterProductivity
                     accepted={accepted}
                     handleEdit={handleClickOpen}

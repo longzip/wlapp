@@ -15,7 +15,8 @@ module.exports = (sequelize, DataTypes) => {
       dateFinished: DataTypes.DATEONLY,
       priority: DataTypes.INTEGER,
       state: DataTypes.STRING,
-      availability: DataTypes.STRING
+      availability: DataTypes.STRING,
+      active: DataTypes.BOOLEAN
     },
     {}
   );

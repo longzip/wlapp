@@ -93,12 +93,13 @@ class CardNextWorkorder extends Component {
             </div>
           </Paper>
         ) : (
-          <WorkcenterProductivitiesList
-            nextWorkorderProductivities={nextWorkorderProductivities}
-            handleAccept={handleAccept}
-            handleClickOpen={handleClickOpenNext}
-          />
+          <React.Fragment></React.Fragment>
         )}
+        <WorkcenterProductivitiesList
+          nextWorkorderProductivities={nextWorkorderProductivities}
+          handleAccept={handleAccept}
+          handleClickOpen={handleClickOpenNext}
+        />
       </div>
     );
   }

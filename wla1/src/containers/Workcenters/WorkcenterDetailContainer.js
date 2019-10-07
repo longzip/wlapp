@@ -157,11 +157,31 @@ class WorkcenterDetailContainer extends Component {
                 onClose={this.handleClose}
                 aria-labelledby="form-dialog-title"
               >
-                <DialogTitle id="form-dialog-title">Nhập số liệu</DialogTitle>
+                <DialogTitle id="form-dialog-title">
+                  BẢNG PHIẾU PALET NỘI THẤT
+                </DialogTitle>
                 <DialogContent>
+                  <TextField
+                    margin="dense"
+                    id="name"
+                    label="SỐ PALET"
+                    type="text"
+                    fullWidth
+                    // value={this.state.textInputValue}
+                    // onChange={this.handleChange}
+                  />
                   <DialogContentText>
-                    Bạn đã sản xuất được bao nhiêu? Ghi nhận số liệu tại ô trống
-                    dưới đây.
+                    MÃ SẢN PHẨM:
+                    {this.state.item.Product && this.state.item.Product.code}
+                  </DialogContentText>
+                  <DialogContentText>
+                    TÊN CHI TIẾT:
+                    {this.state.item.Product && this.state.item.Product.name}
+                  </DialogContentText>
+                  <DialogContentText>
+                    QUY CÁCH:{" "}
+                    {this.state.item.Production &&
+                      this.state.item.Production.productDimension}
                   </DialogContentText>
                   <TextField
                     autoFocus
@@ -182,7 +202,7 @@ class WorkcenterDetailContainer extends Component {
                     onClick={this._saveWorkcenterProductivity}
                     color="primary"
                   >
-                    Ghi nhận
+                    Tạo Pallet
                   </Button>
                 </DialogActions>
               </Dialog>
@@ -323,12 +343,14 @@ class WorkcenterDetailContainer extends Component {
       ProductId,
       WorkcenterId,
       qtyProduced: this.state.textInputValue,
-      loss: this.state.lossInputValue,
+      loss: this.state.lossInputValue ? this.state.lossInputValue : 0,
       productUom,
       ContactId,
-      prevId: this.state.workcenterProductivity.id
+      prevId: this.state.workcenterProductivity.id,
+      PalletId: this.state.workcenterProductivity.PalletId
     };
-
+    console.log("Save Next Workcenter Productivity");
+    console.log(workcenterProductivity);
     this.props.saveWorkcenterProductivity(workcenterProductivity);
     this.setState(() => ({
       textInputValue: "",

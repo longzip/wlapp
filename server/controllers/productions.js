@@ -58,14 +58,14 @@ async function todo(productionId) {
     const workorder = await Workorder.findOrCreate({
       where: {
         WorkcenterId: routingWorkorder.WorkcenterId,
-        ProductionId: productionId,
-        ProductId: production.ProductId,
-        ContactId: production.ContactId,
-        productUom: production.productUom,
-        factor: production.factor
+        ProductionId: productionId
       },
       defaults: {
-        isStarted: routingWorkorder.isStarted,
+        productUom: production.productUom,
+        factor: production.factor,
+        ProductId: production.ProductId,
+        ContactId: production.ContactId,
+        isStarted: routingWorkorder.isStarted ? true : false,
         nextWorkOrderId: nextWorkorder ? nextWorkorder[0].get("id") : null
       }
     });
@@ -109,8 +109,7 @@ module.exports = {
     Production.create(value)
       .then(item => {
         result.status = status;
-        console.log("get id ljsdfsdjfjsdfjsldjfsd:");
-        todo(item.get("id"));
+        // todo(item.get("id"));
         result.result = item;
         return res.status(status).send(result);
       })
@@ -125,7 +124,7 @@ module.exports = {
   show: (req, res) => {
     let result = {};
     let status = 200;
-    // todo(req.params.id);
+    todo(req.params.id);
     console.log("Todo" + req.params.id);
     Production.findOne({
       include: [{ model: OrderLine }, { model: Contact }],

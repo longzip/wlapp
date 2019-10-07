@@ -1,128 +1,112 @@
-import React, { Component } from "react";
-import withStyles from "@material-ui/styles/withStyles";
+import React from "react";
 import { withRouter } from "react-router-dom";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
-// import Button from "@material-ui/core/Button";
-// import Stepper from "@material-ui/core/Stepper";
-// import Step from "@material-ui/core/Step";
-// import StepLabel from "@material-ui/core/StepLabel";
-// import OutlinedInput from "@material-ui/core/OutlinedInput";
-// import MenuItem from "@material-ui/core/MenuItem";
-// import FormControl from "@material-ui/core/FormControl";
-// import Select from "@material-ui/core/Select";
-// import List from "@material-ui/core/List";
-// import ListItem from "@material-ui/core/ListItem";
-// import ListItemIcon from "@material-ui/core/ListItemIcon";
-// import ListItemText from "@material-ui/core/ListItemText";
-// import DoneIcon from "@material-ui/icons/Done";
-// import CircularProgress from "@material-ui/core/CircularProgress";
-// import Fade from "@material-ui/core/Fade";
-// import Back from "./common/Back";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
 
-const backgroundShape = require("../images/shape.svg");
-
-const logo = require("../images/logo.jpg");
-
-const numeral = require("numeral");
-numeral.defaultFormat("0");
-
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.secondary["A100"],
-    overflow: "hidden",
-    background: `url(${backgroundShape}) no-repeat`,
-    backgroundSize: "cover",
-    backgroundPosition: "0 400px",
-    marginTop: 10,
-    padding: 20,
-    paddingBottom: 500
+const useStyles = makeStyles(theme => ({
+  "@global": {
+    body: {
+      backgroundColor: theme.palette.common.white
+    }
   },
-  logo: {
-    marginBottom: 24,
-    display: "flex",
-    justifyContent: "center"
-  },
-  smallContainer: {},
   paper: {
-    padding: theme.spacing(3),
-    textAlign: "left",
-    color: theme.palette.text.secondary
-  },
-  stepContainer: {
+    marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
     alignItems: "center"
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main
+  },
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1)
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2)
   }
-});
+}));
 
-class Login extends Component {
-  state = {
-    username: "",
-    password: ""
-  };
+const SignIn = () => {
+  const classes = useStyles();
 
-  componentDidMount() {}
-
-  handleChange(event) {
-    console.log(event);
-  }
-
-  render() {
-    const { classes } = this.props;
-
-    return (
-      <React.Fragment>
-        <CssBaseline />
-        <div className={classes.root}>
-          <Grid container justify="center">
-            <Grid
-              alignItems="center"
-              justify="center"
-              container
-              className={classes.grid}
-            >
-              <Grid item xs={12}>
-                <div className={classes.logo}>
-                  <img width={180} height={180} src={logo} alt="" />
-                </div>
-                <div className={classes.stepContainer}>
-                  <Typography
-                    variant="subtitle1"
-                    style={{ fontWeight: "bold" }}
-                    gutterBottom
-                  >
-                    Đăng nhập hệ thống
-                  </Typography>
-                </div>
-                <div className={classes.smallContainer}>
-                  <Paper className={classes.paper}>
-                    <form
-                      className={classes.container}
-                      noValidate
-                      autoComplete="off"
-                    >
-                      <TextField
-                        id="standard-name"
-                        label="Name"
-                        className={classes.textField}
-                        onChange={this.handleChange.bind(this)}
-                        margin="normal"
-                      />
-                    </form>
-                  </Paper>
-                </div>
-              </Grid>
+  return (
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Đăng nhập
+        </Typography>
+        <form className={classes.form} noValidate>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="username"
+            label="Tên đăng nhập"
+            name="username"
+            autoComplete="username"
+            autoFocus
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Mật khẩu"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+          />
+          <FormControlLabel
+            control={<Checkbox value="remember" color="primary" />}
+            label="Remember me"
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Sign In
+          </Button>
+          {/* <Grid container>
+            <Grid item xs>
+              <Link href="#" variant="body2">
+                Forgot password?
+              </Link>
             </Grid>
-          </Grid>
-        </div>
-      </React.Fragment>
-    );
-  }
-}
+            <Grid item>
+              <Link href="#" variant="body2">
+                {"Don't have an account? Sign Up"}
+              </Link>
+            </Grid>
+          </Grid> */}
+        </form>
+      </div>
+      {/* <Box mt={8}>
+        <Copyright />
+      </Box> */}
+    </Container>
+  );
+};
 
-export default withRouter(withStyles(styles)(Login));
+export default withRouter(SignIn);

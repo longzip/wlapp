@@ -60,26 +60,72 @@ module.exports = {
       result.error = error;
       return res.status(status).send(result);
     }
-    console.log("Ghi nhận số liệu");
-    console.log(value);
-    WorkcenterProductivity.create(value)
-      .then(item => {
-        if (value.prevId) {
-          WorkcenterProductivity.update(
-            { isChecked: true },
-            { where: { id: value.prevId } }
+
+    if (!value.PalletId) {
+      //Tạo pallet
+      let newValue = {};
+      Pallet.create({ name: "new" })
+        .then(pallet => {
+          const newPalletId = pallet.get("id");
+          newValue = Object.assign(value, { PalletId: newPalletId });
+          Pallet.update(
+            {
+              name:
+                "PALLET" +
+                moment().format("YY") +
+                moment().format("WW") +
+                "-" +
+                newPalletId
+            },
+            { where: { id: newPalletId } }
           );
-        }
-        result.status = status;
-        result.result = item;
-        return res.status(status).send(result);
-      })
-      .catch(err => {
-        status = 500;
-        result.status = status;
-        result.error = err;
-        return res.status(status).send(result);
-      });
+          console.log("Ghi nhận số liệu");
+          console.log(newValue);
+          WorkcenterProductivity.create(newValue)
+            .then(item => {
+              if (value.prevId) {
+                WorkcenterProductivity.update(
+                  { isChecked: true },
+                  { where: { id: value.prevId } }
+                );
+              }
+              result.status = status;
+              result.result = item;
+              return res.status(status).send(result);
+            })
+            .catch(err => {
+              status = 500;
+              result.status = status;
+              result.error = err;
+              return res.status(status).send(result);
+            });
+        })
+        .catch(err => {
+          status = 500;
+          result.status = status;
+          result.error = err;
+          return res.status(status).send(result);
+        });
+    } else {
+      WorkcenterProductivity.create(value)
+        .then(item => {
+          if (value.prevId) {
+            WorkcenterProductivity.update(
+              { isChecked: true },
+              { where: { id: value.prevId } }
+            );
+          }
+          result.status = status;
+          result.result = item;
+          return res.status(status).send(result);
+        })
+        .catch(err => {
+          status = 500;
+          result.status = status;
+          result.error = err;
+          return res.status(status).send(result);
+        });
+    }
   },
 
   show: (req, res) => {
