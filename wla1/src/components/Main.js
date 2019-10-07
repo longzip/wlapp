@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import withStyles from "@material-ui/styles/withStyles";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter, Link, Redirect } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import { connect } from "react-redux";
@@ -105,8 +105,9 @@ class Main extends Component {
   }
 
   render() {
-    const { classes, workcenters } = this.props;
-    console.log(this.props);
+    const { classes, workcenters, user } = this.props;
+    if (user.WorkcenterId)
+      return <Redirect to={"/workcenter/" + user.WorkcenterId} />;
     return (
       <React.Fragment>
         <CssBaseline />
@@ -187,6 +188,7 @@ Main.propTypes = {
 
 const mapStateToProps = state => ({
   workcenters: state.workcentersReducer.workcenters,
+  user: state.loginedUserReducer.user,
   workcentersIsLoading: state.workcentersReducer.workcentersIsLoading,
   workcentersErrorMessage: state.workcentersReducer.workcentersErrorMessage
 });

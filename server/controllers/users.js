@@ -169,7 +169,7 @@ module.exports = {
     let status = 200;
     const { username, password } = req.body;
 
-    User.findOne({ where: { username } })
+    User.findOne({ raw: true, where: { username } })
       .then(user => {
         // We could compare passwords in our model instead of below as well
         bcrypt
@@ -190,15 +190,19 @@ module.exports = {
 
               result.token = token;
               result.status = status;
-              result.result = {
-                id: user.id,
-                name: user.name,
-                username: user.uom,
-                email: user.username,
-                token,
+              result.result = Object.assign(user, {
                 roles: ["admin"],
                 rights: ["can_view_users"]
-              };
+              });
+              // result.result = {
+              //   id: user.id,
+              //   name: user.name,
+              //   username: user.uom,
+              //   email: user.username,
+              //   token,
+              //   roles: ["admin"],
+              //   rights: ["can_view_users"]
+              // };
             } else {
               status = 401;
               result.status = status;

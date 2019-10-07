@@ -4,6 +4,7 @@ import { SelectedWorkcenterTypes } from "../Stores/SelectedWorkcenter/Actions";
 import { ProductionsTypes } from "../Stores/Productions/Actions";
 import { WorkcentersTypes } from "../Stores/Workcenters/Actions";
 import { WorkordersTypes } from "../Stores/Workorders/Actions";
+import { LoginedUserTypes } from "../Stores/LoginedUser/Actions";
 import { WorkcenterProductivitiesTypes } from "../Stores/WorkcenterProductivities/Actions";
 import { fetchWorkcenters, fetchWorkcenter } from "./WorkcentersSaga";
 import {
@@ -16,6 +17,7 @@ import {
   saveWorkcenterProductivity,
   fetchWorkcenterProductivities
 } from "./WorkcenterProductivitiesSaga";
+import { login } from "./UsersSaga";
 
 export default function* root() {
   yield all([
@@ -35,6 +37,7 @@ export default function* root() {
     takeEvery(
       WorkcenterProductivitiesTypes.FETCH_WORKCENTER_PRODUCTIVITIES,
       fetchWorkcenterProductivities
-    )
+    ),
+    takeEvery(LoginedUserTypes.LOGIN, login)
   ]);
 }

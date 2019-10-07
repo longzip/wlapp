@@ -9,7 +9,7 @@ const Menu = [
   },
   {
     label: "Đăng xuất",
-    pathname: "/exit"
+    pathname: "/signout"
   }
 ];
 

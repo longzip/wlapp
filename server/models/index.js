@@ -43,11 +43,11 @@ sequelize
   })
   .then(() => {
     //Settings
+    db.Workcenter.bulkCreate(require("../data/Workcenters"));
     db.User.bulkCreate(require("../data/Users"));
     db.Uom.bulkCreate(require("../data/Uoms"));
     //
     db.Product.bulkCreate(require("../data/Products"));
-    db.Workcenter.bulkCreate(require("../data/Workcenters"));
     //Sales
     db.Contact.bulkCreate(require("../data/Contacts"));
     // db.Order.bulkCreate(require("../data/Orders"));
@@ -55,7 +55,7 @@ sequelize
     //Mpr
     db.Routing.bulkCreate(require("../data/Routings"));
     db.RoutingWorkcenter.bulkCreate(require("../data/RoutingWorkcenters"));
-    db.Production.bulkCreate(require("../data/Productions")).then(() => {});
+    db.Production.bulkCreate(require("../data/Productions"));
   })
   .then(() => {
     console.log("Done!");

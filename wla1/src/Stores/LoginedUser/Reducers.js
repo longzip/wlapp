@@ -8,6 +8,13 @@ export const loginLoading = state => ({
   userErrorMessage: null
 });
 
+export const logout = state => ({
+  ...state,
+  user: {},
+  userIsLoading: false,
+  userErrorMessage: null
+});
+
 export const loginSuccess = (state, { user }) => ({
   ...state,
   user: user,
@@ -25,5 +32,6 @@ export const loginFailure = (state, { errorMessage }) => ({
 export const reducer = createReducer(INITIAL_STATE, {
   [LoginedUserTypes.LOGIN_LOADING]: loginLoading,
   [LoginedUserTypes.LOGIN_SUCCESS]: loginSuccess,
-  [LoginedUserTypes.LOGIN_FAILURE]: loginFailure
+  [LoginedUserTypes.LOGIN_FAILURE]: loginFailure,
+  [LoginedUserTypes.LOGOUT]: logout
 });
