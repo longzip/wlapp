@@ -58,6 +58,14 @@ class DashboardContainer extends Component {
                     <QuoteList quotes={quotes} />
                   </div>
                 </div>
+                <div className="card">
+                  <div className="card-header border-transparent">
+                    <h3 className="card-title">Dự án</h3>
+                  </div>
+                  <div className="card-body p-0">
+                    <ContactList contacts={contacts} />
+                  </div>
+                </div>
               </div>
               <div className="col-md-4">
                 <div className="card">
@@ -71,14 +79,6 @@ class DashboardContainer extends Component {
                     <a href="/datas/products" className="uppercase">
                       Xem toàn bộ sản phẩm
                     </a>
-                  </div>
-                </div>
-                <div className="card">
-                  <div className="card-header border-transparent">
-                    <h3 className="card-title">Dự án</h3>
-                  </div>
-                  <div className="card-body p-0">
-                    <ContactList contacts={contacts} />
                   </div>
                 </div>
               </div>

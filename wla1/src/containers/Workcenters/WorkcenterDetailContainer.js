@@ -28,18 +28,25 @@ class WorkcenterDetailContainer extends Component {
   constructor() {
     super();
     this.state = {
+      openNext: false,
       open: false,
       openAccept: false,
       textInputValue: "",
-      item: {}
+      lossInputValue: "0",
+      item: {},
+      workcenterProductivity: {}
     };
     this._saveWorkcenterProductivity = this._saveWorkcenterProductivity.bind(
+      this
+    );
+    this._saveNextWorkcenterProductivity = this._saveNextWorkcenterProductivity.bind(
       this
     );
     this._acceptWorkcenterProductivity = this._acceptWorkcenterProductivity.bind(
       this
     );
     this.handleClose = this.handleClose.bind(this);
+    this.handleClickOpen = this.handleClickOpen.bind(this);
   }
   componentDidMount() {
     this._fetchWorkcenter();
@@ -48,23 +55,52 @@ class WorkcenterDetailContainer extends Component {
   }
 
   handleClickOpen = item => {
+    console.log("Click Open");
+    console.log(item);
     this.setState(() => ({ item }));
     this.setState({ open: true });
   };
 
+  handleClickOpenNext = (item, workcenterProductivity) => {
+    console.log("Click Open Next");
+    console.log(item);
+    console.log(workcenterProductivity);
+    this.setState(() => ({
+      item,
+      workcenterProductivity,
+      openNext: true,
+      textInputValue: workcenterProductivity.qtyProduced
+    }));
+  };
+
   handleClickOpenAccept = item => {
+    console.log("Click Accept");
+    console.log(item);
     this.setState(() => ({ item }));
     this.setState({ openAccept: true });
   };
 
   handleClose() {
-    this.setState({ open: false, openAccept: false });
+    this.setState({ open: false, openAccept: false, openNext: false });
   }
   handleChange = event => {
     const {
       target: { value }
     } = event;
-    this.setState(() => ({ textInputValue: value }));
+    const lossInputValue =
+      this.state.workcenterProductivity.qtyProduced - value;
+    this.setState(() => ({ textInputValue: value, lossInputValue }));
+  };
+  handleChangeLoss = event => {
+    const {
+      target: { value }
+    } = event;
+    const textInputValue =
+      this.state.workcenterProductivity.qtyProduced - value;
+    this.setState(() => ({
+      lossInputValue: value,
+      textInputValue
+    }));
   };
 
   render() {
@@ -108,7 +144,8 @@ class WorkcenterDetailContainer extends Component {
                   <Grid item xs={12}>
                     <WorkordersList
                       workorders={workorders}
-                      handleEdit={this.handleClickOpen}
+                      handleClickOpen={this.handleClickOpen}
+                      handleClickOpenNext={this.handleClickOpenNext}
                       handleAccept={this.handleClickOpenAccept}
                       handleSave={this.handleClickOpen}
                     />
@@ -143,6 +180,49 @@ class WorkcenterDetailContainer extends Component {
                   </Button>
                   <Button
                     onClick={this._saveWorkcenterProductivity}
+                    color="primary"
+                  >
+                    Ghi nhận
+                  </Button>
+                </DialogActions>
+              </Dialog>
+              {/* Next Productivity */}
+              <Dialog
+                open={this.state.openNext}
+                onClose={this.handleClose}
+                aria-labelledby="form-dialog-title"
+              >
+                <DialogTitle id="form-dialog-title">Nhập số liệu</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    Bạn đã sản xuất được bao nhiêu? Ghi nhận số liệu tại ô trống
+                    dưới đây.
+                  </DialogContentText>
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Gia công đạt"
+                    type="number"
+                    value={this.state.textInputValue}
+                    onChange={this.handleChange}
+                  />{" "}
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    id="lost"
+                    label="Sai hỏng"
+                    type="number"
+                    value={this.state.lossInputValue}
+                    onChange={this.handleChangeLoss}
+                  />
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={this.handleClose} color="primary">
+                    Hủy
+                  </Button>
+                  <Button
+                    onClick={this._saveNextWorkcenterProductivity}
                     color="primary"
                   >
                     Ghi nhận
@@ -206,7 +286,8 @@ class WorkcenterDetailContainer extends Component {
       ProductionId,
       WorkcenterId,
       ProductId,
-      productUom
+      productUom,
+      ContactId
     } = this.state.item;
     const workcenterProductivity = {
       ProductionId,
@@ -214,11 +295,48 @@ class WorkcenterDetailContainer extends Component {
       ProductId,
       WorkcenterId,
       qtyProduced: this.state.textInputValue,
-      productUom
+      productUom,
+      ContactId
     };
+
     this.props.saveWorkcenterProductivity(workcenterProductivity);
-    this.setState({ open: false });
-    this.setState(() => ({ textInputValue: "" }));
+    this.setState(() => ({
+      textInputValue: "",
+      lossInputValue: "0",
+      open: false,
+      openAccept: false,
+      openNext: false
+    }));
+  }
+  _saveNextWorkcenterProductivity() {
+    const {
+      id,
+      ProductionId,
+      WorkcenterId,
+      ProductId,
+      productUom,
+      ContactId
+    } = this.state.item;
+    const workcenterProductivity = {
+      ProductionId,
+      WorkorderId: id,
+      ProductId,
+      WorkcenterId,
+      qtyProduced: this.state.textInputValue,
+      loss: this.state.lossInputValue,
+      productUom,
+      ContactId,
+      prevId: this.state.workcenterProductivity.id
+    };
+
+    this.props.saveWorkcenterProductivity(workcenterProductivity);
+    this.setState(() => ({
+      textInputValue: "",
+      lossInputValue: "0",
+      open: false,
+      openAccept: false,
+      openNext: false
+    }));
   }
 }
 

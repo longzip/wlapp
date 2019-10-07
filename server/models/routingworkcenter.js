@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
       sequence: DataTypes.INTEGER,
       note: DataTypes.TEXT,
       worksheet: DataTypes.STRING,
-      active: DataTypes.BOOLEAN
+      active: DataTypes.BOOLEAN,
+      isStarted: DataTypes.BOOLEAN
     },
     {}
   );

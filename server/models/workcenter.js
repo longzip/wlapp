@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     "Workcenter",
     {
       name: DataTypes.STRING,
+      isStarted: DataTypes.BOOLEAN,
       active: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true }
     },
     {}

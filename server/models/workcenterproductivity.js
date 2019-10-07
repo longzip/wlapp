@@ -8,7 +8,6 @@ module.exports = (sequelize, DataTypes) => {
       productUom: DataTypes.STRING,
       factor: DataTypes.INTEGER,
       isChecked: DataTypes.BOOLEAN,
-      isChecked: DataTypes.BOOLEAN,
       accepted: DataTypes.BOOLEAN
     },
     {}

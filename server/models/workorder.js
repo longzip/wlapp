@@ -5,7 +5,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       nextWorkOrderId: DataTypes.INTEGER,
       productUom: DataTypes.STRING,
-      factor: DataTypes.INTEGER
+      factor: DataTypes.INTEGER,
+      isStarted: DataTypes.BOOLEAN
     },
     {}
   );

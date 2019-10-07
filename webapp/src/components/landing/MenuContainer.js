@@ -58,7 +58,7 @@ export class MenuContainer extends React.Component {
                   className="nav-link"
                 >
                   <i className="nav-icon fas fa-tachometer-alt" />
-                  <p>Overview</p>
+                  <p>Bảng tin</p>
                 </NavLink>
               </li>
 
@@ -81,7 +81,7 @@ export class MenuContainer extends React.Component {
                 >
                   <i className="nav-icon fab fa-delicious" />
                   <p>
-                    Bán hàng
+                    Thông tin dự án
                     <i className="right fas fa-angle-left" />
                   </p>
                 </NavLink>
@@ -142,7 +142,7 @@ export class MenuContainer extends React.Component {
                       <p>Lệnh sản xuất</p>
                     </NavLink>
                   </li>
-                  <li className="nav-item">
+                  {/* <li className="nav-item">
                     <NavLink
                       activeClassName="active"
                       to="/mrp/workorders"
@@ -151,7 +151,7 @@ export class MenuContainer extends React.Component {
                       <i className="far fa-calendar-plus nav-icon"></i>
                       <p>Lệnh làm việc</p>
                     </NavLink>
-                  </li>
+                  </li> */}
                 </ul>
               </li>
 
@@ -163,7 +163,7 @@ export class MenuContainer extends React.Component {
                 >
                   <i className="nav-icon far fa-building" />
                   <p>
-                    Dữ liệu sản xuất
+                    Quản lý sản xuất
                     <i className="right fas fa-angle-left" />
                   </p>
                 </NavLink>
@@ -175,7 +175,7 @@ export class MenuContainer extends React.Component {
                       className="nav-link"
                     >
                       <i className="far fa-circle nav-icon" />
-                      <p>Quy trình sản xuất</p>
+                      <p>Định tuyến</p>
                     </NavLink>
                   </li>
                   <li className="nav-item">
@@ -256,7 +256,7 @@ export class MenuContainer extends React.Component {
                   </li>
                 </ul>
               </li> */}
-              <li className="nav-item has-treeview">
+              {/* <li className="nav-item has-treeview">
                 <NavLink
                   activeClassName="active"
                   to="/stocks"
@@ -290,7 +290,7 @@ export class MenuContainer extends React.Component {
                     </NavLink>
                   </li>
                 </ul>
-              </li>
+              </li> */}
               {hasRole(userAuth, ["admin"]) && (
                 <li className="nav-item has-treeview">
                   <NavLink

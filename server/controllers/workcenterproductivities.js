@@ -13,6 +13,8 @@ const moment = require("moment");
 function validate(data) {
   const schema = {
     qtyProduced: Joi.number(),
+    loss: Joi.number(),
+    prevId: Joi.number(),
     productUom: Joi.string(),
     factor: Joi.number(),
     WorkcenterId: Joi.number(),
@@ -58,9 +60,16 @@ module.exports = {
       result.error = error;
       return res.status(status).send(result);
     }
-
+    console.log("Ghi nhận số liệu");
+    console.log(value);
     WorkcenterProductivity.create(value)
       .then(item => {
+        if (value.prevId) {
+          WorkcenterProductivity.update(
+            { isChecked: true },
+            { where: { id: value.prevId } }
+          );
+        }
         result.status = status;
         result.result = item;
         return res.status(status).send(result);

@@ -6,7 +6,7 @@ import ButtonBarWorkcenterProductivity from "../buttons/ButtonBarWorkcenterProdu
 
 class CardWorkorderProductivity extends Component {
   render() {
-    const { classes, edit = true, handleAccept, handleEdit } = this.props;
+    const { classes, edit = true, handleAccept, handleClickOpen } = this.props;
     const {
       Product,
       Contact,
@@ -52,7 +52,7 @@ class CardWorkorderProductivity extends Component {
                 {edit && (
                   <ButtonBarWorkcenterProductivity
                     accepted={accepted}
-                    handleEdit={handleEdit}
+                    handleEdit={handleClickOpen}
                     handleAccept={handleAccept}
                   />
                 )}

@@ -65,6 +65,7 @@ async function todo(productionId) {
         factor: production.factor
       },
       defaults: {
+        isStarted: routingWorkorder.isStarted,
         nextWorkOrderId: nextWorkorder ? nextWorkorder[0].get("id") : null
       }
     });
@@ -124,7 +125,7 @@ module.exports = {
   show: (req, res) => {
     let result = {};
     let status = 200;
-    todo(req.params.id);
+    // todo(req.params.id);
     console.log("Todo" + req.params.id);
     Production.findOne({
       include: [{ model: OrderLine }, { model: Contact }],

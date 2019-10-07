@@ -6,6 +6,7 @@ module.exports = [
     worksheet:
       "Kích thước tấm mặt cắt theo bản vẽ, để độ dư gia công mỗi chiều là 2-4mm.",
     active: true,
+    isStarted: true,
     RoutingId: 1,
     WorkcenterId: 1
   },

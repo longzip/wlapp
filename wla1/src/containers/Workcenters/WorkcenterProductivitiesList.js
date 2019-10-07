@@ -28,7 +28,7 @@ export class WorkcenterProductivitiesList extends Component {
             key={key}
             workcenterProductivity={item}
             handleAccept={() => this.props.handleAccept(item)}
-            handleEdit={() => this.props.handleEdit(item)}
+            handleClickOpen={() => this.props.handleClickOpen(item)}
           />
         ))}
       </React.Fragment>

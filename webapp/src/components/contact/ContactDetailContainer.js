@@ -189,7 +189,7 @@ class ContactDetailContainer extends Component {
                           <li>
                             <a
                               target="_blank"
-                              href={`http://localhost:5000/${document.fileUrl}`}
+                              href={`http://localhost:5000/uploads/${document.fileUrl}`}
                               className="btn-link text-secondary"
                             >
                               <i className="far fa-fw fa-file-word"></i>

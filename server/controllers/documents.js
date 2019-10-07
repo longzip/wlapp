@@ -31,7 +31,8 @@ module.exports = {
       });
   },
   add: (req, res) => {
-    const data = Object.assign({}, req.body, { fileUrl: req.file.path });
+    console.log(req.file);
+    const data = Object.assign({}, req.body, { fileUrl: req.file.filename });
     let result = {};
     let status = 201;
     console.log(req.file);

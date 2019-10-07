@@ -55,7 +55,7 @@ Object.keys(db).forEach(modelName => {
 //     //Mpr
 //     db.Routing.bulkCreate(require("../data/Routings"));
 //     db.RoutingWorkcenter.bulkCreate(require("../data/RoutingWorkcenters"));
-//     db.Production.bulkCreate(require("../data/Productions")).then(() => {});
+//     // db.Production.bulkCreate(require("../data/Productions")).then(() => {});
 //   })
 //   .then(() => {
 //     console.log("Done!");

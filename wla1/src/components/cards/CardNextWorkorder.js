@@ -18,7 +18,7 @@ class CardNextWorkorder extends Component {
       edit = true,
       workorderProductivities,
       nextWorkorderProductivities,
-      handleEdit,
+      handleClickOpenNext,
       handleAccept
     } = this.props;
     const {
@@ -26,11 +26,12 @@ class CardNextWorkorder extends Component {
       factor,
       Production,
       Product,
-      Workcenter
+      Workcenter,
+      isStarted
     } = this.props.workorder;
     return (
       <div className={classes.root}>
-        {true ? (
+        {isStarted ? (
           <Paper className={classes.paper}>
             <div className={classes.itemContainer}>
               <div className={classes.baseline}>
@@ -95,7 +96,7 @@ class CardNextWorkorder extends Component {
           <WorkcenterProductivitiesList
             nextWorkorderProductivities={nextWorkorderProductivities}
             handleAccept={handleAccept}
-            handleEdit={handleEdit}
+            handleClickOpen={handleClickOpenNext}
           />
         )}
       </div>

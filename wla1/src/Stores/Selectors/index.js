@@ -41,11 +41,16 @@ const makeGetWorkorderProductivities = () => {
   );
 };
 
+const getNextWorkcenterProductivities = createSelector(
+  getWorkcenterProductivities,
+  items => items.filter(item => !item.isChecked)
+);
+
 const getNextWorkorderFilter = (state, props) =>
   props.workorder.nextWorkOrderId;
 const makeGetNextWorkorderProductivities = () => {
   return createSelector(
-    [getNextWorkorderFilter, getWorkcenterProductivities],
+    [getNextWorkorderFilter, getNextWorkcenterProductivities],
     (nextWorkorderFilter, workcenterProductivities) =>
       workcenterProductivities.filter(
         workcenterProductivity =>
